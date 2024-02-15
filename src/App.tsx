@@ -1,14 +1,14 @@
-import { Theme } from '@radix-ui/themes'
 import EventCard from './components/event-card'
 import Otro from './components/otro'
+import TestComponent from './components/tests-components/tests-components'
 
 function App () {
+  const testComponent: boolean = true
   return (
     <>
-      <Theme appearance="dark">
-        <EventCard/>
-        <Otro/>
-      </Theme>
+      {testComponent && <TestComponent />}
+      <EventCard/>
+      <Otro/>
     </>
   )
 }

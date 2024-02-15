@@ -1,0 +1,177 @@
+.test-components{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 70%;
+}
+
+.background1 {
+  position: fixed;
+  z-index: -1; 
+  pointer-events: none; 
+}
+
+@keyframes moveColors {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.background1 {
+  background: linear-gradient(45deg, #7e0000, #012b01, #000047);
+  background-size: 200% 200%;
+  animation: moveColors 10s ease-in-out infinite; 
+}
+
+.background2 {
+  background: linear-gradient(45deg, rgb(246,46,36), rgb(255,133,27), rgb(255,221,0), rgb(46,204,64), rgb(0,116,217), rgb(176,13,201));
+  background-size: 200%;
+  animation: gba 10s infinite;
+}
+
+@keyframes gba { 
+  0% {
+    background-position: 0;
+  }
+  50% {
+    background-position: 100%;
+  }
+  100% {
+    background-position: 0;
+  }
+}
+
+.background3 {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow: auto;
+    background: linear-gradient(315deg, rgba(101,0,94,1) 3%, rgba(60,132,206,1) 38%, rgba(48,238,226,1) 68%, rgba(255,25,25,1) 98%);
+    animation: gradient 15s ease infinite;
+    background-size: 400% 400%;
+    background-attachment: fixed;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.wave {
+    background: rgb(255 255 255 / 25%);
+    border-radius: 1000% 1000% 0 0;
+    position: fixed;
+    width: 200%;
+    height: 12em;
+    animation: wave 10s -3s linear infinite;
+    transform: translate3d(0, 0, 0);
+    opacity: 0.8;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.wave:nth-of-type(2) {
+    bottom: -1.25em;
+    animation: wave 18s linear reverse infinite;
+    opacity: 0.8;
+}
+
+.wave:nth-of-type(3) {
+    bottom: -2.5em;
+    animation: wave 20s -1s reverse infinite;
+    opacity: 0.9;
+}
+
+@keyframes wave {
+    2% {
+        transform: translateX(1);
+    }
+
+    25% {
+        transform: translateX(-25%);
+    }
+
+    50% {
+        transform: translateX(-50%);
+    }
+
+    75% {
+        transform: translateX(-25%);
+    }
+
+    100% {
+        transform: translateX(1);
+    }
+}
+
+.background4 {
+  background-image:
+    -webkit-repeating-linear-gradient(45deg,
+    transparent 0%, transparent 60px,
+    rgba(26, 188, 156, 0.8) 60px, rgba(26, 188, 156, 0.8) 100px,
+    rgba(26, 188, 156, 0.8) 100px, rgba(26, 188, 156, 0.8) 140px,
+    rgba(231, 76, 60, 0.8) 140px, rgba(26, 188, 156, 0.8) 160px),
+    -webkit-repeating-linear-gradient(-45deg,
+    transparent 0%, transparent 60px,
+    rgba(231, 76, 60, 0.8) 60px, rgba(72,3,111,.8) 100px,
+    rgba(26, 188, 156, 0.8) 100px, rgba(26, 188, 156, 0.8) 140px,
+    rgba(241, 196, 15, 0.8) 140px, rgba(26, 188, 156, 0.8) 160px);  
+}
+
+.background5 {
+ height: 100vh;
+  font-family: "Exo", sans-serif;
+  color: #fff;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab );
+  background-size: 400% 400%;
+  -webkit-animation: gradientBG 10s ease infinite;
+          animation: gradientBG 10s ease infinite;
+}
+.container {
+  width: 100%;
+  position: absolute;
+  top: 35%;
+  text-align: center;
+}
+h1 {
+  font-weight: 900;
+}
+a {
+  text-decoration: none;
+  color: #212121;
+}
+@-webkit-keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

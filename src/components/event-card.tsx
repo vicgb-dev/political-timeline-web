@@ -1,35 +1,26 @@
-import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import './styles.css'
+import { Avatar, Box, Card, Flex, Text } from '@radix-ui/themes'
 
 const AlertDialogDemo = () => (
   <>
-
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
-    <AlertDialog.Root>
-      <AlertDialog.Trigger asChild>
-        <button className="Button violet">Delete account</button>
-      </AlertDialog.Trigger>
-      <AlertDialog.Portal>
-        <AlertDialog.Overlay className="AlertDialogOverlay" />
-        <AlertDialog.Content className="AlertDialogContent">
-          <AlertDialog.Title className="AlertDialogTitle">Are you absolutely sure?</AlertDialog.Title>
-          <AlertDialog.Description className="AlertDialogDescription">
-          This action cannot be undone. This will permanently delete your account and remove your
-          data from our servers.
-          </AlertDialog.Description>
-          <div style={{ display: 'flex', gap: 25, justifyContent: 'flex-end' }}>
-            <AlertDialog.Cancel asChild>
-              <button className="Button mauve">Cancel</button>
-            </AlertDialog.Cancel>
-            <AlertDialog.Action asChild>
-              <button className="Button red">Yes, delete account</button>
-            </AlertDialog.Action>
-          </div>
-        </AlertDialog.Content>
-      </AlertDialog.Portal>
-    </AlertDialog.Root>
+    <Card style={{ maxWidth: 240 }}>
+      <Flex gap="3" align="center">
+        <Avatar
+          size="3"
+          src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?&w=64&h=64&dpr=2&q=70&crop=focalpoint&fp-x=0.67&fp-y=0.5&fp-z=1.4&fit=crop"
+          radius="full"
+          fallback="T"
+        />
+        <Box>
+          <Text as="div" size="2" weight="bold">
+        Teodros Girmay
+          </Text>
+          <Text as="div" size="2" color="gray">
+        Engineering
+          </Text>
+        </Box>
+      </Flex>
+    </Card>
   </>
 )
 
