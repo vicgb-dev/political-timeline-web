@@ -13,9 +13,16 @@ const cache = createCache({ key: 'css', prepend: true })
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <CacheProvider value={cache}>
-      <Theme appearance='dark'>
+      <Theme
+        appearance='dark'
+        accentColor='orange'
+        grayColor="gray"
+        panelBackground="translucent"
+        scaling="100%"
+        radius="medium"
+      >
         <App />
-        <ThemePanel />
+        {/* <ThemePanel /> */}
       </Theme>
     </CacheProvider>
   </React.StrictMode>

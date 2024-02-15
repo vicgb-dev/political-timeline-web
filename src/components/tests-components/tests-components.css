@@ -1,9 +1,54 @@
+.event-card-S{
+  width: 400px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .test-components{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 70%;
+    /* padding: 20px; */
 }
 
 .background1 {
@@ -26,6 +71,12 @@
 
 .background1 {
   background: linear-gradient(45deg, #7e0000, #012b01, #000047);
+  background-size: 200% 200%;
+  animation: moveColors 10s ease-in-out infinite; 
+}
+
+.background6 {
+  background: linear-gradient(45deg, #0a0500, #0c0b00, #09010c);
   background-size: 200% 200%;
   animation: moveColors 10s ease-in-out infinite; 
 }
