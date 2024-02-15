@@ -23,7 +23,14 @@ module.exports = {
     }
   },
   rules: {
+    indent: ['error', 2],
     'react/prop-types': 'off',
-    'react/react-in-jsx-scope': 'off'
+    'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/no-unused-vars': 'warn',
+    'no-unused-vars': 'warn',
+    'react/no-unescaped-entities': 'off',
+    'react/jsx-no-undef': 'off',
+    'no-undef': 'off',
+    '@typescript-eslint/no-var-requires': 'off'
   }
 }
