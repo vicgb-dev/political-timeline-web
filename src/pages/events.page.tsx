@@ -26,7 +26,7 @@ export function EventsPage () {
 
   return (
     <>
-      <div className="linea-central"></div>
+      <div className="time-line"></div>
       <div className="fixed background"></div>
       <EventTimeLine props={{ events }}/>
     </>

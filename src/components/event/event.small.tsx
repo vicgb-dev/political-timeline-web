@@ -1,15 +1,16 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
-import { Event } from './../../models/event.interface'
+import { Event } from '../../models/event.interface'
 import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react'
 import { ALIGN } from '../../constants/enums'
-import './event-s.css'
+import './event.css'
 import { TopicService } from '../../services/topic-service'
 
 interface EventSProps {
   event: Event
   column: ALIGN
   align: ALIGN
+  oneColumn: boolean
 }
 
 export function EventS ({ props }: { props: EventSProps }) {
@@ -20,6 +21,10 @@ export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [contentExpanded, setContentExpanded] = useState(false)
   const [topic, setTopic] = useState('')
+
+  const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
+  const oneColumnClass = props.oneColumn ? 'one-column' : ''
+  // const isLeft = true
 
   useEffect(() => {
     if (!props.event.idTopic) return
@@ -40,7 +45,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   if (contentExpanded) {
     cardDisplay = 'fullScreen'
   } else {
-    if (props.column === ALIGN.LEFT) {
+    if (isLeft) {
       cardDisplay = 'smallScreenLeft'
     } else {
       cardDisplay = 'smallScreenRight'
@@ -55,15 +60,19 @@ export function EventS ({ props }: { props: EventSProps }) {
     setContentExpanded(!contentExpanded)
   }
 
+  const getDate = (date: Date): string => {
+    return (new Date(date)).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })
+  }
+
   return (// <div className="test-components background6">
-    <Box className={`${cardDisplay} event-card-S scrollAnimation`} >
+    <Box className={`${cardDisplay} event-card-S scrollAnimation ${oneColumnClass}`} >
       {/* Por encima */}
-      <Flex gap="3" justify='between' >
+      <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         <Link size='2' href="" target="_blank">
           { topic }
         </Link>
-        <Flex gap="3" justify='end' style={{ marginRight: '-24px' }} >
-          <Text size='2' >{ props.event.eventDate }</Text>
+        <Flex gap="3" justify='end' style={{ marginRight: (isLeft ? '-24px' : '0px'), marginLeft: (isLeft ? '0px' : '-24px'), flexDirection: (isLeft ? 'row' : 'row-reverse') }} >
+          <Text size='2' >{ getDate(props.event.eventDate) }</Text>
           <CalendarIcon />
         </Flex>
       </Flex>

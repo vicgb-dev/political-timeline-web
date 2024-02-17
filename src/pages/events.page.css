@@ -1,6 +1,6 @@
 
-.linea-central {
-  position: absolute;
+.time-line {
+  position: fixed;
   left: calc(50% - 0px);
   width: 1px;
   height: 100%;

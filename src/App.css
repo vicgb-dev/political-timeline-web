@@ -1,11 +1,9 @@
 #root {
-  max-width: 1280px;
+  max-width: 1500px;
   margin: 0 auto;
   text-align: center;
 }
 
-.header {
-  z-index: 100;
-  max-width: 800px;
-  margin: 0 auto;
+main {
+  padding-top: 80px;
 }

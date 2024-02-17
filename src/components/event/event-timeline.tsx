@@ -1,8 +1,8 @@
 import { Event } from './../../models/event.interface'
-import { EventS } from './event-s'
+import { EventS } from './event.small'
 import { ALIGN } from '../../constants/enums'
 import { Box, Flex } from '@radix-ui/themes'
-import { EventSSkeleton } from './event-s-skeleton'
+import { EventSSkeleton } from './event.small.skeleton'
 import { TimelineDate } from '../timeline/timeline-date'
 import React from 'react'
 
@@ -11,6 +11,9 @@ interface EventTimeLineProps {
 }
 
 export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
+  // TODO: que esta variable cambie automaticamente cuando clicas un evento y se abre a pantalla completa
+  const oneColumn: boolean = false
+
   const showDate = (eventId: number): boolean => {
     const eventIndex = props.events?.findIndex((event: Event) => event.id === eventId)
     if (!eventIndex) return false
@@ -52,7 +55,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
             { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
             <Box
               key={`${event.id}box`}>
-              <EventS key={`${event.id}event`} props={{ event, column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT, align: ALIGN.RIGHT }}/>
+              <EventS key={`${event.id}event`} props={{ oneColumn, event, column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT, align: ALIGN.RIGHT }}/>
             </Box>
           </React.Fragment>
         )))
