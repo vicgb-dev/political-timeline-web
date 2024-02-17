@@ -1,40 +1,29 @@
-import { Box, Flex } from '@radix-ui/themes'
-import EventCard from './components/event-card'
-import Otro from './components/otro'
-import TestComponent from './components/tests-components/tests-components'
+import { IconButton, TextField } from '@radix-ui/themes'
+import { DotsHorizontalIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { EventsPage } from './components/pages/events.page'
+import './App.css'
 
 function App () {
-  const testComponent: boolean = true
   return (
     <>
-      <Flex gap="9" justify='center' align='center'>
-        <Flex gap="9" direction='column' justify='center' align='center'>
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-        </Flex>
-        <Flex gap="9" direction='column' justify='center' align='center'>
-          <Box height='9'>
-          </Box>
-          <Box height='9'>
-          </Box>
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-          {testComponent && <TestComponent />}
-        </Flex>
-      </Flex>
-      <EventCard/>
-      <Otro/>
+      <header >
+        <div className='header'>
+          <TextField.Root>
+            <TextField.Slot>
+              <MagnifyingGlassIcon height="16" width="16" />
+            </TextField.Slot>
+            <TextField.Input placeholder="Search the docs…" size="3" />
+            <TextField.Slot pr="3">
+              <IconButton size="2" variant="ghost">
+                <DotsHorizontalIcon height="16" width="16" />
+              </IconButton>
+            </TextField.Slot>
+          </TextField.Root>
+        </div>
+      </header>
+      <main>
+        <EventsPage />
+      </main>
     </>
   )
 }

@@ -1,18 +1,18 @@
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import './tests-components.css'
 import * as r from '@radix-ui/themes'
-import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, MagnifyingGlassIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
+import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 
 function TestComponent () {
-  const [expanded, setExpanded] = useState(false)
-  const contentRef = useRef<HTMLParagraphElement>(null) // Añade el tipo de referencia aquí
+  const [buttonsExpanded, setButtonsExpanded] = useState(false)
+  const [contentExpanded, setContentExpanded] = useState(false)
 
-  const toggleExpand = () => {
-    setExpanded(!expanded)
+  const toggleButtonsExpand = () => {
+    setButtonsExpanded(!buttonsExpanded)
   }
 
-  const getContentHeight = () => {
-    return expanded ? contentRef.current!.scrollHeight + 'px' : '0'
+  const toggleContentExpand = () => {
+    setContentExpanded(!contentExpanded)
   }
 
   return (
@@ -23,17 +23,32 @@ function TestComponent () {
         <r.Link size='2' href="" target="_blank">
             Nombre del Topic del evento
         </r.Link>
-        <r.Text size='2' >20/12/2024 2:05AM</r.Text>
+        <r.Flex gap="3" justify='end' style={{ marginRight: '-24px' }} >
+          <r.Text size='2' >20/12/2024 2:05AM</r.Text>
+          <CalendarIcon />
+        </r.Flex>
       </r.Flex>
       <r.Card size="3">
         {/* Titulo */}
         <r.Flex gap="3" align="end" direction="column" pb='4'>
-          <r.Button variant='ghost' size='2'>
-            <r.Heading size="5" weight="bold">
+          <r.Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={toggleContentExpand}>
+            <r.Heading size="5" style={{ textDecoration: 'underline' }}>
                 Este es el título del evento
             </r.Heading>
           </r.Button>
         </r.Flex>
+        {/* Contenido */}
+        <div className={`${contentExpanded ? 'full-height' : 'no-height'} overflow-clip`}>
+          <r.Heading size="2" style={{ marginBottom: '12px' }}>
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
+          </r.Heading>
+        </div>
         {/* Partidos */}
         <r.Flex gap="2" width='100%' py='2' justify='end' wrap='wrap'>
           <r.Badge variant='soft' radius='full' color="orange">#In progress</r.Badge>
@@ -42,28 +57,30 @@ function TestComponent () {
         </r.Flex>
         {/* Botones */}
         <r.Flex gap="4" pt='4' align="center">
-          <r.IconButton variant='ghost' size='2' onClick={toggleExpand}>
+          <r.IconButton variant='ghost' size='2' onClick={toggleButtonsExpand}>
             <DotsVerticalIcon />
           </r.IconButton>
-          <r.IconButton variant='ghost' size='2' onClick={toggleExpand}>
+          <r.IconButton variant='ghost' size='2' onClick={toggleButtonsExpand}>
             <PersonIcon />
           </r.IconButton>
-          <r.IconButton variant='ghost' size='2' onClick={toggleExpand}>
+          <r.IconButton variant='ghost' size='2' onClick={toggleButtonsExpand}>
             <ArchiveIcon />
           </r.IconButton>
-          <r.IconButton variant='ghost' size='2' onClick={toggleExpand}>
+          <r.IconButton variant='ghost' size='2' onClick={toggleButtonsExpand}>
             <DropdownMenuIcon />
           </r.IconButton>
-          <r.IconButton variant='ghost' size='2' onClick={toggleExpand}>
+          <r.IconButton variant='ghost' size='2' onClick={toggleButtonsExpand}>
             <Share1Icon />
           </r.IconButton>
         </r.Flex>
         {/* Desplegable */}
-        {expanded && (<r.Flex gap="3" pt='4' align="center" direction="column">
-          <r.Heading size="2" weight="bold">
+        <div className={`${buttonsExpanded ? 'full-height' : 'no-height'} `}>
+          <r.Flex gap="3" pt='5' align="center" direction="column">
+            <r.Heading size="1" weight="bold">
             Personajes públicos mencionados en el evento: Personajes públicos mencionados en el asd asd as asdsd
-          </r.Heading>
-        </r.Flex>)}
+            </r.Heading>
+          </r.Flex>
+        </div>
       </r.Card>
     </r.Box>
     // </div>

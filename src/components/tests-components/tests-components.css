@@ -2,11 +2,31 @@
   width: 400px;
 }
 
+.no-height{
+  max-height: 0;
+  transition: max-height 0.5s ease-out;
+}
 
+.full-height{
+  max-height: 1000px;
+  transition: max-height 0.5s ease-in;
+}
 
+.linea-central {
+    position: fixed;
+    top: 0;
+    left: calc(50% - 2px);
+    width: 4px;
+    height: 100%;
+    background-color: #eeeeee;
+    /* background-color: #ffa057; */
+    /* Asegura que esté por encima del contenido */
+    z-index: 99;
+  }
 
-
-
+.overflow-clip {
+  overflow: hidden;
+}
 
 
 
