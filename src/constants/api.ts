@@ -11,3 +11,6 @@ export const EVENT = '/event'
 export const PUBLISHED = '/published'
 export const MINE = '/mine'
 export const ALL = '/all'
+
+// TOPICS
+export const TOPIC = '/topic'

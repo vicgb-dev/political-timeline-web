@@ -1,0 +1,15 @@
+.timeline-date{
+    height: 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+.timeline-date .line{
+    min-width: 200px;
+    min-height: 1px;
+    background-image: linear-gradient(90deg, white, transparent);
+}

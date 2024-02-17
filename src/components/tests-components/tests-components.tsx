@@ -45,8 +45,6 @@ function TestComponent () {
             Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
             Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
             Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
-            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
-            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el evento
           </r.Heading>
         </div>
         {/* Partidos */}

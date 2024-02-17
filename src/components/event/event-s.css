@@ -1,0 +1,115 @@
+
+@import '@radix-ui/colors/gray-dark.css';
+@import '@radix-ui/colors/blue.css';
+
+.event-card-S{
+  min-width: 400px;
+  max-width: 400px;
+  transition: all 0.5s ease-in-out;
+}
+
+.no-height{
+  max-height: 0;
+  /* transition: max-height 0.5s ease-out; */
+  transition: max-height 0.5s cubic-bezier(0, 0.53, 0.24, 0.99);
+}
+
+.full-height{
+  max-height: 800px;
+  /* transition: max-height 0.5s ease-in; */
+  transition: max-height 0.5s cubic-bezier(0.35, 0.09, 0.24, 0.99)
+}
+
+.linea-central {
+    position: fixed;
+    left: calc(50% - 0px);
+    width: 1px;
+    height: 100%;
+    background-color: #b8b8b8;
+    /* background-color: #ffa057; */
+    /* Asegura que esté por encima del contenido */
+    /* z-index: 99; */
+  }
+
+.overflow-clip {
+  overflow: hidden;
+}
+
+.bg{
+    background-color: var(--gray-5) !important;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.nobg{
+    transition: background-color 0.5s ease-in-out;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+/* Estilo del contenedor del skeleton */
+.skeleton-container {
+  background-image: linear-gradient(90deg, #1f1f1f 25%, #2e2e2e 50%, #1f1f1f 75%) !important;
+  background-size: 200px 100%; /* Ancho de la animación x Altura del contenedor */
+  animation: skeleton-loading 1.5s infinite linear; /* La animación se repite infinitamente */
+  border-radius: 15px;
+}
+
+
+/* @keyframes scrollAnimation {
+  from {
+    scale: 90%;
+    transform: translateY(40px);
+  }
+  to {
+    scale: 100%;
+    transform: translateY(0px);
+  }
+}
+
+.scrollAnimation{
+  view-timeline-name: --event;
+  view-timeline-axis: block;
+
+  animation-timeline: --event;
+  animation-name: scrollAnimation;
+
+  animation-range: entry 25% cover 40%;
+  animation-fill-mode: both;
+} */
+
+.transparent{
+  background-color: transparent !important;
+  color: transparent !important;
+}
+
+.fullScreen{
+  transition: all 0.5s ease-in-out;
+  max-width: 900px;
+  margin-top: 40px;
+  margin-bottom: 90px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.smallScreenLeft{
+  transition: all 0.5s ease-in-out;
+  margin-top: -60px;
+  margin-right: 500px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.smallScreenRight{
+  transition: all 0.5s ease-in-out;
+  margin-top: -60px;
+  margin-left: 500px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

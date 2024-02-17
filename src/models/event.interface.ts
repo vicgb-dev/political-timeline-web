@@ -17,7 +17,7 @@ export interface Event {
     publishingStatus: string
     idTopic: number | null
     idAuthor: string
-    eventDate: string
+    eventDate: Date
     importance: number
     eventImg: string | null
 }
