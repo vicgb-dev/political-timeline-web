@@ -1,6 +1,6 @@
 import { IconButton, TextField } from '@radix-ui/themes'
 import { DotsHorizontalIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
-import { EventsPage } from './components/pages/events.page'
+import { EventsPage } from './pages/events.page'
 import './App.css'
 
 function App () {

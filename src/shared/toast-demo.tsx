@@ -2,8 +2,13 @@ import * as React from 'react'
 import * as Toast from '@radix-ui/react-toast'
 import './toast-demo.css'
 
-const ToastDemo = () => {
-  const [open, setOpen] = React.useState(false)
+export interface ToastDemoProps {
+  showToast: boolean
+}
+
+const ToastDemo: React.FC<ToastDemoProps> = ({ showToast }: ToastDemoProps) => {
+  console.log(showToast)
+  const [open, setOpen] = React.useState(showToast)
   const eventDateRef = React.useRef(new Date())
   const timerRef = React.useRef(0)
 

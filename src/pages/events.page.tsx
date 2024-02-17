@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import { EventTimeLine } from '../event/event-timeline'
-import { Event } from '../../models/event.interface'
-import { Box, Flex } from '@radix-ui/themes'
-import TestComponent from '../tests-components/tests-components'
-import { EventsService } from '../../services/events-service'
-import ToastDemo from '../../shared/toast-demo'
+import { EventTimeLine } from '../components/event/event-timeline'
+import { Event } from '../models/event.interface'
+import { Box, Button, Flex } from '@radix-ui/themes'
+import TestComponent from '../components/tests-components/tests-components'
+import { EventsService } from '../services/events-service'
+import Toast from '../shared/toast'
 
 export function EventsPage () {
   const [events, setEvents] = useState<Event[]>([])
+  const [showToast, setShowToast] = useState(false)
 
   // Obtener los eventos
   useEffect(() => {
@@ -26,7 +27,8 @@ export function EventsPage () {
 
   return (
     <>
-      <ToastDemo />
+      <Toast showToast={showToast} description="Hola" duration={2000} />
+      <Button onClick={() => setShowToast(!showToast)}>Mostrar Toast</Button>
       <div className="linea-central"></div>
       <EventTimeLine events={events} isMobile={false}/>
       <Flex direction='column' justify='center' align='center' style={{ paddingTop: '80px' }}>
