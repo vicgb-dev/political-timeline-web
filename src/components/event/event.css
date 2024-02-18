@@ -106,3 +106,11 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.border-rainbow
+{
+    border: 2px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-image-source: linear-gradient(45deg, var(--blue-9), var(--blue-3), var(--blue-5), var(--blue-7), var(--blue-1));
+} 

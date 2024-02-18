@@ -2,6 +2,8 @@ export const HOST = 'https://localhost:32768'
 
 // --- ENDPOINTS ---
 
+// USER
+export const USER = '/user'
 export const LOGIN = '/login'
 export const REGISTER = '/register'
 

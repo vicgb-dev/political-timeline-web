@@ -1,4 +1,4 @@
-import { DotsHorizontalIcon, MagnifyingGlassIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
+import { MagnifyingGlassIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { IconButton, TextField } from '@radix-ui/themes'
 
 export function Search () {

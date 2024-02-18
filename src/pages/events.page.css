@@ -1,10 +1,12 @@
+@import '@radix-ui/colors/gray-dark.css';
+@import '@radix-ui/colors/blue.css';
 
 .time-line {
   position: fixed;
   left: calc(50% - 0px);
   width: 1px;
   height: 100%;
-  background-color: #b8b8b8;
+  background-color: var(--gray-10);
   /* background-color: #ffa057; */
   /* Asegura que esté por encima del contenido */
   /* z-index: 99; */

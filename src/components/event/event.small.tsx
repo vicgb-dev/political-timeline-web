@@ -68,7 +68,7 @@ export function EventS ({ props }: { props: EventSProps }) {
     <Box className={`${cardDisplay} event-card-S scrollAnimation ${oneColumnClass}`} >
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
-        <Link size='2' href="" target="_blank">
+        <Link size='2' href="" target="_blank" color='orange'>
           { topic }
         </Link>
         <Flex gap="3" justify='end' style={{ marginRight: (isLeft ? '-24px' : '0px'), marginLeft: (isLeft ? '0px' : '-24px'), flexDirection: (isLeft ? 'row' : 'row-reverse') }} >
@@ -76,7 +76,7 @@ export function EventS ({ props }: { props: EventSProps }) {
           <CalendarIcon />
         </Flex>
       </Flex>
-      <Card size="3" className={contentExpanded ? 'bg' : 'nobg'}>
+      <Card size="3" className={`'border-rainbow' ${contentExpanded} ? 'bg' : 'nobg'`} >
         {/* Titulo */}
         <Flex gap="3" align="end" direction="column" pb='4'>
           <Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={toggleContentExpand}>
