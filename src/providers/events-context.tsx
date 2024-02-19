@@ -1,0 +1,63 @@
+import { useState, createContext, Dispatch, SetStateAction, useEffect } from 'react'
+import { PoliticalEvent } from '../models/event.interface'
+
+export interface EventsContextState {
+  floatEvent: boolean
+  oneCenterColumn: boolean
+  focusedEvent: PoliticalEvent | null
+  setIsFloatEvent: Dispatch<SetStateAction<boolean>>,
+  setIsOneCenterColumn: Dispatch<SetStateAction<boolean>>,
+  setFocusedEvent: Dispatch<SetStateAction<PoliticalEvent | null>>
+}
+
+export const EventsContext = createContext<EventsContextState>({
+  floatEvent: true,
+  oneCenterColumn: true,
+  focusedEvent: null,
+  setIsFloatEvent: () => {},
+  setIsOneCenterColumn: () => {},
+  setFocusedEvent: () => {}
+})
+
+interface EventsProviderProps {
+  children: React.ReactNode;
+}
+
+export const EventsProvider = ({ children } : EventsProviderProps) => {
+  const [floatEvent, setIsFloatEvent] = useState<boolean>(true)
+  const [oneCenterColumn, setIsOneCenterColumn] = useState<boolean>(true)
+  const [focusedEvent, setFocusedEvent] = useState<PoliticalEvent | null>(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+    // Radix UI considera 1280px tablet landscape
+      setIsFloatEvent(window.innerWidth < 1280)
+      // Radix UI considera 768px tablet portrait
+      setIsOneCenterColumn(window.innerWidth < 768)
+    }
+    // Agregar un event listener para el evento resize
+    window.addEventListener('resize', handleResize)
+
+    // Eliminar el event listener cuando el componente se desmonte
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  return (
+    <EventsContext.Provider
+      value={{
+        floatEvent,
+        oneCenterColumn,
+        focusedEvent,
+        setIsFloatEvent,
+        setIsOneCenterColumn,
+        setFocusedEvent
+      }}
+    >
+      {children}
+    </EventsContext.Provider>
+  )
+}
+
+export default EventsProvider

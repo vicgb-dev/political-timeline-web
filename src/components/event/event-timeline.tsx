@@ -1,21 +1,24 @@
-import { Event } from './../../models/event.interface'
+import { PoliticalEvent } from './../../models/event.interface'
 import { EventS } from './event.small'
 import { ALIGN } from '../../constants/enums'
 import { Box, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from './event.small.skeleton'
 import { TimelineDate } from '../timeline/timeline-date'
-import React from 'react'
+import React, { useContext } from 'react'
+import { EventsContext } from '../../providers/events-context'
 
 interface EventTimeLineProps {
-  events: Event[] | null
+  events: PoliticalEvent[] | null
 }
 
 export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
   // TODO: que esta variable cambie automaticamente cuando clicas un evento y se abre a pantalla completa
-  const oneColumn: boolean = false
+  const { oneCenterColumn } = useContext(EventsContext)
+
+  const oneColumn: boolean = oneCenterColumn
 
   const showDate = (eventId: number): boolean => {
-    const eventIndex = props.events?.findIndex((event: Event) => event.id === eventId)
+    const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)
     if (!eventIndex) return false
 
     const previousDate: Date | undefined = props.events?.[eventIndex - 1].eventDate
@@ -29,7 +32,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
   }
 
   const getEventDate = (eventId: number): Date => {
-    const eventIndex = props.events?.findIndex((event: Event) => event.id === eventId)
+    const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)
     if (!eventIndex) return new Date()
 
     const currentDate: Date | undefined = props.events?.[eventIndex - 1].eventDate
@@ -50,7 +53,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
             }}>
             <EventSSkeleton/>
           </Box>)))
-        : (props.events.map((event: Event, index: number) => (
+        : (props.events.map((event: PoliticalEvent, index: number) => (
           <React.Fragment key={`${event.id}div`} >
             { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
             <Box

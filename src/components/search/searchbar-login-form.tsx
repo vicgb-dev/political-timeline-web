@@ -1,7 +1,7 @@
 import { Button, Flex, Heading, IconButton, Link, Separator, Text, TextField } from '@radix-ui/themes'
 import * as Form from '@radix-ui/react-form'
 import { EyeNoneIcon, EyeOpenIcon, LockClosedIcon, PersonIcon } from '@radix-ui/react-icons'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { emailValid, passwordValid } from '../../tools/field-validations'
 import { UserService } from '../../services/auth/user-service'
 
@@ -16,11 +16,17 @@ export function SearchBarLoginForm () {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [logingIn, setLogingIn] = useState(false)
 
+  const isFirstInput = useRef(true)
+
   function togglePasswordView () {
     setPasswordVisible(!passwordVisible)
   }
 
   useEffect(() => {
+    if (isFirstInput.current) {
+      isFirstInput.current = formData.email === '' && formData.password === ''
+      return
+    }
     setFormErrors({ email: emailValid(formData.email), password: passwordValid(formData.password) })
   }, [formData])
 

@@ -1,13 +1,14 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
-import { Event } from '../../models/event.interface'
+import { PoliticalEvent } from '../../models/event.interface'
 import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ALIGN } from '../../constants/enums'
 import './event.css'
 import { TopicService } from '../../services/topic-service'
+import { EventsContext } from '../../providers/events-context'
 
 interface EventSProps {
-  event: Event
+  event: PoliticalEvent
   column: ALIGN
   align: ALIGN
   oneColumn: boolean
@@ -19,12 +20,14 @@ export function EventS ({ props }: { props: EventSProps }) {
   // Decide si mostrar una columna o dos
 
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
-  const [contentExpanded, setContentExpanded] = useState(false)
+  // const [contentExpanded, setContentExpanded] = useState(false)
   const [topic, setTopic] = useState('')
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
   const oneColumnClass = props.oneColumn ? 'one-column' : ''
   // const isLeft = true
+
+  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
 
   useEffect(() => {
     if (!props.event.idTopic) return
@@ -41,23 +44,23 @@ export function EventS ({ props }: { props: EventSProps }) {
 
   let cardDisplay: string
 
-  cardDisplay = 'smallScreenLeft'
-  if (contentExpanded) {
-    cardDisplay = 'fullScreen'
+  // cardDisplay = 'smallScreenLeft'
+  // if (contentExpanded) {
+  // cardDisplay = 'fullScreen'
+  // } else {
+  if (isLeft) {
+    cardDisplay = 'smallScreenLeft'
   } else {
-    if (isLeft) {
-      cardDisplay = 'smallScreenLeft'
-    } else {
-      cardDisplay = 'smallScreenRight'
-    }
+    cardDisplay = 'smallScreenRight'
   }
+  // }
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
   }
 
-  const toggleContentExpand = () => {
-    setContentExpanded(!contentExpanded)
+  const focusOnThisEvent = () => {
+    setFocusedEvent(props.event)
   }
 
   const getDate = (date: Date): string => {
@@ -76,19 +79,19 @@ export function EventS ({ props }: { props: EventSProps }) {
           <CalendarIcon />
         </Flex>
       </Flex>
-      <Card size="3" className={`'border-rainbow' ${contentExpanded} ? 'bg' : 'nobg'`} >
+      <Card size="3" className={`'border-rainbow' ${focusedEvent?.id === props.event.id ? 'bg' : 'nobg'}`} >
         {/* Titulo */}
         <Flex gap="3" align="end" direction="column" pb='4'>
-          <Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={toggleContentExpand}>
+          <Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={focusOnThisEvent}>
             <Heading size="5" style={{ textDecoration: 'underline' }}>
               { props.event.title }
             </Heading>
           </Button>
         </Flex>
         {/* Contenido */}
-        <div className={`${contentExpanded ? 'full-height' : 'no-height'} overflow-clip`}>
+        <div className={' overflow-clip'}>
           <Heading size="2" style={{ marginBottom: '12px' }}>
-            { props.event.description }
+            {/* { props.event.description } */}
           </Heading>
         </div>
         {/* Partidos */}

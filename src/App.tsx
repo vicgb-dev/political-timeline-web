@@ -1,6 +1,7 @@
 import { EventsPage } from './pages/events.page'
 import { Header } from './components/header/header'
 import './App.css'
+import EventsProvider from './providers/events-context'
 
 function App () {
   return (
@@ -9,7 +10,11 @@ function App () {
         <Header />
       </header>
       <main>
-        <EventsPage />
+
+        <EventsProvider>
+
+          <EventsPage />
+        </EventsProvider>
       </main>
     </>
   )

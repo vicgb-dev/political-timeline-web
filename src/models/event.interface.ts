@@ -10,7 +10,7 @@
 "eventImg": null
 */
 
-export interface Event {
+export interface PoliticalEvent {
     id: number
     title: string
     description: string

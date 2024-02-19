@@ -1,11 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { EventTimeLine } from '../components/event/event-timeline'
-import { Event } from '../models/event.interface'
+import { PoliticalEvent } from '../models/event.interface'
 import { EventsService } from '../services/events-service'
 import './events.page.css'
+import { EventsContext } from '../providers/events-context'
+import { Button } from '@radix-ui/themes'
 
 export function EventsPage () {
-  const [events, setEvents] = useState<Event[] | null>(null)
+  const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
+
+  const { setFocusedEvent } = useContext(EventsContext)
+
+  const {
+    floatEvent,
+    oneCenterColumn,
+    focusedEvent
+  } = useContext(EventsContext)
 
   // Obtener los eventos
   useEffect(() => {
@@ -24,10 +34,26 @@ export function EventsPage () {
     }
   }, [])
 
+  const handleDebugclick = () => {
+    setFocusedEvent(null)
+  }
+
   return (
     <>
-      <div className="time-line"></div>
       <div className="fixed background"></div>
+      <div className="time-line"></div>
+      <Button onClick={handleDebugclick}>Click me</Button>
+      <div className='debug'>
+        <span>
+          {floatEvent ? 'Float' : 'No float'}
+        </span>
+        <span>
+          {oneCenterColumn ? 'One center column' : 'No one center column'}
+        </span>
+        <span>
+          {focusedEvent ? focusedEvent.title : 'No focused event'}
+        </span>
+      </div>
       <EventTimeLine props={{ events }}/>
     </>
   )

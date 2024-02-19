@@ -1,8 +1,9 @@
 @import '@radix-ui/colors/gray-dark.css';
 @import '@radix-ui/colors/blue.css';
+@import '@radix-ui/colors/orange-dark.css';
 
 .event-card-S{
-  min-width: 400px;
+  min-width: 100px;
   max-width: 400px;
   transition: all 0.5s ease-in-out;
 }
@@ -24,7 +25,8 @@
 }
 
 .bg{
-    background-color: var(--gray-3) !important;
+    /* background-color: var(--gray-3) !important; */
+    background-color: var(--orange-4) !important;
     transition: background-color 0.5s ease-in-out;
 }
 
