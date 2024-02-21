@@ -2,12 +2,36 @@
 @import '@radix-ui/colors/blue.css';
 @import '@radix-ui/colors/orange-dark.css';
 
+/* Estilos de la tarjeta de evento */
 .event-card-S{
-  min-width: 100px;
-  max-width: 400px;
+  min-width: 300px;
   transition: all 0.5s ease-in-out;
 }
 
+.two-columns-width{
+  max-width: calc(50% - 30px);
+}
+
+.one-column-width{
+  max-width: calc(100% - 30px);
+}
+
+.one-column-margins{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.isLeft{
+  transition: all 0.5s ease-in-out;
+  margin-right: auto;
+}
+
+.isRight{
+  transition: all 0.5s ease-in-out;
+  margin-left: auto;
+}
+
+/* Desplegables de tarjeta de evento */
 .no-height{
   max-height: 0;
   /* transition: max-height 0.5s ease-out; */
@@ -20,20 +44,18 @@
   transition: max-height 0.5s cubic-bezier(0.35, 0.09, 0.24, 0.99)
 }
 
-.overflow-clip {
-  overflow: hidden;
-}
-
-.bg{
+/* Estilos al seleccionar la tarjeta de evento */
+.selected{
     /* background-color: var(--gray-3) !important; */
     background-color: var(--orange-4) !important;
     transition: background-color 0.5s ease-in-out;
 }
 
-.nobg{
+.no-selected{
     transition: background-color 0.5s ease-in-out;
 }
 
+/* Estilos del esqueleto de la tarjeta de evento */
 @keyframes skeleton-loading {
   0% {
     background-position: -200px 0;
@@ -43,7 +65,6 @@
   }
 }
 
-/* Estilo del contenedor del skeleton */
 .skeleton-container {
   background-image: linear-gradient(90deg, #1f1f1f 25%, #2e2e2e 50%, #1f1f1f 75%) !important;
   background-size: 200px 100%; /* Ancho de la animación x Altura del contenedor */
@@ -51,68 +72,16 @@
   border-radius: 15px;
 }
 
-
-/* @keyframes scrollAnimation {
-  from {
-    scale: 90%;
-    transform: translateY(40px);
-  }
-  to {
-    scale: 100%;
-    transform: translateY(0px);
-  }
-}
-
-.scrollAnimation{
-  view-timeline-name: --event;
-  view-timeline-axis: block;
-
-  animation-timeline: --event;
-  animation-name: scrollAnimation;
-
-  animation-range: entry 25% cover 40%;
-  animation-fill-mode: both;
-} */
-
 .transparent{
   background-color: transparent !important;
   color: transparent !important;
 }
 
-.fullScreen{
-  transition: all 0.5s ease-in-out;
-  max-width: 900px;
-  margin-top: 40px;
-  margin-bottom: 90px;
-  margin-left: 0px;
-  margin-right: 0px;
+/* Estilo del icono del calendario del timeline */
+.calendar-icon-center{
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  left: calc(50% - 12px); /* Centrar horizontalmente */
+  top: calc(0% - 3px);
 }
-
-.smallScreenLeft{
-  transition: all 0.5s ease-in-out;
-  margin-top: -60px;
-  margin-right: 500px;
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
-
-.smallScreenRight{
-  transition: all 0.5s ease-in-out;
-  margin-top: -60px;
-  margin-left: 500px;
-  margin-top: -5px;
-  margin-bottom: -5px;
-}
-
-.one-column{
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-.border-rainbow
-{
-    border: 2px solid;
-    border-image-slice: 1;
-    border-width: 2px;
-    border-image-source: linear-gradient(45deg, var(--blue-9), var(--blue-3), var(--blue-5), var(--blue-7), var(--blue-1));
-} 

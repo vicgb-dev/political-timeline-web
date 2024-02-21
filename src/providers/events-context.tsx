@@ -3,19 +3,19 @@ import { PoliticalEvent } from '../models/event.interface'
 
 export interface EventsContextState {
   floatEvent: boolean
-  oneCenterColumn: boolean
+  oneColumn: boolean
   focusedEvent: PoliticalEvent | null
   setIsFloatEvent: Dispatch<SetStateAction<boolean>>,
-  setIsOneCenterColumn: Dispatch<SetStateAction<boolean>>,
+  setOneColumn: Dispatch<SetStateAction<boolean>>,
   setFocusedEvent: Dispatch<SetStateAction<PoliticalEvent | null>>
 }
 
 export const EventsContext = createContext<EventsContextState>({
   floatEvent: true,
-  oneCenterColumn: true,
+  oneColumn: true,
   focusedEvent: null,
   setIsFloatEvent: () => {},
-  setIsOneCenterColumn: () => {},
+  setOneColumn: () => {},
   setFocusedEvent: () => {}
 })
 
@@ -25,19 +25,24 @@ interface EventsProviderProps {
 
 export const EventsProvider = ({ children } : EventsProviderProps) => {
   const [floatEvent, setIsFloatEvent] = useState<boolean>(true)
-  const [oneCenterColumn, setIsOneCenterColumn] = useState<boolean>(true)
+  const [oneColumn, setOneColumn] = useState<boolean>(true)
   const [focusedEvent, setFocusedEvent] = useState<PoliticalEvent | null>(null)
+
+  const updateWindowSize = () => {
+    // Radix UI considera 1280px tablet landscape
+    setIsFloatEvent(window.innerWidth < 1280)
+    // Radix UI considera 768px tablet portrait
+    setOneColumn(window.innerWidth < 768)
+    // setIsOneCenterColumn(window.innerWidth < 1280)
+  }
 
   useEffect(() => {
     const handleResize = () => {
-    // Radix UI considera 1280px tablet landscape
-      setIsFloatEvent(window.innerWidth < 1280)
-      // Radix UI considera 768px tablet portrait
-      setIsOneCenterColumn(window.innerWidth < 768)
+      updateWindowSize()
     }
     // Agregar un event listener para el evento resize
     window.addEventListener('resize', handleResize)
-
+    updateWindowSize()
     // Eliminar el event listener cuando el componente se desmonte
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -48,10 +53,10 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
     <EventsContext.Provider
       value={{
         floatEvent,
-        oneCenterColumn,
+        oneColumn,
         focusedEvent,
         setIsFloatEvent,
-        setIsOneCenterColumn,
+        setOneColumn,
         setFocusedEvent
       }}
     >

@@ -1,11 +1,12 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../models/event.interface'
-import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
+import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useState } from 'react'
 import { ALIGN } from '../../constants/enums'
-import './event.css'
 import { TopicService } from '../../services/topic-service'
 import { EventsContext } from '../../providers/events-context'
+import { getDate } from '../../tools/date-tools'
+import './event.css'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -15,45 +16,24 @@ interface EventSProps {
 }
 
 export function EventS ({ props }: { props: EventSProps }) {
-  // const EventS: FC<EventSProps> = ({ event, align }) => {
-  // Pinta la linea
-  // Decide si mostrar una columna o dos
-
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
-  // const [contentExpanded, setContentExpanded] = useState(false)
   const [topic, setTopic] = useState('')
+  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
-  const oneColumnClass = props.oneColumn ? 'one-column' : ''
-  // const isLeft = true
-
-  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
 
   useEffect(() => {
     if (!props.event.idTopic) return
 
-    async function readTopic () {
+    async function getTopic () {
       const readTopic = await TopicService.getTopic(props.event.idTopic!)
       if (readTopic) {
         setTopic(readTopic.title)
       }
     }
 
-    readTopic()
+    getTopic()
   }, [])
-
-  let cardDisplay: string
-
-  // cardDisplay = 'smallScreenLeft'
-  // if (contentExpanded) {
-  // cardDisplay = 'fullScreen'
-  // } else {
-  if (isLeft) {
-    cardDisplay = 'smallScreenLeft'
-  } else {
-    cardDisplay = 'smallScreenRight'
-  }
-  // }
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
@@ -63,37 +43,26 @@ export function EventS ({ props }: { props: EventSProps }) {
     setFocusedEvent(props.event)
   }
 
-  const getDate = (date: Date): string => {
-    return (new Date(date)).toLocaleDateString('es-ES', { year: 'numeric', month: 'short', day: 'numeric' })
-  }
-
   return (// <div className="test-components background6">
-    <Box className={`${cardDisplay} event-card-S scrollAnimation ${oneColumnClass}`} >
+    <Box className={`event-card-S ${isLeft ? 'isLeft' : 'isRight'} ${props.oneColumn ? 'one-column-margins one-column-width' : 'two-columns-width'}`} >
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
+        {/* Topic */}
         <Link size='2' href="" target="_blank" color='orange'>
           { topic }
         </Link>
-        <Flex gap="3" justify='end' style={{ marginRight: (isLeft ? '-24px' : '0px'), marginLeft: (isLeft ? '0px' : '-24px'), flexDirection: (isLeft ? 'row' : 'row-reverse') }} >
-          <Text size='2' >{ getDate(props.event.eventDate) }</Text>
-          <CalendarIcon />
-        </Flex>
+        {/* Fecha */}
+        <Text size='2' >{ getDate(props.event.eventDate) }</Text>
       </Flex>
-      <Card size="3" className={`'border-rainbow' ${focusedEvent?.id === props.event.id ? 'bg' : 'nobg'}`} >
+      <Card size="3" className={` ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
-        <Flex gap="3" align="end" direction="column" pb='4'>
+        <Flex gap="3" align="start" direction="column" pb='4'>
           <Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={focusOnThisEvent}>
             <Heading size="5" style={{ textDecoration: 'underline' }}>
               { props.event.title }
             </Heading>
           </Button>
         </Flex>
-        {/* Contenido */}
-        <div className={' overflow-clip'}>
-          <Heading size="2" style={{ marginBottom: '12px' }}>
-            {/* { props.event.description } */}
-          </Heading>
-        </div>
         {/* Partidos */}
         <Flex gap="2" width='100%' py='2' justify='end' wrap='wrap'>
           <Badge variant='soft' radius='full' color="orange">#In progress</Badge>

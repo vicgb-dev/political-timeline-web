@@ -1,0 +1,49 @@
+.layout {
+    display: flex;
+    width: 100%;
+    max-width: 1350px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
+
+.events-column{
+    flex: 1;
+}
+
+.empty-focused-event{
+    width: 100%;
+    flex: 2;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+
+.focused-event-container{
+    position: fixed;
+    width: 100%;
+    max-width: 1350px;
+    display: flex;
+    padding-right: 24px;
+    gap: 50px;
+}
+
+.focused-event{
+    flex: 2;
+}
+
+.float-event{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: all 0.5s ease-in-out;
+}
+
+.event-row{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    max-width: 1350px;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+}
