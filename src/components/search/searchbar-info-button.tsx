@@ -5,7 +5,7 @@ export function SearchBarInfoButton () {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <IconButton variant='solid' size='2' >
+        <IconButton variant='surface' size='2' >
           <InfoCircledIcon />
         </IconButton>
       </Popover.Trigger>

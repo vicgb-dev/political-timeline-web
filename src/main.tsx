@@ -15,7 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <CacheProvider value={cache}>
       <Theme
         appearance='dark'
-        accentColor='gray'
+        accentColor='orange'
         grayColor="gray"
         panelBackground="translucent"
         scaling="100%"

@@ -1,13 +1,32 @@
 .layout {
     display: flex;
     width: 100%;
-    max-width: 1350px;
     position: relative;
     transition: all 0.5s ease-in-out;
 }
 
-.events-column{
-    flex: 1;
+.aqua{
+    background-color: aqua;
+}
+
+.layout-center{
+    margin: 0 auto;
+}
+
+.max-width-1350{
+    max-width: 1350px;
+}
+
+.max-width-440{
+    max-width: 440px;
+}
+
+.margin-left-50{
+    margin-left: 50px;
+}
+
+.padding-right-15{
+    padding-right: 15px;
 }
 
 .empty-focused-event{
@@ -22,12 +41,8 @@
     width: 100%;
     max-width: 1350px;
     display: flex;
-    padding-right: 24px;
-    gap: 50px;
-}
-
-.focused-event{
-    flex: 2;
+    z-index: -1;
+    margin: 0 auto;
 }
 
 .float-event{
@@ -46,4 +61,5 @@
     max-width: 1350px;
     position: relative;
     transition: all 0.5s ease-in-out;
+    margin-bottom: 20px;
 }

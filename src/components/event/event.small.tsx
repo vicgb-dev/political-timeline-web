@@ -44,7 +44,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   }
 
   return (// <div className="test-components background6">
-    <Box className={`event-card-S ${isLeft ? 'isLeft' : 'isRight'} ${props.oneColumn ? 'one-column-margins one-column-width' : 'two-columns-width'}`} >
+    <Box className={`event-card-S ${isLeft ? 'isLeft' : 'isRight'} ${props.oneColumn ? '' : 'two-columns-width'}`} >
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         {/* Topic */}
@@ -52,19 +52,22 @@ export function EventS ({ props }: { props: EventSProps }) {
           { topic }
         </Link>
         {/* Fecha */}
-        <Text size='2' >{ getDate(props.event.eventDate) }</Text>
+        <Text size='2' style={{ color: 'white' }} >{ getDate(props.event.eventDate) }</Text>
       </Flex>
-      <Card size="3" className={` ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
+      <Card size="3" className={`event-blur ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
         <Flex gap="3" align="start" direction="column" pb='4'>
-          <Button highContrast color='gray' variant='ghost' size='2' style={{ textAlign: 'end' }} onClick={focusOnThisEvent}>
+          <Button variant='ghost' size='2' onClick={focusOnThisEvent}>
             <Heading size="5" style={{ textDecoration: 'underline' }}>
               { props.event.title }
             </Heading>
           </Button>
         </Flex>
+        <p className='short-description'>
+          { props.event.summary }
+        </p>
         {/* Partidos */}
-        <Flex gap="2" width='100%' py='2' justify='end' wrap='wrap'>
+        <Flex gap="2" width='100%' py='2' wrap='wrap'>
           <Badge variant='soft' radius='full' color="orange">#In progress</Badge>
           <Badge variant='outline' radius='large' color="blue">In review</Badge>
           <Badge variant='outline' radius='large' color="green">Complete</Badge>

@@ -6,16 +6,15 @@ import EventsProvider from './providers/events-context'
 function App () {
   return (
     <>
-      <header >
-        <Header />
-      </header>
-      <main>
-
-        <EventsProvider>
+      <EventsProvider>
+        <header >
+          <Header />
+        </header>
+        <main>
 
           <EventsPage />
-        </EventsProvider>
-      </main>
+        </main>
+      </EventsProvider>
     </>
   )
 }

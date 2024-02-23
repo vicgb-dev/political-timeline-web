@@ -45,7 +45,13 @@ export function TimelineDate ({ date }: TimelineDateProps) {
 
   return (
     <div className="timeline-date">
-      <Text as="p" size="2" weight="medium" >{getYear(new Date(date).getFullYear())}{getMonth(new Date(date).getMonth())}</Text>
+      <Text
+        as="p"
+        size="2"
+        weight="medium"
+        style={{ color: 'white', marginLeft: '-5px' }} >
+        {getYear(new Date(date).getFullYear())}{getMonth(new Date(date).getMonth())}
+      </Text>
       <div className="line"></div>
     </div>
   )

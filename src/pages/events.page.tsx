@@ -4,7 +4,7 @@ import { PoliticalEvent } from '../models/event.interface'
 import { EventsService } from '../services/events-service'
 import { EventsContext } from '../providers/events-context'
 import './events.page.css'
-import { Flex } from '@radix-ui/themes'
+import { Flex, Separator } from '@radix-ui/themes'
 import '../components/event/event.css'
 
 export function EventsPage () {
@@ -45,17 +45,31 @@ export function EventsPage () {
 
   return (
     <>
-      <div className="fixed background"></div>
+      <div className="fixed background-img"></div>
+
       <Flex
+        direction='column'
+        align='center'>
+        <div
+          style={{
+            position: 'fixed',
+            zIndex: '-1',
+            width: '1500px',
+            height: '100%'
+          }}>
+          <div className={`z-9 time-line-default ${lineClass}`}></div>
+        </div>
+      </Flex>
+      {/* <Flex
         direction='row'
         justify='center'
         align='center'
         className='focused-event-container'
-        style={{ height: '100%', maxWidth: '1350px' }}>
-        {/* <div className='events-column border-timeline'></div> */}
-        {/* <div style={{ flex: '2' }}></div> */}
-        <div className={lineClass}></div>
-      </Flex>
+        style={{ height: '100%', maxWidth: '1350px' }}> */}
+      {/* <div className='events-column border-timeline'></div> */}
+      {/* <div style={{ flex: '2' }}></div> */}
+      {/* <div className={`z-9 time-line-default ${lineClass}`}></div>
+      </Flex> */}
       {/* <Button onClick={handleDebugclick}>Click me</Button> */}
       <div className='debug'>
         <span>

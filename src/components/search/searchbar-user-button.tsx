@@ -6,7 +6,7 @@ export function SearchBarUserButton () {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <IconButton variant='solid' size='2' >
+        <IconButton variant='surface' size='2' >
           <PersonIcon />
         </IconButton>
       </Popover.Trigger>
