@@ -110,12 +110,18 @@ backdrop-filter: blur(15px);
 }
 
 /* Estilo del icono del calendario del timeline */
+.calendar-icon{
+  padding: 7px;
+  background-color: var(--accent-12);
+  border-radius: 16px;
+}
+
 .calendar-icon-center{
   width: 24px;
   height: 24px;
   position: absolute;
-  left: calc(50% - 12px);
-  top: calc(0% - 3px);
+  left: calc(50% - 18px);
+  top: calc(0% - 8px);
 }
 
 .calendar-icon-2-3{
@@ -123,8 +129,8 @@ backdrop-filter: blur(15px);
   height: 24px;
   position: absolute;
   right: 0;
-  top: calc(0% - 3px);
-  margin-right: -40px;
+  top: calc(0% - 8px);
+  margin-right: -48px;
 }
 
 .short-description{

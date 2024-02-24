@@ -48,7 +48,7 @@ export function EventS ({ props }: { props: EventSProps }) {
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         {/* Topic */}
-        <Link size='2' href="" target="_blank" color='orange'>
+        <Link size='2' href="" target="_blank">
           { topic }
         </Link>
         {/* Fecha */}
@@ -57,7 +57,7 @@ export function EventS ({ props }: { props: EventSProps }) {
       <Card size="3" className={`event-blur ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
         <Flex gap="3" align="start" direction="column" pb='4'>
-          <Button variant='ghost' size='2' onClick={focusOnThisEvent}>
+          <Button highContrast variant='ghost' size='2' onClick={focusOnThisEvent}>
             <Heading size="5" style={{ textDecoration: 'underline' }}>
               { props.event.title }
             </Heading>

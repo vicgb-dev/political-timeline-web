@@ -110,7 +110,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
               <React.Fragment key={`${event.id}div`} >
                 { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
                 <Box key={`${event.id}box`} className='event-row'>
-                  <CalendarIcon style={{ color: 'white' }} className={`${showFocusedEvent ? 'calendar-icon-2-3' : 'calendar-icon-center'}`}/>
+                  <CalendarIcon style={{ color: 'black' }} className={`calendar-icon ${showFocusedEvent ? 'calendar-icon-2-3' : 'calendar-icon-center'}`}/>
                   <EventS
                     key={`${event.id}event`}
                     props={{

@@ -111,16 +111,16 @@ export function SearchBarLoginForm () {
           <Text size='1' color='red' style={{ maxWidth: '250px' }}>{formErrors.password}</Text>
           <Form.Submit asChild>
             {/* Submit */}
-            <Button disabled={logingIn} type="submit" variant="outline" color='orange' style={{ marginTop: 10 }}>
+            <Button disabled={logingIn} type="submit" variant="outline" style={{ marginTop: 10 }}>
               {logingIn ? 'Iniciando sesión' : 'Iniciar sesión'}
             </Button>
           </Form.Submit>
         </Flex>
       </Form.Root>
 
-      <Link size='2' href='#' color='orange'>¿Olvidaste tu contraseña?</Link>
+      <Link size='2' href='#'>¿Olvidaste tu contraseña?</Link>
       <Separator size='4'/>
-      <Text size='2'>¿No tienes una cuenta? <Link href='#' color='orange'>Regístrate</Link></Text>
+      <Text size='2'>¿No tienes una cuenta? <Link href='#'>Regístrate</Link></Text>
 
     </Flex>
   )
