@@ -3,7 +3,8 @@ import * as Form from '@radix-ui/react-form'
 import { EyeNoneIcon, EyeOpenIcon, LockClosedIcon, PersonIcon } from '@radix-ui/react-icons'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { emailValid, passwordValid } from '../../tools/field-validations'
-import { UserService } from '../../services/auth/user-service'
+import { AuthService } from '../../services/auth/auth-service'
+import { LoginDialog } from '../dialogs/login-dialog'
 
 export interface LoginFormData{
     email: string
@@ -44,14 +45,14 @@ export function SearchBarLoginForm () {
     setFormData(newFormData)
     if (emailValid(newFormData.email) === '' && passwordValid(newFormData.password) === '') {
       setLogingIn(true)
-      const response = await UserService.login(newFormData)
+      const response = await AuthService.login(newFormData)
 
       setLogingIn(false)
 
       if (response) {
         console.log('Login correcto')
         // TODO: cambiar el layout del popover para mostrar el menu de usuario
-        window.location.reload()
+        // window.location.reload()
       } else {
         console.log('Error en el login')
       }
@@ -66,7 +67,6 @@ export function SearchBarLoginForm () {
 
   return (
     <Flex direction='column' gap='4' align='center' p='3' style={{ transition: 'all 0.5 ease-in-out' }}>
-
       {/* Titulo */}
       <Heading size='5'>¿Ya tienes una cuenta?</Heading>
       <Form.Root className="FormRoot" onSubmit={handleSubmit}>

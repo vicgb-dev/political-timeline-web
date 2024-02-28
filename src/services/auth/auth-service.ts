@@ -2,7 +2,7 @@ import { HOST, LOGIN, USER } from '../../constants/api'
 import { LoginUser } from '../../models/login.interface'
 import { AuthRepo } from '../../repositories/auth-repo'
 
-export class UserService {
+export class AuthService {
   static async login (userLogin: LoginUser): Promise<boolean> {
     try {
       const response = await fetch(`${HOST}${USER}${LOGIN}`, {
@@ -27,5 +27,9 @@ export class UserService {
       console.error('Error en la llamada a la API:', error)
       throw error
     }
+  }
+
+  static async isLogged (): Promise<boolean> {
+    return Promise.resolve(!!AuthRepo.getToken())
   }
 }

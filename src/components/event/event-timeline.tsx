@@ -1,10 +1,10 @@
 import { PoliticalEvent } from './../../models/event.interface'
 import { EventS } from './event.small'
 import { ALIGN } from '../../constants/enums'
-import { Box, Flex } from '@radix-ui/themes'
+import { Box, Button, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from './event.small.skeleton'
 import { TimelineDate } from '../timeline/timeline-date'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { EventsContext } from '../../providers/events-context'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { EventL } from './event.large'
@@ -16,24 +16,10 @@ interface EventTimeLineProps {
 
 export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
   const { oneColumn, focusedEvent, floatEvent } = useContext(EventsContext)
-  const [stretchEvent, setStretchEvent] = useState(false)
 
   const isOneColumn: boolean = oneColumn || focusedEvent !== null
   const showFloatEvent: boolean = focusedEvent !== null && floatEvent
   const showFocusedEvent: boolean = focusedEvent !== null && !floatEvent
-
-  useEffect(() => {
-    const handleResize = () => {
-      setStretchEvent(window.innerWidth < 1380)
-    }
-    // Agregar un event listener para el evento resize
-    window.addEventListener('resize', handleResize)
-    setStretchEvent(window.innerWidth < 1380)
-    // Eliminar el event listener cuando el componente se desmonte
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   const showDate = (eventId: number): boolean => {
     const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)
@@ -109,7 +95,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
             : (props.events.map((event: PoliticalEvent, index: number) => (
               <React.Fragment key={`${event.id}div`} >
                 { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
-                <Box key={`${event.id}box`} className='event-row'>
+                <Box key={`${event.id}box`} className='event-column'>
                   <CalendarIcon style={{ color: 'black' }} className={`calendar-icon ${showFocusedEvent ? 'calendar-icon-2-3' : 'calendar-icon-center'}`}/>
                   <EventS
                     key={`${event.id}event`}

@@ -53,9 +53,9 @@
     transition: all 0.5s ease-in-out;
 }
 
-.event-row{
+.event-column{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 100%;
     max-width: 1350px;

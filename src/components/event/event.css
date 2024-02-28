@@ -55,12 +55,14 @@ backdrop-filter: blur(15px);
 
 .isLeft{
   transition: all 0.5s ease-in-out;
-  margin-right: auto;
+  /* margin-right: auto; */
+  align-self: flex-start;
 }
 
 .isRight{
   transition: all 0.5s ease-in-out;
-  margin-left: auto;
+  /* margin-left: auto; */
+  align-self: flex-end;
 }
 
 /* Desplegables de tarjeta de evento */

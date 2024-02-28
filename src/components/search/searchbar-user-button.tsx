@@ -1,19 +1,28 @@
 import { PersonIcon } from '@radix-ui/react-icons'
-import { IconButton, Popover } from '@radix-ui/themes'
+import { Dialog, IconButton, Popover } from '@radix-ui/themes'
 import { SearchBarLoginForm } from './searchbar-login-form'
+import { LoginDialog } from '../dialogs/login-dialog'
+import { useContext } from 'react'
+import { AuthContext } from '../../providers/auth-context'
 
 export function SearchBarUserButton () {
-  return (
-    <Popover.Root>
-      <Popover.Trigger>
-        <IconButton variant='surface' size='2' >
-          <PersonIcon />
-        </IconButton>
-      </Popover.Trigger>
-      <Popover.Content >
-        <SearchBarLoginForm />
+  const { isLogged } = useContext(AuthContext)
 
-      </Popover.Content>
-    </Popover.Root>
+  return (
+    <>
+      {isLogged
+        ? <Popover.Root>
+          <Popover.Trigger>
+            <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
+          </Popover.Trigger>
+          <Popover.Content >
+            <SearchBarLoginForm />
+          </Popover.Content>
+        </Popover.Root>
+        : <LoginDialog>
+          <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
+        </LoginDialog> }
+
+    </>
   )
 }

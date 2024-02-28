@@ -23,4 +23,25 @@ export class TopicService {
       }
     }
   }
+
+  static async getTopics (): Promise<Topic[]> {
+    try {
+      const response = await fetch(`${HOST}${TOPIC}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+      if (!response.ok) {
+        throw new Error('Error al obtener los datos de la API')
+      }
+      const data: Topic[] = await response.json()
+      console.log(data)
+      return data
+    } catch (error) {
+      console.error('Error en la llamada a la API:', error)
+      throw error
+    }
+  }
 }

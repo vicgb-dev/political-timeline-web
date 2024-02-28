@@ -4,11 +4,14 @@ import { PoliticalEvent } from '../models/event.interface'
 import { EventsService } from '../services/events-service'
 import { EventsContext } from '../providers/events-context'
 import './events.page.css'
-import { Flex, Separator } from '@radix-ui/themes'
+import { Button, Flex, Separator } from '@radix-ui/themes'
 import '../components/event/event.css'
+import { AuthService } from '../services/auth/auth-service'
+import { AuthContext } from '../providers/auth-context'
 
 export function EventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
+  const { logout } = useContext(AuthContext)
 
   const {
     floatEvent,
@@ -41,6 +44,10 @@ export function EventsPage () {
     lineClass = 'time-line'
   } else {
     lineClass = 'time-line-right'
+  }
+
+  const deleteToken = () => {
+    logout()
   }
 
   return (
@@ -81,6 +88,7 @@ export function EventsPage () {
         <span>
           {focusedEvent ? focusedEvent.title : 'No focused event'}
         </span>
+        <Button onClick={deleteToken}>Borrar token</Button>
       </div>
       <EventTimeLine props={{ events }}/>
     </>
