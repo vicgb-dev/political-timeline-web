@@ -80,36 +80,30 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
         align='start'
         style={{ paddingTop: '20px' }}
         className={`${showFocusedEvent ? 'max-width-440' : 'max-width-1350 layout-center'} ${oneColumn ? 'padding-right-15' : ''}`}>
-        <div>
-          {!props.events
-            ? (Array.from({ length: 5 }, (_, index) => (
-              <Box
-                key={index}
-                style={{
-                  marginTop: '-60px',
-                  marginRight: index % 2 === 0 ? '500px' : 0,
-                  marginLeft: index % 2 === 1 ? '500px' : 0
-                }}>
-                <EventSSkeleton/>
-              </Box>)))
-            : (props.events.map((event: PoliticalEvent, index: number) => (
-              <React.Fragment key={`${event.id}div`} >
-                { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
-                <Box key={`${event.id}box`} className='event-column'>
-                  <CalendarIcon style={{ color: 'black' }} className={`calendar-icon ${showFocusedEvent ? 'calendar-icon-2-3' : 'calendar-icon-center'}`}/>
-                  <EventS
-                    key={`${event.id}event`}
-                    props={{
-                      oneColumn: isOneColumn,
-                      event,
-                      column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT,
-                      align: ALIGN.RIGHT
-                    }}/>
-                </Box>
-              </React.Fragment>
-            )))
-          }
-        </div>
+        {!props.events
+          ? (Array.from({ length: 5 }, (_, index) => (
+            <Box
+              key={index}
+              style={{
+                marginTop: '-60px',
+                marginRight: index % 2 === 0 ? '500px' : 0,
+                marginLeft: index % 2 === 1 ? '500px' : 0
+              }}>
+              <EventSSkeleton/>
+            </Box>)))
+          : (props.events.map((event: PoliticalEvent, index: number) => (
+            // TODO: incluir la fecha al cambiar de mes
+            // { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}
+            <EventS
+              key={`${event.id}event`}
+              props={{
+                oneColumn: isOneColumn,
+                event,
+                column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT,
+                align: ALIGN.RIGHT
+              }}/>
+          )))
+        }
       </Flex>
     </>
   )

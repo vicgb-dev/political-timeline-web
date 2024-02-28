@@ -1,7 +1,7 @@
 /* Estilos de la tarjeta de evento */
 .event-card-S{
   min-width: 300px;
-  transition: all 0.5s ease-in-out;
+  position: relative;
 }
 
 .event-card-L{
@@ -38,14 +38,14 @@
 backdrop-filter: blur(15px);
 }
 
-.two-columns-width{
-    transition: all 0.5s ease-in-out;
+.two-columns{
   max-width: calc(50% - 30px);
+  transition: all 0.5s ease-in-out;
+  margin-bottom: -100px;
 }
 
-.one-column-width{
-    transition: all 0.5s ease-in-out;
-  max-width: calc(100% - 30px);
+.one-column{
+  margin-bottom: 20px;
 }
 
 .one-column-margins{
@@ -54,27 +54,28 @@ backdrop-filter: blur(15px);
 }
 
 .isLeft{
-  transition: all 0.5s ease-in-out;
   /* margin-right: auto; */
   align-self: flex-start;
 }
 
 .isRight{
-  transition: all 0.5s ease-in-out;
   /* margin-left: auto; */
   align-self: flex-end;
+}
+
+.short-description{
+  opacity: 0.9;
+  text-wrap: pretty;
 }
 
 /* Desplegables de tarjeta de evento */
 .no-height{
   max-height: 0;
-  /* transition: max-height 0.5s ease-out; */
   transition: max-height 0.5s cubic-bezier(0, 0.53, 0.24, 0.99);
 }
 
 .full-height{
   max-height: 800px;
-  /* transition: max-height 0.5s ease-in; */
   transition: max-height 0.5s cubic-bezier(0.35, 0.09, 0.24, 0.99)
 }
 
@@ -111,31 +112,52 @@ backdrop-filter: blur(15px);
   color: transparent !important;
 }
 
-/* Estilo del icono del calendario del timeline */
+/* Estilo del icono del calendario y la linea del timeline */
 .calendar-icon{
   padding: 7px;
   background-color: var(--accent-12);
   border-radius: 16px;
-}
-
-.calendar-icon-center{
   width: 24px;
   height: 24px;
   position: absolute;
-  left: calc(50% - 18px);
-  top: calc(0% - 8px);
 }
 
-.calendar-icon-2-3{
-  width: 24px;
-  height: 24px;
+.one-column-line{
   position: absolute;
+  width: 2px;
+  background: white;
+  height: calc(100% - 40px);
+  margin-top: 40px;
+  transition: height 0.5s ease-in-out;
+}
+
+.two-column-line{
+  position: absolute;
+  width: 2px;
+  background: white;
+  height: calc(100% - 160px);
+  margin-top: 40px;
+  transition: height 0.5s ease-in-out;
+}
+
+.line-right{
+  left: 0;
+  margin-left: -31px;
+}
+
+.line-left{
   right: 0;
-  top: calc(0% - 8px);
-  margin-right: -48px;
+  margin-right: -31px;
 }
 
-.short-description{
-  opacity: 0.9;
-  text-wrap: pretty;
+.calendar-icon-left{
+  right: 0;
+  margin-right: -49px;
+  margin-top: -10px;
+}
+
+.calendar-icon-right{
+  left: 0;
+  margin-left: -49px;
+  margin-top: -10px;
 }

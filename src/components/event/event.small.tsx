@@ -1,11 +1,12 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../models/event.interface'
-import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
-import { useContext, useEffect, useState } from 'react'
+import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { ALIGN } from '../../constants/enums'
 import { TopicService } from '../../services/topic-service'
 import { EventsContext } from '../../providers/events-context'
 import { getDate } from '../../tools/date-tools'
+import { CalendarLineEvent } from './calendar-line-event'
 import './event.css'
 
 interface EventSProps {
@@ -18,9 +19,11 @@ interface EventSProps {
 export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
-  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
+  const { floatEvent, focusedEvent, setFocusedEvent } = useContext(EventsContext)
+  const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
+  const showFocusedEvent: boolean = focusedEvent !== null && !floatEvent
 
   useEffect(() => {
     if (!props.event.idTopic) return
@@ -41,10 +44,25 @@ export function EventS ({ props }: { props: EventSProps }) {
 
   const focusOnThisEvent = () => {
     setFocusedEvent(props.event)
+    // Obtener el nodo DOM de la event seleccionada
+    const eventNode = eventRef.current
+
+    // Desplazar la event seleccionada al centro del viewport
+    if (eventNode) {
+      console.log('Haciendo scrol')
+      setTimeout(() => {
+        eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 50)
+    }
   }
 
   return (// <div className="test-components background6">
-    <Box className={`event-card-S ${isLeft ? 'isLeft' : 'isRight'} ${props.oneColumn ? '' : 'two-columns-width'}`} >
+    <Box ref={eventRef} className={
+      `event-card-S 
+      ${isLeft ? 'isLeft' : 'isRight'} 
+      ${props.oneColumn ? 'one-column' : 'two-columns'}`
+    } >
+      <CalendarLineEvent props={{ align: isLeft ? ALIGN.LEFT : ALIGN.RIGHT, oneColumn: props.oneColumn }}/>
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         {/* Topic */}

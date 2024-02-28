@@ -64,7 +64,7 @@ export function EventsPage () {
             width: '1500px',
             height: '100%'
           }}>
-          <div className={`z-9 time-line-default ${lineClass}`}></div>
+          {/* <div className={`z-9 time-line-default ${lineClass}`}></div> */}
         </div>
       </Flex>
       {/* <Flex
