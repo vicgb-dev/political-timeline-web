@@ -36,6 +36,7 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
     // setIsOneCenterColumn(window.innerWidth < 1280)
   }
 
+  // Actualizar el layout por tamaño de pantalla
   useEffect(() => {
     const handleResize = () => {
       updateWindowSize()

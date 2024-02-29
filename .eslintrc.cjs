@@ -31,6 +31,7 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'react/jsx-no-undef': 'off',
     'no-undef': 'off',
-    '@typescript-eslint/no-var-requires': 'off'
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-explicit-any': 'warn'
   }
 }

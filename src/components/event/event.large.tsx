@@ -1,5 +1,5 @@
 import { ArchiveIcon, Cross1Icon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
-import { Badge, Text, Card, Flex, Heading, IconButton } from '@radix-ui/themes'
+import { Badge, Text, Card, Flex, Heading, IconButton, ScrollArea } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../models/event.interface'
 import { useContext, useState } from 'react'
 import { EventsContext } from '../../providers/events-context'
@@ -12,7 +12,7 @@ interface EventLProps {
 
 export function EventL ({ props }: { props: EventLProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
-  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
+  const { setFocusedEvent } = useContext(EventsContext)
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
@@ -33,9 +33,11 @@ export function EventL ({ props }: { props: EventLProps }) {
           <Cross1Icon />
         </IconButton>
       </Flex>
-      <Text className='event-description'>
-        { props.event.description }
-      </Text>
+      <ScrollArea type='hover'>
+        <Text className='event-description'>
+          { props.event.description }
+        </Text>
+      </ScrollArea>
       {/* Footer */}
       <footer className='event-footer'>
         {/* Botones */}

@@ -17,7 +17,7 @@ interface EventTimeLineProps {
 export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
   const { oneColumn, focusedEvent, floatEvent } = useContext(EventsContext)
 
-  const isOneColumn: boolean = oneColumn || focusedEvent !== null
+  const isOneColumn: boolean = oneColumn || (focusedEvent !== null && !floatEvent)
   const showFloatEvent: boolean = focusedEvent !== null && floatEvent
   const showFocusedEvent: boolean = focusedEvent !== null && !floatEvent
 
@@ -47,16 +47,28 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
   return (
     <>
       {/* Mostrar evento grande como dialogo */}
-      {/* {showFloatEvent
-        ? <div className='float-event'>
+      {showFloatEvent
+        ? <div
+          style={{
+            position: 'fixed',
+            paddingTop: '20px',
+            bottom: '0',
+            zIndex: '10',
+            width: '100%',
+            height: 'calc(100% - 100px)',
+            marginLeft: '-34px', /* 25px de padding del main y 8px del margen del body */
+            paddingBottom: '15px'
+          }}
+        >
           <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
         </div>
         : null
-      } */}
+      }
 
       {/* Mostrar evento grande dos tercios */}
       {showFocusedEvent
         ? (
+          // TODO: mejorar el responsive al estrecharse la pagina
           <Flex
             direction='column'
             align='end'>
@@ -68,6 +80,8 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
                 width: '950px',
                 height: 'calc(100% - 180px)'
               }}>
+              {/* <Flex className='event-L-grandpa'>
+            <div className='aqua event-L-parent'> */}
               <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
             </div>
           </Flex>

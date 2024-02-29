@@ -13,7 +13,6 @@ function App () {
             <Header />
           </header>
           <main>
-
             <EventsPage />
           </main>
         </EventsProvider>

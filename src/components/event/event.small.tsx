@@ -1,6 +1,6 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../models/event.interface'
-import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
+import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { ALIGN } from '../../constants/enums'
 import { TopicService } from '../../services/topic-service'
@@ -19,11 +19,10 @@ interface EventSProps {
 export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
-  const { floatEvent, focusedEvent, setFocusedEvent } = useContext(EventsContext)
+  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
   const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
-  const showFocusedEvent: boolean = focusedEvent !== null && !floatEvent
 
   useEffect(() => {
     if (!props.event.idTopic) return
@@ -49,10 +48,9 @@ export function EventS ({ props }: { props: EventSProps }) {
 
     // Desplazar la event seleccionada al centro del viewport
     if (eventNode) {
-      console.log('Haciendo scrol')
       setTimeout(() => {
         eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }, 50)
+      }, 10)
     }
   }
 

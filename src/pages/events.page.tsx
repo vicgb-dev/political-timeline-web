@@ -54,19 +54,6 @@ export function EventsPage () {
     <>
       <div className="fixed background-img"></div>
 
-      <Flex
-        direction='column'
-        align='center'>
-        <div
-          style={{
-            position: 'fixed',
-            zIndex: '-1',
-            width: '1500px',
-            height: '100%'
-          }}>
-          {/* <div className={`z-9 time-line-default ${lineClass}`}></div> */}
-        </div>
-      </Flex>
       {/* <Flex
         direction='row'
         justify='center'
@@ -78,7 +65,7 @@ export function EventsPage () {
       {/* <div className={`z-9 time-line-default ${lineClass}`}></div>
       </Flex> */}
       {/* <Button onClick={handleDebugclick}>Click me</Button> */}
-      <div className='debug'>
+      {/* <div className='debug'>
         <span>
           {floatEvent ? 'Float' : 'No float'}
         </span>
@@ -89,7 +76,7 @@ export function EventsPage () {
           {focusedEvent ? focusedEvent.title : 'No focused event'}
         </span>
         <Button onClick={deleteToken}>Borrar token</Button>
-      </div>
+      </div> */}
       <EventTimeLine props={{ events }}/>
     </>
   )
