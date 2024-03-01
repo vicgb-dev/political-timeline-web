@@ -67,20 +67,12 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
       {showFocusedEvent
         ? (
           // TODO: mejorar el responsive al estrecharse la pagina
-          <Flex
-            direction='column'
-            align='end'>
-            <div
-              style={{
-                position: 'fixed',
-                paddingTop: '20px',
-                zIndex: '10',
-                width: '950px',
-                height: 'calc(100% - 180px)'
-              }}>
+          <div
+            className='event-L-parent'>
+            <div className='event-L-container'>
               <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
             </div>
-          </Flex>
+          </div>
         )
         : null
       }

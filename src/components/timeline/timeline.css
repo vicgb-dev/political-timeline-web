@@ -54,11 +54,23 @@
 }
 
 .event-L-parent{
-    display: block;
-    position: fixed;
-    width: 50%;
     display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.event-L-container{
+    position: fixed;
+    align-self: flex-end;
+    width: calc((100% - (100% - 1500px)) * 0.635);
     padding-top: 20px;
     z-index: 10;
     height: calc(100% - 180px);
+}
+
+@media screen and (max-width: 1520px) {
+    .event-L-container{
+        width: 62%;
+    }
+    
 }
