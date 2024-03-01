@@ -1,20 +1,18 @@
-import { PoliticalEvent } from './../../models/event.interface'
-import { EventS } from './event.small'
+import { PoliticalEvent } from '../../models/event.interface'
+import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
-import { Box, Button, Flex } from '@radix-ui/themes'
-import { EventSSkeleton } from './event.small.skeleton'
-import { TimelineDate } from '../timeline/timeline-date'
-import React, { useContext } from 'react'
-import { EventsContext } from '../../providers/events-context'
-import { CalendarIcon } from '@radix-ui/react-icons'
-import { EventL } from './event.large'
-import './event-timeline.css'
+import { Box, Flex } from '@radix-ui/themes'
+import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
+import { useContext } from 'react'
+import { EventsContext } from '../../context/events-context'
+import { EventL } from '../event/eventL/event.large'
+import './timeline.css'
 
-interface EventTimeLineProps {
+interface TimeLineProps {
   events: PoliticalEvent[] | null
 }
 
-export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
+export function TimeLine ({ props }: { props: TimeLineProps }) {
   const { oneColumn, focusedEvent, floatEvent } = useContext(EventsContext)
 
   const isOneColumn: boolean = oneColumn || (focusedEvent !== null && !floatEvent)
@@ -80,8 +78,6 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
                 width: '950px',
                 height: 'calc(100% - 180px)'
               }}>
-              {/* <Flex className='event-L-grandpa'>
-            <div className='aqua event-L-parent'> */}
               <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
             </div>
           </Flex>
@@ -93,7 +89,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
         justify='center'
         align='start'
         style={{ paddingTop: '20px' }}
-        className={`${showFocusedEvent ? 'max-width-440' : 'max-width-1350 layout-center'} ${oneColumn ? 'padding-right-15' : ''}`}>
+        className={`${showFocusedEvent ? 'events-two-thirds' : 'max-width-1350 layout-center'} ${oneColumn ? 'one-clumn-timeline' : ''}`}>
         {!props.events
           ? (Array.from({ length: 5 }, (_, index) => (
             <Box
@@ -113,8 +109,7 @@ export function EventTimeLine ({ props }: { props: EventTimeLineProps }) {
               props={{
                 oneColumn: isOneColumn,
                 event,
-                column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT,
-                align: ALIGN.RIGHT
+                column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT
               }}/>
           )))
         }

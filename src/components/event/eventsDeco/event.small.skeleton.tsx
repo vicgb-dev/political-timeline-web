@@ -1,7 +1,7 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { ArchiveIcon, CalendarIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useState } from 'react'
-import './event.css'
+import '../event.css'
 
 export function EventSSkeleton () {
 // const EventS: FC<EventSProps> = ({ event, align }) => {

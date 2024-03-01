@@ -49,12 +49,12 @@ backdrop-filter: blur(15px);
 }
 
 .isLeft{
-  /* margin-right: auto; */
   align-self: flex-start;
+  /* Se aplica cuando es una columna y el resumen es muy corto */
+  width: 100%;
 }
 
 .isRight{
-  /* margin-left: auto; */
   align-self: flex-end;
 }
 
@@ -76,8 +76,7 @@ backdrop-filter: blur(15px);
 
 /* Estilos al seleccionar la tarjeta de evento */
 .selected{
-    /* background-color: var(--gray-3) !important; */
-    background-color: var(--orange-4) !important;
+    background-color: var(--accent-4) !important;
     transition: background-color 0.5s ease-in-out;
 }
 

@@ -1,9 +1,9 @@
 import { PersonIcon } from '@radix-ui/react-icons'
-import { Dialog, IconButton, Popover } from '@radix-ui/themes'
+import { IconButton, Popover } from '@radix-ui/themes'
 import { SearchBarLoginForm } from './searchbar-login-form'
 import { LoginDialog } from '../dialogs/login-dialog'
 import { useContext } from 'react'
-import { AuthContext } from '../../providers/auth-context'
+import { AuthContext } from '../../context/auth-context'
 
 export function SearchBarUserButton () {
   const { isLogged } = useContext(AuthContext)

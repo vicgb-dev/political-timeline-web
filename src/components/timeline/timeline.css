@@ -17,16 +17,17 @@
     max-width: 1350px;
 }
 
-.max-width-440{
-    max-width: 440px;
+.events-two-thirds{
+    max-width: 30%;
 }
 
 .margin-left-50{
     margin-left: 50px;
 }
 
-.padding-right-15{
-    padding-right: 15px;
+.one-clumn-timeline{
+    margin-left: -20px;
+    padding-right: 30px;
 }
 
 .event-column{

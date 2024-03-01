@@ -1,6 +1,6 @@
 import { CalendarIcon } from '@radix-ui/react-icons'
-import { ALIGN } from '../../constants/enums'
-import './event.css'
+import { ALIGN } from '../../../constants/enums'
+import '../event.css'
 
 interface CalendarLineEventProps{
     align: ALIGN,

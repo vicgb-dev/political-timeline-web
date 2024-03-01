@@ -1,18 +1,17 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
-import { PoliticalEvent } from '../../models/event.interface'
+import { PoliticalEvent } from '../../../models/event.interface'
 import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { ALIGN } from '../../constants/enums'
-import { TopicService } from '../../services/topic-service'
-import { EventsContext } from '../../providers/events-context'
-import { getDate } from '../../tools/date-tools'
-import { CalendarLineEvent } from './calendar-line-event'
-import './event.css'
+import { ALIGN } from '../../../constants/enums'
+import { TopicService } from '../../../services/topic-service'
+import { EventsContext } from '../../../context/events-context'
+import { getDate } from '../../../tools/date-tools'
+import { CalendarLineEvent } from '../eventsDeco/calendar-line-event'
+import '../event.css'
 
 interface EventSProps {
   event: PoliticalEvent
   column: ALIGN
-  align: ALIGN
   oneColumn: boolean
 }
 
@@ -74,7 +73,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         {/* Titulo */}
         <Flex gap="3" align="start" direction="column" pb='4'>
           <Button highContrast variant='ghost' size='2' onClick={focusOnThisEvent}>
-            <Heading size="5" style={{ textDecoration: 'underline' }}>
+            <Heading size="5">
               { props.event.title }
             </Heading>
           </Button>

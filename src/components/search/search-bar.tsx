@@ -1,9 +1,9 @@
 import { BoxIcon, CalendarIcon, MagnifyingGlassIcon, MixIcon, MixerHorizontalIcon } from '@radix-ui/react-icons'
 import { IconButton, TextField } from '@radix-ui/themes'
 import { useContext } from 'react'
-import { EventsContext } from '../../providers/events-context'
+import { EventsContext } from '../../context/events-context'
 
-export function Search () {
+export function SearchBar () {
   const { floatEvent, oneColumn, focusedEvent, setIsFloatEvent, setOneColumn, setFocusedEvent } = useContext(EventsContext)
 
   const tempEvent = {

@@ -4,7 +4,7 @@ export const fakeEvents: PoliticalEvent[] = [
   {
     id: 1,
     title: 'Evento 1',
-    summary: 'Resumen del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1',
+    summary: 'Resumen del evento 1',
     description: 'Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1 Descripción del evento 1',
     publishingStatus: 'published',
     idTopic: 1,
@@ -40,7 +40,7 @@ export const fakeEvents: PoliticalEvent[] = [
   {
     id: 4,
     title: 'Evento 4',
-    summary: 'Resumen del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4',
+    summary: 'Resumen del evento 4',
     description: 'Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4 Descripción del evento 4',
     publishingStatus: 'published',
     idTopic: 1,

@@ -1,20 +1,14 @@
 import { EventsPage } from './pages/events.page'
-import { Header } from './components/header/header'
+import EventsProvider from './context/events-context'
+import { AuthProvider } from './context/auth-context'
 import './App.css'
-import EventsProvider from './providers/events-context'
-import { AuthProvider } from './providers/auth-context'
 
 function App () {
   return (
     <>
       <AuthProvider>
         <EventsProvider>
-          <header >
-            <Header />
-          </header>
-          <main>
-            <EventsPage />
-          </main>
+          <EventsPage />
         </EventsProvider>
       </AuthProvider>
     </>
