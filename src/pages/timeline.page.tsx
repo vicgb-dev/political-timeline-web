@@ -4,7 +4,7 @@ import { PoliticalEvent } from '../models/event.interface'
 import { EventsService } from '../services/events-service'
 import { Header } from '../components/header/header'
 
-export function EventsPage () {
+export function TimelinePage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
 
   // Obtener los eventos
