@@ -15,5 +15,6 @@ export class AuthRepo {
 
   static logout (): void {
     localStorage.removeItem('token')
+    console.log('token borrado')
   }
 }

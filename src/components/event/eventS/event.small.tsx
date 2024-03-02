@@ -71,8 +71,8 @@ export function EventS ({ props }: { props: EventSProps }) {
       </Flex>
       <Card size="3" className={`event-blur ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
-        <Button highContrast style={{ width: '100%' }} variant='ghost' size='2' onClick={focusOnThisEvent}>
-          <Flex gap="3" align="start" direction="column" pb='4' width='100%'>
+        <Button highContrast style={{ width: '100%', marginBottom: '5px' }} variant='ghost' size='2' onClick={focusOnThisEvent}>
+          <Flex gap="3" align="start" direction="column" width='100%'>
             <Heading size="6">
               { props.event.title }
             </Heading>

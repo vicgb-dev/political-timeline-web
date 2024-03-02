@@ -4,11 +4,13 @@ import { AuthService } from '../services/auth/auth-service'
 
 export interface AuthContextState{
     isLogged: boolean
+    login: (token: string) => void
     logout: Dispatch<SetStateAction<void>>
 }
 
 export const AuthContext = createContext<AuthContextState>({
   isLogged: false,
+  login: () => {},
   logout: () => {}
 })
 
@@ -24,6 +26,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIsLogged(false)
   }
 
+  const login = (token: string) => {
+    AuthRepo.saveToken(token)
+    setIsLogged(true)
+  }
+
   useEffect(() => {
     const isLogged = async () => {
       const isLogged = await AuthService.isLogged()
@@ -37,6 +44,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     <AuthContext.Provider
       value={{
         isLogged,
+        login,
         logout
       }}
     >
