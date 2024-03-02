@@ -10,7 +10,7 @@ interface CalendarLineEventProps{
 export function CalendarLineEvent ({ props }:{props : CalendarLineEventProps}) {
   return (
     <>
-      <div className={`
+      <div className={`line
       ${props.oneColumn
       ? 'one-column-line'
       : 'two-column-line'} 

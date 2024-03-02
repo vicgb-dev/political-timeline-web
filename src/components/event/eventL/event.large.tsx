@@ -26,8 +26,8 @@ export function EventL ({ props }: { props: EventLProps }) {
     <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur'>
       {/* Titulo */}
       <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
-        <Heading size="5" style={{ textDecoration: 'underline' }}>
-            asdasdasd{ props.event.title }
+        <Heading size="7" style={{ textDecoration: 'underline' }}>
+          { props.event.title }
         </Heading>
         <IconButton onClick={closeEvent}>
           <Cross1Icon />

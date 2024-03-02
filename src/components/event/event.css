@@ -25,10 +25,6 @@
   border-top: 1px solid var(--gray-2);
 }
 
-.event-blur .rt-CardInner{
-  /* background-color: var(--gray-a14); */
-}
-
 .event-blur{
 backdrop-filter: blur(15px);
 }
@@ -36,11 +32,11 @@ backdrop-filter: blur(15px);
 .two-columns{
   max-width: calc(50% - 30px);
   transition: all 0.5s ease-in-out;
-  margin-bottom: -100px;
+  margin-bottom: -80px;
 }
 
 .one-column{
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .one-column-margins{
@@ -116,22 +112,20 @@ backdrop-filter: blur(15px);
   position: absolute;
 }
 
-.one-column-line{
+.line{
   position: absolute;
   width: 2px;
   background: white;
-  height: calc(100% - 40px);
   margin-top: 40px;
   transition: height 0.5s ease-in-out;
 }
 
+.one-column-line{
+  height: calc(100% - 30px);
+}
+
 .two-column-line{
-  position: absolute;
-  width: 2px;
-  background: white;
-  height: calc(100% - 160px);
-  margin-top: 40px;
-  transition: height 0.5s ease-in-out;
+  height: calc(100% - 140px);
 }
 
 .line-right{

@@ -71,16 +71,16 @@ export function EventS ({ props }: { props: EventSProps }) {
       </Flex>
       <Card size="3" className={`event-blur ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
-        <Flex gap="3" align="start" direction="column" pb='4'>
-          <Button highContrast variant='ghost' size='2' onClick={focusOnThisEvent}>
-            <Heading size="5">
+        <Button highContrast style={{ width: '100%' }} variant='ghost' size='2' onClick={focusOnThisEvent}>
+          <Flex gap="3" align="start" direction="column" pb='4' width='100%'>
+            <Heading size="6">
               { props.event.title }
             </Heading>
-          </Button>
-        </Flex>
-        <p className='short-description'>
-          { props.event.summary }
-        </p>
+            <Text className='short-description'>
+              { props.event.summary }
+            </Text>
+          </Flex>
+        </Button>
         {/* Partidos */}
         <Flex gap="2" width='100%' py='2' wrap='wrap'>
           <Badge variant='soft' radius='full' color="orange">#In progress</Badge>

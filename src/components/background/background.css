@@ -8,7 +8,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(3px) brightness(0.3);
+  filter: blur(3px) brightness(0.15);
 }
 
 .fixed{

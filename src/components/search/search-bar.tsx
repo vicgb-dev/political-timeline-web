@@ -32,7 +32,7 @@ export function SearchBar () {
   }
 
   return (
-    <TextField.Root className='item-grow search-input' color='orange' >
+    <TextField.Root className='item-grow' color='orange' >
       <TextField.Slot>
         <MagnifyingGlassIcon height="16" width="16" />
       </TextField.Slot>
