@@ -1,7 +1,7 @@
 import { PoliticalEvent } from '../../models/event.interface'
 import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
-import { Box, Flex } from '@radix-ui/themes'
+import { Box, Button, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
 import { useContext } from 'react'
 import { EventsContext } from '../../context/events-context'
