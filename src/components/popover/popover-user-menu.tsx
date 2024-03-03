@@ -24,7 +24,7 @@ export function PopoverUserMenu ({ children }: {children: React.ReactNode}) {
               Mi perfil
             </Button>
           </Link>
-          <Link to='/about' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }}>
+          <Link to='/my-events' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }}>
             <Button size='2'style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} variant='soft'>
               Mis eventos
             </Button>
@@ -34,7 +34,11 @@ export function PopoverUserMenu ({ children }: {children: React.ReactNode}) {
               Configuración
             </Button>
           </Link>
-          <Button size='2' style={{ width: '100%', justifyContent: 'start' }} variant='solid' color='tomato' onClick={signOut} >Cerrar sesión</Button>
+          <Link to='/' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }}>
+            <Button size='2' style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} variant='solid' color='tomato' onClick={signOut} >
+              Cerrar sesión
+            </Button>
+          </Link>
         </Flex>
       </Popover.Content>
     </Popover.Root>

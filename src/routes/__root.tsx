@@ -1,4 +1,4 @@
-import { createRootRoute, createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
+import { createRootRouteWithContext, Link, Outlet } from '@tanstack/react-router'
 import React, { Suspense } from 'react'
 import { Button } from '@radix-ui/themes'
 import { AuthContextState } from '../context/auth-context'

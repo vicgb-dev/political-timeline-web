@@ -1,5 +1,5 @@
 import { PersonIcon } from '@radix-ui/react-icons'
-import { IconButton } from '@radix-ui/themes'
+import { Button, IconButton } from '@radix-ui/themes'
 import { LoginDialog } from '../dialogs/login-dialog'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/auth-context'
@@ -15,7 +15,7 @@ export function SearchBarUserButton () {
           <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
         </PopoverUserMenu>
         : <LoginDialog>
-          <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
+          <Button variant='surface' size='2'>Iniciar sesión</Button>
         </LoginDialog> }
 
     </>

@@ -31,7 +31,7 @@ export class AuthService {
     AuthRepo.logout()
   }
 
-  static async isLogged (): Promise<boolean> {
-    return Promise.resolve(!!AuthRepo.getToken())
+  static isLogged (): boolean {
+    return AuthRepo.getToken() !== null
   }
 }

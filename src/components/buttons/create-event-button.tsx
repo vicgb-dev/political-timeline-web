@@ -9,7 +9,10 @@ export function CreateEventButton () {
 
   return (
     isLogged &&
-    <Link to='/my-events' style={{ textDecoration: 'none', color: 'inherit' }}>
+    <Link
+      to='/my-events'
+      search={{ creating: true }}
+      style={{ textDecoration: 'none', color: 'inherit' }}>
       <Button size='2' variant='solid' style={{ marginLeft: 'auto', cursor: 'pointer' }}>
         <PlusIcon height="16" width="16" />
           Crear evento

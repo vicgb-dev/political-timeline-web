@@ -19,7 +19,7 @@ interface AuthProviderProps{
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLogged, setIsLogged] = useState<boolean>(false)
+  const [isLogged, setIsLogged] = useState<boolean>(AuthService.isLogged())
 
   const logout = () => {
     AuthRepo.logout()
@@ -32,8 +32,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }
 
   useEffect(() => {
-    const isLogged = async () => {
-      const isLogged = await AuthService.isLogged()
+    const isLogged = () => {
+      const isLogged = AuthService.isLogged()
       setIsLogged(isLogged)
     }
 
