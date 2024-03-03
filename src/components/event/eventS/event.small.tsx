@@ -18,7 +18,7 @@ interface EventSProps {
 export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
-  const { focusedEvent, setFocusedEvent } = useContext(EventsContext)
+  const { selectedEvents, addBigEvent } = useContext(EventsContext)
   const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
@@ -41,7 +41,8 @@ export function EventS ({ props }: { props: EventSProps }) {
   }
 
   const focusOnThisEvent = () => {
-    setFocusedEvent(props.event)
+    addBigEvent(props.event)
+
     // Obtener el nodo DOM de la event seleccionada
     const eventNode = eventRef.current
 
@@ -69,7 +70,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         {/* Fecha */}
         <Text size='2' style={{ color: 'white' }} >{ getDate(props.event.eventDate) }</Text>
       </Flex>
-      <Card size="3" className={`event-blur ${focusedEvent?.id === props.event.id ? 'selected' : 'no-selected'}`} >
+      <Card size="3" className={`event-blur ${selectedEvents?.find((e) => e.id === props.event.id) ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
         <Button
           highContrast

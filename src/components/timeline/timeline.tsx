@@ -13,11 +13,12 @@ interface TimeLineProps {
 }
 
 export function TimeLine ({ props }: { props: TimeLineProps }) {
-  const { oneColumn, focusedEvent, floatEvent } = useContext(EventsContext)
+  const { oneColumn, selectedEvents, floatEvent } = useContext(EventsContext)
 
-  const isOneColumn: boolean = oneColumn || (focusedEvent !== null && !floatEvent)
-  const showFloatEvent: boolean = focusedEvent !== null && floatEvent
-  const showFocusedEvent: boolean = focusedEvent !== null && !floatEvent
+  const isFocusedEvent: boolean = selectedEvents !== null && selectedEvents.length > 0
+  const isOneColumn: boolean = oneColumn || (isFocusedEvent && !floatEvent)
+  const showFloatEvent: boolean = isFocusedEvent && floatEvent
+  const showFocusedEvent: boolean = isFocusedEvent && !floatEvent
 
   const showDate = (eventId: number): boolean => {
     const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)
@@ -59,7 +60,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
           }}
         >
           {/* <EventL props={{ event: focusedEvent! }}/> */}
-          <EventsTabs props={{ events: [focusedEvent!] }}/>
+          <EventsTabs/>
         </div>
         : null
       }
@@ -71,7 +72,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
             className='event-L-parent'>
             <div className='event-L-container'>
               {/* <EventL props={{ event: focusedEvent! }}/> */}
-              <EventsTabs props={{ events: [focusedEvent!] }}/>
+              <EventsTabs/>
             </div>
           </div>
         )

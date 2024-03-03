@@ -11,14 +11,14 @@ interface EventLProps {
 
 export function EventL ({ props }: { props: EventLProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
-  const { setFocusedEvent } = useContext(EventsContext)
+  const { removeBigEvent } = useContext(EventsContext)
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
   }
 
   const closeEvent = () => {
-    setFocusedEvent(null)
+    removeBigEvent(props.event)
   }
 
   return (
