@@ -40,9 +40,48 @@
     /* filter: drop-shadow(0px 0px 10px var(--accent-8)); */
     path{
       fill: var(--accent-10);
+      
     }
     rect{
       fill: var(--accent-10);
+      stroke: white;
+      stroke-dasharray: 500;
+      stroke-dashoffset: -500;
+      stroke-width: 5px;
+      animation: animate 5s forwards infinite; /* Animation Shorthand */
     }
+  }
+}
+
+.logo:hover .vertical{
+  animation: animateVertical 0.5s forwards ease-in-out;
+}
+
+.logo:hover .left-event{
+  animation: animateLeftEvent 0.5s forwards ease-in-out;
+}
+.logo:hover .right-event{
+  animation: animateRightEvent 0.5s forwards ease-in-out;
+}
+
+@keyframes animateVertical{
+  60%{
+    transform: translateY(-10px) scaleY(1.2);
+  }
+  100%{
+    stroke-dashoffset: 100;
+    transform: translateY(-10px) scaleY(1.2);
+  }
+}
+
+@keyframes animateLeftEvent{
+  100%{
+    stroke-dashoffset: 100;
+  }
+}
+
+@keyframes animateRightEvent{
+  100%{
+    stroke-dashoffset: 100;
   }
 }

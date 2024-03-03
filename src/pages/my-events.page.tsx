@@ -3,13 +3,12 @@ import { PoliticalEvent } from '../models/event.interface'
 import { EventsService } from '../services/events-service'
 import { Header } from '../components/header/header'
 import { TimeLine } from '../components/timeline/timeline'
-import { getRouteApi } from '@tanstack/react-router'
-
-const routeApi = getRouteApi('/my-events')
+import { CreateEventButton } from '../components/buttons/create-event-button'
+import { Route } from '../routes/my-events'
 
 export function MyEventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
-  const { eventId, creating } = routeApi.useSearch()
+  const { eventId, creating } = Route.useSearch()
 
   // Obtener los eventos
   useEffect(() => {
@@ -31,8 +30,10 @@ export function MyEventsPage () {
         <Header />
       </header>
       <main>
-        <p>{eventId}</p>
-        <p>{creating ? 'true' : 'false'}</p>
+        {!creating &&
+        <div style={{ position: 'fixed', zIndex: 1, height: 0, left: '0', right: '0', marginTop: -15 }}>
+          <CreateEventButton />
+        </div>}
         <TimeLine props={{ events }}/>
       </main>
     </>

@@ -66,7 +66,6 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
       {/* Mostrar evento grande dos tercios */}
       {showFocusedEvent
         ? (
-          // TODO: mejorar el responsive al estrecharse la pagina
           <div
             className='event-L-parent'>
             <div className='event-L-container'>
