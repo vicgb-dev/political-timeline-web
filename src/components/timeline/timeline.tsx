@@ -3,7 +3,7 @@ import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
 import { Box, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { EventsContext } from '../../context/events-context'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
 import './timeline.css'
@@ -14,6 +14,14 @@ interface TimeLineProps {
 
 export function TimeLine ({ props }: { props: TimeLineProps }) {
   const { oneColumn, selectedEvents, floatEvent } = useContext(EventsContext)
+
+  useEffect(() => {
+    if (isFocusedEvent && floatEvent) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [selectedEvents, floatEvent])
 
   const isFocusedEvent: boolean = selectedEvents !== null && selectedEvents.length > 0
   const isOneColumn: boolean = oneColumn || (isFocusedEvent && !floatEvent)

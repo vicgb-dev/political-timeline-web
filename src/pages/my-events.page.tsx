@@ -8,7 +8,7 @@ import { Route } from '../routes/my-events'
 
 export function MyEventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
-  const { eventId, creating } = Route.useSearch()
+  const { creating } = Route.useSearch()
 
   // Obtener los eventos
   useEffect(() => {

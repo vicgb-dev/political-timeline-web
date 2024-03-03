@@ -3,12 +3,13 @@
   z-index: -1;
   pointer-events: none;
   width: 100%;
-  background-image: url("../../assets/_2028e379-e485-49e0-95cb-96ceb41eea401.jpg");
+  /* background-image: url("../../assets/_2028e379-e485-49e0-95cb-96ceb41eea401.jpg"); */
+  background-image: url("../../assets/Group18.png");
   height: 100%;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: blur(3px) brightness(0.15);
+  filter: blur(8px) brightness(0.15);
 }
 
 .fixed{

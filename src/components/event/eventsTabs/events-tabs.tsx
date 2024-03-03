@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { PlusIcon } from '@radix-ui/react-icons'
 import { EventsContext } from '../../../context/events-context'
 import { CreateEventButton } from '../../buttons/create-event-button'
+import { EventForm } from '../eventForm/event-form'
 
 export function EventsTabs () {
   const {
@@ -107,13 +108,7 @@ export function EventsTabs () {
           height: 'calc(100% - 85px)',
           paddingTop: '10px'
         }}>
-        <Card className='efcolor' style={{ height: '100%' }}>
-          <Flex align='center' direction='column' gap='5' justify='center' style={{ height: '100%' }}>
-            <Heading style={{ textWrap: 'pretty', textAlign: 'center' }}>
-                Edita este evento y crealo
-            </Heading>
-          </Flex>
-        </Card>
+        <EventForm />
       </Tabs.Content>)}
     </Tabs.Root>
   )

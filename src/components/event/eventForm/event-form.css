@@ -1,0 +1,101 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 150px 80px 200px 150px 80px;
+  gap: 10px 10px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "INFO INFO INFO INFO TOPIC TOPIC"
+    "TITLE TITLE TITLE TITLE DATE DATE"
+    "SUMMARY SUMMARY SUMMARY SUMMARY SOURCES SOURCES"
+    "FIGURES FIGURES GROUPS GROUPS EVENTS EVENTS"
+    "TAGS TAGS TAGS TAGS SUBMIT SUBMIT";
+}
+
+@media (max-width: 768px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 
+    150px
+    80px
+    80px 
+    80px 
+    200px 
+    200px 
+    150px 
+    150px 
+    150px 
+    80px
+    80px;
+    gap: 10px 10px;
+    grid-auto-flow: row;
+    grid-template-areas:
+    "INFO"
+    "TOPIC"
+    "DATE"
+    "TITLE"
+    "SUMMARY"
+    "SOURCES"
+    "FIGURES"
+    "GROUPS"
+    "EVENTS"
+    "TAGS"
+    "SUBMIT";
+  }
+}
+
+.INFO { 
+    grid-area: INFO;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.TITLE { 
+    grid-area: TITLE;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.DATE { 
+    grid-area: DATE;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.TOPIC { 
+    grid-area: TOPIC;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.SUMMARY { 
+    grid-area: SUMMARY;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.SOURCES { 
+    grid-area: SOURCES;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.FIGURES { 
+    grid-area: FIGURES;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.GROUPS { 
+    grid-area: GROUPS;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.EVENTS { 
+    grid-area: EVENTS;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.TAGS { 
+    grid-area: TAGS;
+    background-color: rgba(48, 48, 48, 0.418);
+}
+
+.SUBMIT { 
+    grid-area: SUBMIT;
+    background-color: rgba(48, 48, 48, 0.418);
+}
