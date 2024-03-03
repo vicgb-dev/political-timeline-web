@@ -14,3 +14,10 @@ main {
   padding-left: 25px;
   padding-right: 25px;
 }
+
+/* --color-panel-solid es una variable de Radix UI */
+/* ef = Event Focused */
+.efcolor{
+  background-color: var(--color-panel-solid) !important;
+  border-radius: var(--radius-5) !important;
+}

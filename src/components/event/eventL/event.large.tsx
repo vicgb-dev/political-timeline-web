@@ -7,7 +7,6 @@ import '../event.css'
 
 interface EventLProps {
   event: PoliticalEvent
-  isFloat: boolean
 }
 
 export function EventL ({ props }: { props: EventLProps }) {
@@ -23,7 +22,7 @@ export function EventL ({ props }: { props: EventLProps }) {
   }
 
   return (
-    <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur'>
+    <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur efcolor'>
       {/* Titulo */}
       <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
         <Heading size="7" style={{ textDecoration: 'underline' }}>

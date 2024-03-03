@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { EventsContext } from '../../context/events-context'
 import { EventL } from '../event/eventL/event.large'
 import './timeline.css'
+import { EventsTabs } from '../event/eventsTabs/events-tabs'
 
 interface TimeLineProps {
   events: PoliticalEvent[] | null
@@ -55,10 +56,11 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
             width: '100%',
             height: 'calc(100% - 100px)',
             marginLeft: '-34px', /* 25px de padding del main y 8px del margen del body */
-            paddingBottom: '15px'
+            paddingBottom: '35px'
           }}
         >
-          <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
+          {/* <EventL props={{ event: focusedEvent! }}/> */}
+          <EventsTabs props={{ events: [focusedEvent!] }}/>
         </div>
         : null
       }
@@ -69,7 +71,8 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
           <div
             className='event-L-parent'>
             <div className='event-L-container'>
-              <EventL props={{ event: focusedEvent!, isFloat: floatEvent }}/>
+              {/* <EventL props={{ event: focusedEvent! }}/> */}
+              <EventsTabs props={{ events: [focusedEvent!] }}/>
             </div>
           </div>
         )
