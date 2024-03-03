@@ -1,4 +1,4 @@
-import { PoliticalEvent } from '../../models/event.interface'
+import { PoliticalEvent } from '../../models/political-event.interface'
 import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
 import { Box, Flex } from '@radix-ui/themes'

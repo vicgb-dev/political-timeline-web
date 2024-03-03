@@ -1,7 +1,7 @@
 import { EVENT, HOST, MINE, PUBLISHED } from '../constants/api'
 import { DEBUG } from '../constants/debug'
 import { fakeEvents } from '../constants/mocks/mock-events'
-import { PoliticalEvent } from '../models/event.interface'
+import { PoliticalEvent } from '../models/political-event.interface'
 import { AuthRepo } from '../repositories/auth-repo'
 
 export class EventsService {
@@ -34,7 +34,8 @@ export class EventsService {
     if (DEBUG) {
       return new Promise((resolve) => {
         setTimeout(() => {
-          resolve(fakeEvents.slice(0, 3))
+          // resolve(fakeEvents.slice(0, 3))
+          resolve(fakeEvents)
         }, 500)
       })
     }

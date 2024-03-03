@@ -1,6 +1,6 @@
 import { ArchiveIcon, Cross1Icon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { Badge, Text, Card, Flex, Heading, IconButton, ScrollArea } from '@radix-ui/themes'
-import { PoliticalEvent } from '../../../models/event.interface'
+import { PoliticalEvent } from '../../../models/political-event.interface'
 import { useContext, useState } from 'react'
 import { EventsContext } from '../../../context/events-context'
 import '../event.css'

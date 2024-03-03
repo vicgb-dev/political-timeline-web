@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PoliticalEvent } from '../models/event.interface'
+import { PoliticalEvent } from '../models/political-event.interface'
 import { EventsService } from '../services/events-service'
 import { Header } from '../components/header/header'
 import { TimeLine } from '../components/timeline/timeline'

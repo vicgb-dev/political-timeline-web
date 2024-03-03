@@ -1,4 +1,4 @@
-import { PoliticalEvent } from '../../models/event.interface'
+import { PoliticalEvent } from '../../models/political-event.interface'
 
 export const fakeEvents: PoliticalEvent[] = [
   {

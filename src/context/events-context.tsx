@@ -1,5 +1,5 @@
 import { useState, createContext, Dispatch, SetStateAction, useEffect, useLayoutEffect } from 'react'
-import { PoliticalEvent } from '../models/event.interface'
+import { PoliticalEvent } from '../models/political-event.interface'
 
 export interface EventsContextState {
   floatEvent: boolean
@@ -7,12 +7,14 @@ export interface EventsContextState {
   selectedEvents: PoliticalEvent[] | []
   bigEventFocused: PoliticalEvent | null
   shouldAddEvent: boolean
+  eventCreating: PoliticalEvent | null
+  setEventCreating: Dispatch<SetStateAction<PoliticalEvent | null>>
   setShouldAddEvent: Dispatch<SetStateAction<boolean>>
-  setBigEventFocused: (event: PoliticalEvent | null) => void,
-  setIsFloatEvent: Dispatch<SetStateAction<boolean>>,
-  setOneColumn: Dispatch<SetStateAction<boolean>>,
-  addBigEvent: (event: PoliticalEvent) => void,
-  removeBigEvent: (event: PoliticalEvent) => void,
+  setBigEventFocused: (event: PoliticalEvent | null) => void
+  setIsFloatEvent: Dispatch<SetStateAction<boolean>>
+  setOneColumn: Dispatch<SetStateAction<boolean>>
+  addBigEvent: (event: PoliticalEvent) => void
+  removeBigEvent: (event: PoliticalEvent) => void
 }
 
 export const EventsContext = createContext<EventsContextState>({
@@ -21,6 +23,8 @@ export const EventsContext = createContext<EventsContextState>({
   selectedEvents: [],
   bigEventFocused: null,
   shouldAddEvent: true,
+  eventCreating: null,
+  setEventCreating: () => {},
   setShouldAddEvent: () => {},
   setBigEventFocused: () => {},
   setIsFloatEvent: () => {},
@@ -39,6 +43,7 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
   const [selectedEvents, setSelectedEvents] = useState<PoliticalEvent[]>([])
   const [bigEventFocused, setBigEventFocused] = useState<PoliticalEvent | null>(null)
   const [shouldAddEvent, setShouldAddEvent] = useState<boolean>(true)
+  const [eventCreating, setEventCreating] = useState<PoliticalEvent | null>(null)
 
   const updateWindowSize = () => {
     // Get Root element by getElement so i can know the width of the window
@@ -118,6 +123,8 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
         selectedEvents,
         bigEventFocused,
         shouldAddEvent,
+        eventCreating,
+        setEventCreating,
         setShouldAddEvent,
         setBigEventFocused,
         setIsFloatEvent,

@@ -1,5 +1,5 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
-import { PoliticalEvent } from '../../../models/event.interface'
+import { PoliticalEvent } from '../../../models/political-event.interface'
 import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { ALIGN } from '../../../constants/enums'
