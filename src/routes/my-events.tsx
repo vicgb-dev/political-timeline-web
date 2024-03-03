@@ -1,15 +1,11 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import { MyEventsPage } from '../pages/my-events.page'
-
-type MyEventsSearchParams = {
-  eventId?: string | undefined,
-  creating?: boolean | undefined
-}
+import { EventsSearchParams } from '../pages/search-params/events-params'
 
 export const Route = createFileRoute('/my-events')({
-  validateSearch: (search: Record<string, unknown>): MyEventsSearchParams => {
+  validateSearch: (search: Record<string, unknown>): EventsSearchParams => {
     return {
-      eventId: (search.eventId as string) || undefined,
+      eventIds: (search.events as number[]) || undefined,
       creating: (search.creating as boolean) || undefined
     }
   },

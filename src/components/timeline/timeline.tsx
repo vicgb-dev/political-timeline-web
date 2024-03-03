@@ -1,13 +1,12 @@
 import { PoliticalEvent } from '../../models/event.interface'
 import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
-import { Box, Button, Flex } from '@radix-ui/themes'
+import { Box, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
 import { useContext } from 'react'
 import { EventsContext } from '../../context/events-context'
-import { EventL } from '../event/eventL/event.large'
-import './timeline.css'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
+import './timeline.css'
 
 interface TimeLineProps {
   events: PoliticalEvent[] | null

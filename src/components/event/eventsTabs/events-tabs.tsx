@@ -1,4 +1,4 @@
-import { Card, Flex, Heading, Tabs, Text } from '@radix-ui/themes'
+import { Card, Flex, Heading, Tabs } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/event.interface'
 import { EventL } from '../eventL/event.large'
 import { useEffect, useState } from 'react'
@@ -9,12 +9,10 @@ interface EventsTabsProps {
 }
 
 export function EventsTabs ({ props }: {props: EventsTabsProps}) {
-  const moreThanOneEvent: boolean = props.events.length > 0
   const [defaultValue, setDefaultValue] = useState(props.events[0].id.toString())
 
   useEffect(() => {
     setDefaultValue(props.events[0].id.toString())
-    console.log('EventsTabs useEffect')
   }, [props.events])
 
   return (
@@ -22,31 +20,29 @@ export function EventsTabs ({ props }: {props: EventsTabsProps}) {
       onValueChange={(value) => setDefaultValue(value)}
       value={defaultValue}
       style={{ height: '100%' }}>
-      {moreThanOneEvent &&
-        <Tabs.List className='efcolor' style={{ borderRadius: '20px' }}>
-          {props.events.map((event: PoliticalEvent) => (
-            <Tabs.Trigger value={event.id.toString()} key={event.id}>
-              <p style={{
-                maxWidth: '150px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                {event.title}
-              </p>
-            </Tabs.Trigger>
-          ))}
-          <Tabs.Trigger value={'addEvent'} key={'addEventkey'}>
-            <PlusIcon />
+      <Tabs.List className='efcolor' style={{ borderRadius: '20px' }}>
+        {props.events.map((event: PoliticalEvent) => (
+          <Tabs.Trigger value={event.id.toString()} key={event.id}>
+            <p style={{
+              maxWidth: '150px',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis'
+            }}>
+              {event.title}
+            </p>
           </Tabs.Trigger>
-        </Tabs.List>
-      }
+        ))}
+        <Tabs.Trigger value={'addEvent'} key={'addEventkey'}>
+          <PlusIcon />
+        </Tabs.Trigger>
+      </Tabs.List>
 
       {props.events.map((event: PoliticalEvent) => (
         <Tabs.Content
           value={event.id.toString()}
           key={event.id}
           style={{
-            height: moreThanOneEvent ? 'calc(100% - 85px)' : 'calc(100% - 20px)',
+            height: 'calc(100% - 85px)',
             paddingTop: '10px'
           }}>
           <EventL props={{ event }} />
@@ -57,7 +53,7 @@ export function EventsTabs ({ props }: {props: EventsTabsProps}) {
         value={'addEvent'}
         key={'addEventkey'}
         style={{
-          height: moreThanOneEvent ? 'calc(100% - 85px)' : 'calc(100% - 20px)',
+          height: 'calc(100% - 85px)',
           paddingTop: '10px'
         }}>
         <Card className='efcolor' style={{ height: '100%' }}>
