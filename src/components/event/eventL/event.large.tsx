@@ -22,7 +22,7 @@ export function EventL ({ props }: { props: EventLProps }) {
   }
 
   return (
-    <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur efcolor'>
+    <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur efcolor no-border no-top-radius'>
       {/* Titulo */}
       <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
         <Heading size="7" style={{ textDecoration: 'underline' }}>

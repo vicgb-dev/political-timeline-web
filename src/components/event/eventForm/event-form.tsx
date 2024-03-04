@@ -33,7 +33,7 @@ export function EventForm () {
   }
 
   return (
-    <Card className='efcolor' style={{ height: '100%' }}>
+    <Card className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
       <Flex direction='column' gap='2' style={{ padding: '20px' }} height='100%'>
         <Heading size='2'>Crear evento</Heading>
         <Form.Root onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>

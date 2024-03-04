@@ -46,8 +46,8 @@ export function EventsTabs () {
       }}
       value={ getValue() }
       style={{ height: '100%' }}>
-      <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 50 }}>
-        <Tabs.List className='efcolor' style={{ borderRadius: '20px', overflowX: 'scroll', overflowY: 'clip' }}>
+      <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
+        <Tabs.List className='efcolor' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
           {selectedEvents.map((event: PoliticalEvent) => (
             <Tabs.Trigger value={event.id.toString()} key={event.id}>
               <p style={{
@@ -77,8 +77,7 @@ export function EventsTabs () {
           value={event.id.toString()}
           key={event.id}
           style={{
-            height: 'calc(100% - 85px)',
-            paddingTop: '10px'
+            height: 'calc(100% - 60px)'
           }}>
           <EventL props={{ event }} />
         </Tabs.Content>
@@ -88,10 +87,9 @@ export function EventsTabs () {
         value={'addEvent'}
         key={'addEventkey'}
         style={{
-          height: 'calc(100% - 85px)',
-          paddingTop: '10px'
+          height: 'calc(100% - 60px)'
         }}>
-        <Card className='efcolor' style={{ height: '100%' }}>
+        <Card variant='surface' className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
           <Flex align='center' direction='column' gap='5' justify='center' style={{ height: '100%' }}>
             <Heading style={{ textWrap: 'pretty', textAlign: 'center' }}>
                 Elige un evento y se mostrará aqui
@@ -105,8 +103,7 @@ export function EventsTabs () {
         value={'creatingEvent'}
         key={'creatingEventkey'}
         style={{
-          height: 'calc(100% - 85px)',
-          paddingTop: '10px'
+          height: 'calc(100% - 60px)'
         }}>
         <EventForm />
       </Tabs.Content>)}

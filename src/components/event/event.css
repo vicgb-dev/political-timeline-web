@@ -9,6 +9,20 @@
   flex-direction: column;
 }
 
+.no-border{
+  border-width: 0px !important;
+}
+
+.no-top-radius{
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+}
+
+.event-card-L.rt-Card:where(.rt-variant-surface)::after{
+    border-top-left-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
 .event-description{
   flex: 1;
   text-align: left;

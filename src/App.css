@@ -19,5 +19,8 @@ main {
 /* ef = Event Focused */
 .efcolor{
   background-color: var(--color-panel-solid) !important;
+}
+
+.border-radius-5{
   border-radius: var(--radius-5) !important;
 }
