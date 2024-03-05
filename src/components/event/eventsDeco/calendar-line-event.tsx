@@ -17,6 +17,7 @@ export function CalendarLineEvent ({ props }:{props : CalendarLineEventProps}) {
       ${props.align === ALIGN.LEFT
       ? 'line-left'
       : 'line-right'}`}></div>
+
       <CalendarIcon
         style={{ color: 'black' }}
         className={`calendar-icon 

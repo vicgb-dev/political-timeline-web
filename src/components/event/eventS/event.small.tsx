@@ -54,7 +54,7 @@ export function EventS ({ props }: { props: EventSProps }) {
     }
   }
 
-  return (// <div className="test-components background6">
+  return (
     <Box ref={eventRef} className={
       `event-card-S 
       ${isLeft ? 'isLeft' : 'isRight'} 
@@ -64,7 +64,7 @@ export function EventS ({ props }: { props: EventSProps }) {
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         {/* Topic */}
-        <Link size='2' href="" target="_blank">
+        <Link size='2' href="" target="_blank" className='text-black'>
           { topic }
         </Link>
         {/* Fecha */}
