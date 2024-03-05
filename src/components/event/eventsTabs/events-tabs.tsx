@@ -18,12 +18,13 @@ export function EventsTabs () {
 
   const [addEvent, setAddEvent] = useState(false)
 
-  const getValue = () => {
+  const getTabsValue = () => {
     if (addEvent) return 'addEvent'
     if (bigEventFocused) return bigEventFocused.id.toString()
     if (eventCreating) return 'creatingEvent'
     return 'addEvent'
   }
+
   useEffect(() => {
     if (bigEventFocused) {
       setAddEvent(false)
@@ -44,7 +45,7 @@ export function EventsTabs () {
         }
         setAddEvent(value === 'addEvent')
       }}
-      value={ getValue() }
+      value={ getTabsValue() }
       style={{ height: '100%' }}>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
         <Tabs.List className='efcolor' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
@@ -66,7 +67,8 @@ export function EventsTabs () {
           </Tabs.Trigger>
           {eventCreating && (<Tabs.Trigger
             value={'creatingEvent'}
-            key={'creatingEventkey'}>
+            key={'creatingEventkey'}
+            style={{ backgroundColor: 'var(--accent-a4)' }}>
             Nuevo evento
           </Tabs.Trigger>)}
         </Tabs.List>

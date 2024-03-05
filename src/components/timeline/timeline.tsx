@@ -13,7 +13,7 @@ interface TimeLineProps {
 }
 
 export function TimeLine ({ props }: { props: TimeLineProps }) {
-  const { oneColumn, selectedEvents, floatEvent } = useContext(EventsContext)
+  const { oneColumn, selectedEvents, floatEvent, eventCreating } = useContext(EventsContext)
 
   useEffect(() => {
     if (isFocusedEvent && floatEvent) {
@@ -23,7 +23,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
     }
   }, [selectedEvents, floatEvent])
 
-  const isFocusedEvent: boolean = selectedEvents !== null && selectedEvents.length > 0
+  const isFocusedEvent: boolean = (selectedEvents !== null && selectedEvents.length > 0) || eventCreating !== null
   const isOneColumn: boolean = oneColumn || (isFocusedEvent && !floatEvent)
   const showFloatEvent: boolean = isFocusedEvent && floatEvent
   const showFocusedEvent: boolean = isFocusedEvent && !floatEvent

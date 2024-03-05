@@ -45,57 +45,62 @@
   }
 }
 
+/* Create color var */
+:root {
+  --debug-bg-color: rgba(48, 48, 48, 0.418);
+}
+
 .INFO { 
     grid-area: INFO;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .TITLE { 
     grid-area: TITLE;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .DATE { 
     grid-area: DATE;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .TOPIC { 
     grid-area: TOPIC;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .SUMMARY { 
     grid-area: SUMMARY;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .SOURCES { 
     grid-area: SOURCES;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .FIGURES { 
     grid-area: FIGURES;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .GROUPS { 
     grid-area: GROUPS;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .EVENTS { 
     grid-area: EVENTS;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .TAGS { 
     grid-area: TAGS;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
 
 .SUBMIT { 
     grid-area: SUBMIT;
-    background-color: rgba(48, 48, 48, 0.418);
+    background-color: var(--debug-bg-color);
 }
