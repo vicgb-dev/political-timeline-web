@@ -68,7 +68,7 @@ export function EventS ({ props }: { props: EventSProps }) {
           { topic }
         </Link>
         {/* Fecha */}
-        <Text size='2' style={{ color: 'white' }} >{ getDate(props.event.eventDate) }</Text>
+        <Text size='2'>{ getDate(props.event.eventDate) }</Text>
       </Flex>
       <Card size="3" className={`event-blur ${selectedEvents?.find((e) => e.id === props.event.id) ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
