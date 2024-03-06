@@ -4,6 +4,8 @@ import { PoliticalEvent } from '../../../models/political-event.interface'
 import { useContext, useState } from 'react'
 import { EventsContext } from '../../../context/events-context'
 import '../event.css'
+import { shuffle } from '../../../tools/array-tools'
+import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 
 interface EventLProps {
   event: PoliticalEvent
@@ -59,9 +61,13 @@ export function EventL ({ props }: { props: EventLProps }) {
         </Flex>
         {/* Partidos */}
         <Flex gap="3">
-          <Badge variant='soft' radius='full' color="orange">#In progress</Badge>
-          <Badge variant='outline' radius='large' color="blue">In review</Badge>
-          <Badge variant='outline' radius='large' color="green">Complete</Badge>
+          {
+            shuffle(FakeGroups).slice(0, Math.random() * (5)).map((party, index) => (
+              <Badge key={index} variant='outline' radius='large' color= {getColor(party.color)} >
+                {party.name}
+              </Badge>
+            ))
+          }
         </Flex>
       </footer>
       {/* Desplegable */}

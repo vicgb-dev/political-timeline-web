@@ -3,7 +3,7 @@ import { IconButton, TextField } from '@radix-ui/themes'
 
 export function SearchBar () {
   return (
-    <TextField.Root className='flex-grow' color='orange' >
+    <TextField.Root className='flex-grow' >
       <TextField.Slot>
         <MagnifyingGlassIcon height="16" width="16" />
       </TextField.Slot>

@@ -38,10 +38,11 @@ export function EventForm () {
   }
 
   return (
-    <Card className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
+    <Card size='3' className='h-full efcolor no-border no-top-radius event-card-L'>
       <Flex direction='column' gap='2' style={{ padding: '20px' }} height='100%'>
-        <Flex align='center' justify='between'>
-          <Heading size='1'>Eventos</Heading>
+        <Flex className='items-center justify-between gap-4'>
+          <Heading className='flex-grow' size='5'>Crear nuevo evento</Heading>
+          <Button variant='soft' disabled={isSubmitting} type="submit">Crear</Button>
           <DialogAB props={{
             title: 'Dejar de editar',
             description: '¿Estás seguro de que quieres dejar de editar? Los cambios no guardados se perderán.',
@@ -53,7 +54,7 @@ export function EventForm () {
             <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
           </DialogAB>
         </Flex>
-        <Form.Root onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>
+        <Form.Root onSubmit={handleSubmit(onSubmit)} className='h-full pb-6'>
           <ScrollArea type="hover" >
 
             <div className="container">
@@ -72,7 +73,7 @@ export function EventForm () {
                 </label>
               </div>
               <div className="TOPIC">TOPIC</div>
-              <div className="SUMMARY" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div className="SUMMARY flex flex-col h-full">
                 <label htmlFor='event-create-form-summary'>Resumen del evento</label>
                 <TextArea id='event-create-form-summary' style={{ flex: 1 }} {...register('summary')} placeholder="Resumen" />
                 <Text size='1' color='red'>asdasd</Text>
@@ -83,7 +84,6 @@ export function EventForm () {
               <div className="EVENTS">EVENTS</div>
               <div className="TAGS">TAGS</div>
               <div className="SUBMIT">
-                <Button disabled={isSubmitting} type="submit">Crear</Button>
                 {errors.root && <Text size='1' color='red'>{errors.root?.message}</Text>}
               </div>
             </div>

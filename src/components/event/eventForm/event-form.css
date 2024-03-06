@@ -1,3 +1,9 @@
+
+/* Create color var */
+:root {
+  --debug-bg-color: rgba(48, 48, 48, 0.418);
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -45,62 +51,50 @@
   }
 }
 
-/* Create color var */
-:root {
-  --debug-bg-color: rgba(48, 48, 48, 0.418);
+.container > div{
+    background-color: var(--debug-bg-color);
 }
 
 .INFO { 
     grid-area: INFO;
-    background-color: var(--debug-bg-color);
 }
 
 .TITLE { 
     grid-area: TITLE;
-    background-color: var(--debug-bg-color);
 }
 
 .DATE { 
     grid-area: DATE;
-    background-color: var(--debug-bg-color);
 }
 
 .TOPIC { 
     grid-area: TOPIC;
-    background-color: var(--debug-bg-color);
 }
 
 .SUMMARY { 
     grid-area: SUMMARY;
-    background-color: var(--debug-bg-color);
 }
 
 .SOURCES { 
     grid-area: SOURCES;
-    background-color: var(--debug-bg-color);
 }
 
 .FIGURES { 
     grid-area: FIGURES;
-    background-color: var(--debug-bg-color);
 }
 
 .GROUPS { 
     grid-area: GROUPS;
-    background-color: var(--debug-bg-color);
 }
 
 .EVENTS { 
     grid-area: EVENTS;
-    background-color: var(--debug-bg-color);
 }
 
 .TAGS { 
     grid-area: TAGS;
-    background-color: var(--debug-bg-color);
 }
 
 .SUBMIT { 
     grid-area: SUBMIT;
-    background-color: var(--debug-bg-color);
 }
