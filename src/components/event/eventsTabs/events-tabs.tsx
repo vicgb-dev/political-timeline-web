@@ -17,26 +17,6 @@ export function EventsTabs () {
     eventCreating
   } = useContext(EventsContext)
 
-  // const [addEvent, setAddEvent] = useState(false)
-
-  // const getTabsValue = () => {
-  //   if (addEvent) return 'addEvent'
-  //   if (bigEventFocused) return bigEventFocused.id.toString()
-  //   return 'addEvent'
-  // }
-
-  // useEffect(() => {
-  //   if (bigEventFocused) {
-  //     setAddEvent(false)
-  //   }
-  // }, [bigEventFocused])
-
-  // useEffect(() => {
-  //   if (eventCreating) {
-  //     setAddEvent(false)
-  //   }
-  // }, [eventCreating])
-
   const updateValue = (value: string) => {
     console.log('value', value)
     setShouldAddEvent(value === '0')
@@ -52,22 +32,11 @@ export function EventsTabs () {
   return (
     <Tabs.Root
       onValueChange={value => updateValue(value)}
-      // onValueChange={(value) => {
-      //   console.log('value', value)
-      //   if (value === 'addEvent' || value === '-1') {
-      //     setAddEvent(true)
-      //     setShouldAddEvent(true)
-      //     setBigEventFocused(null)
-      //   } else {
-      //     setShouldAddEvent(false)
-      //     setBigEventFocused(selectedEvents.find((e) => e.id.toString() === value) ?? null)
-      //   }
-      //   setAddEvent(value === 'addEvent')
-      // }}
       value={ getTabsValue() }
       className='h-full'>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
         <Tabs.List className='efcolor' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
+          {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
               ? <Tabs.Trigger value={event.id.toString()} key={event.id}>
@@ -81,11 +50,13 @@ export function EventsTabs () {
               </Tabs.Trigger>
               : null
           ))}
+          {/* Tab de AGREGAR */}
           <Tabs.Trigger
             value={'0'}
             key={'addEventkey'}>
             <PlusIcon />
           </Tabs.Trigger>
+          {/* Tab de CREAR */}
           {eventCreating && (<Tabs.Trigger
             value={'-1'}
             key={'creatingEventkey'}
@@ -95,6 +66,7 @@ export function EventsTabs () {
         </Tabs.List>
       </ScrollArea>
 
+      {/* Contenido de todos los EVENTOS */}
       {selectedEvents.map((event: PoliticalEvent) => (
         event.id > 0
           ? <Tabs.Content
@@ -108,6 +80,7 @@ export function EventsTabs () {
           : null
       ))}
 
+      {/* Contenido de AGREGAR */}
       <Tabs.Content
         value={'0'}
         key={'addEventkey'}
@@ -124,6 +97,7 @@ export function EventsTabs () {
         </Card>
       </Tabs.Content>
 
+      {/* Contenido de CREAR */}
       {eventCreating && (<Tabs.Content
         value={'-1'}
         key={'creatingEventkey'}

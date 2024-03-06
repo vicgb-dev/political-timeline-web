@@ -26,7 +26,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
   const isFocusedEvent: boolean = (selectedEvents !== null && selectedEvents.length > 0) || eventCreating !== null
   const isOneColumn: boolean = oneColumn || (isFocusedEvent && !floatEvent)
   const showFloatEvent: boolean = isFocusedEvent && floatEvent
-  const showFocusedEvent: boolean = isFocusedEvent && !floatEvent
+  const showFocusedEvent: boolean = isFocusedEvent && !floatEvent && selectedEvents?.length > 0
 
   const showDate = (eventId: number): boolean => {
     const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)

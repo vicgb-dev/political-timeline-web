@@ -33,7 +33,7 @@ export function EventL ({ props }: { props: EventLProps }) {
         </IconButton>
       </Flex>
       <ScrollArea type='hover'>
-        <Text className='event-description'>
+        <Text>
           { props.event.description }
         </Text>
       </ScrollArea>

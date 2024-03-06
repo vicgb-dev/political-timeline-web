@@ -16,13 +16,13 @@ export function SearchBarInfoButton () {
             <Text>Separadas por comas:</Text>
             <ul style={{ marginTop: '5px' }}>
               <li>
-                <Text><Code>@</Code>: figuras publicas</Text>
+                <Text><Code>@</Code>: figuras públicas</Text>
               </li>
               <li>
                 <Text><Code>e[ ]</Code>: otro evento</Text>
               </li>
               <li>
-                <Text><Code>t[ ]</Code>: un topic</Text>
+                <Text><Code>t[ ]</Code>: un tema</Text>
               </li>
               <li>
                 <Text><Code>#</Code>: una etiqueta</Text>

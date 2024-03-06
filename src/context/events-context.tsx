@@ -73,6 +73,9 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
   useEffect(() => {
     if (eventCreating) {
       addBigEvent(eventCreating)
+    } else {
+      removeBigEventById(-1)
+      setShouldAddEvent(true)
     }
   }, [eventCreating])
 
@@ -118,6 +121,14 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
     setShouldAddEvent(true)
 
     setSelectedEvents(selectedEvents?.filter((e) => e.id !== event.id))
+  }
+  const removeBigEventById = (id: number) => {
+    setBigEventFocused(null)
+    if (!selectedEvents) return
+
+    setShouldAddEvent(true)
+
+    setSelectedEvents(selectedEvents?.filter((e) => e.id !== id))
   }
 
   return (

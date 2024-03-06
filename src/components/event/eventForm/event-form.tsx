@@ -4,6 +4,9 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as Form from '@radix-ui/react-form'
 import './event-form.css'
+import { DialogAB } from '../../../shared/dialog/dialog-ab'
+import { EventsContext } from '../../../context/events-context'
+import { useContext } from 'react'
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
@@ -21,6 +24,8 @@ export function EventForm () {
     resolver: zodResolver(schema)
   })
 
+  const { setEventCreating } = useContext(EventsContext)
+
   const onSubmit: SubmitHandler<EventFormData> = async (data: EventFormData) => {
     try {
       await new Promise((resolve, reject) => {
@@ -35,7 +40,19 @@ export function EventForm () {
   return (
     <Card className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
       <Flex direction='column' gap='2' style={{ padding: '20px' }} height='100%'>
-        <Heading size='2'>Crear evento</Heading>
+        <Flex align='center' justify='between'>
+          <Heading size='1'>Eventos</Heading>
+          <DialogAB props={{
+            title: 'Dejar de editar',
+            description: '¿Estás seguro de que quieres dejar de editar? Los cambios no guardados se perderán.',
+            btnYesText: 'Seguir editando',
+            btnYesAction: () => { console.log('A') },
+            btnNoText: 'Dejar de editar',
+            btnNoAction: () => { setEventCreating(null) }
+          }}>
+            <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
+          </DialogAB>
+        </Flex>
         <Form.Root onSubmit={handleSubmit(onSubmit)} style={{ height: '100%' }}>
           <ScrollArea type="hover" >
 

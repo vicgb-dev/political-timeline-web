@@ -4,12 +4,13 @@ import { SearchBarInfoButton } from '../search/searchbar-info-button'
 import { SearchBarUserButton } from '../search/searchbar-user-button'
 import { CreateEventButton } from '../buttons/create-event-button'
 import './header.css'
+import { SearchBarThemeButton } from '../search/searchbar-theme-button'
 
 export function Header () {
   const routerState = useRouterState()
   return (
-    <div className='header'>
-      <div className='search-bar'>
+    <div className='fixed w-full top-0 left-1/2 -translate-x-1/2 flex justify-center p-4 z-10 bg-transparent backdrop-blur-sm'>
+      <div className='max-w-4xl w-full flex items-center p-3 h-5 gap-5'>
         <Link to='/' className='logo'>
           <svg width="398" height="160" viewBox="0 0 398 160" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect className='vertical' x="76" width="15" height="146" rx="5"/>
@@ -21,6 +22,7 @@ export function Header () {
         <SearchBarInfoButton />
         <SearchBar />
         <SearchBarUserButton />
+        <SearchBarThemeButton />
         {routerState.location.pathname !== '/my-events' && <CreateEventButton />}
       </div>
     </div>
