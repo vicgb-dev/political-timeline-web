@@ -8,6 +8,8 @@ import { EventsContext } from '../../../context/events-context'
 import { getDate } from '../../../tools/date-tools'
 import { CalendarLineEvent } from '../eventsDeco/calendar-line-event'
 import '../event.css'
+import { shuffle } from '../../../tools/array-tools'
+import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -90,9 +92,13 @@ export function EventS ({ props }: { props: EventSProps }) {
         </Button>
         {/* Partidos */}
         <Flex gap="2" width='100%' py='2' wrap='wrap'>
-          <Badge variant='soft' radius='full' color="orange">#In progress</Badge>
-          <Badge variant='outline' radius='large' color="blue">In review</Badge>
-          <Badge variant='outline' radius='large' color="green">Complete</Badge>
+          {
+            shuffle(FakeGroups).slice(0, Math.random() * (5)).map((party, index) => (
+              <Badge key={index} variant='outline' radius='large' color= {getColor(party.color)} >
+                {party.name}
+              </Badge>
+            ))
+          }
         </Flex>
         {/* Botones */}
         <Flex gap="4" pt='4' align="center">

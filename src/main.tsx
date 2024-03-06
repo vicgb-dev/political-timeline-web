@@ -15,14 +15,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <CacheProvider value={cache}>
       <Theme
         appearance='dark'
-        accentColor='brown'
+        accentColor='purple'
         grayColor="gray"
         panelBackground="translucent"
         scaling="100%"
         radius="medium"
       >
         <App />
-
         <Background />
         {/* <ThemePanel /> */}
       </Theme>
