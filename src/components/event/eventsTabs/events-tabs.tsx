@@ -12,61 +12,82 @@ export function EventsTabs () {
     selectedEvents,
     bigEventFocused,
     setBigEventFocused,
+    shouldAddEvent,
     setShouldAddEvent,
     eventCreating
   } = useContext(EventsContext)
 
-  const [addEvent, setAddEvent] = useState(false)
+  // const [addEvent, setAddEvent] = useState(false)
 
-  const getTabsValue = () => {
-    if (addEvent) return 'addEvent'
-    if (bigEventFocused) return bigEventFocused.id.toString()
-    if (eventCreating) return 'creatingEvent'
-    return 'addEvent'
+  // const getTabsValue = () => {
+  //   if (addEvent) return 'addEvent'
+  //   if (bigEventFocused) return bigEventFocused.id.toString()
+  //   return 'addEvent'
+  // }
+
+  // useEffect(() => {
+  //   if (bigEventFocused) {
+  //     setAddEvent(false)
+  //   }
+  // }, [bigEventFocused])
+
+  // useEffect(() => {
+  //   if (eventCreating) {
+  //     setAddEvent(false)
+  //   }
+  // }, [eventCreating])
+
+  const updateValue = (value: string) => {
+    console.log('value', value)
+    setShouldAddEvent(value === '0')
+
+    setBigEventFocused(selectedEvents.find((e) => e.id.toString() === value) ?? null)
   }
 
-  useEffect(() => {
-    if (bigEventFocused) {
-      setAddEvent(false)
-    }
-  }, [bigEventFocused])
+  const getTabsValue = (): string => {
+    if (shouldAddEvent) return '0'
+    return bigEventFocused?.id.toString() ?? '0'
+  }
 
   return (
     <Tabs.Root
-      onValueChange={(value) => {
-        console.log('value', value)
-        if (value === 'addEvent' || value === 'creatingEvent') {
-          setAddEvent(true)
-          setShouldAddEvent(true)
-          setBigEventFocused(null)
-        } else {
-          setShouldAddEvent(false)
-          setBigEventFocused(selectedEvents.find((e) => e.id.toString() === value) ?? null)
-        }
-        setAddEvent(value === 'addEvent')
-      }}
+      onValueChange={value => updateValue(value)}
+      // onValueChange={(value) => {
+      //   console.log('value', value)
+      //   if (value === 'addEvent' || value === '-1') {
+      //     setAddEvent(true)
+      //     setShouldAddEvent(true)
+      //     setBigEventFocused(null)
+      //   } else {
+      //     setShouldAddEvent(false)
+      //     setBigEventFocused(selectedEvents.find((e) => e.id.toString() === value) ?? null)
+      //   }
+      //   setAddEvent(value === 'addEvent')
+      // }}
       value={ getTabsValue() }
-      style={{ height: '100%' }}>
+      className='h-full'>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
         <Tabs.List className='efcolor' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
           {selectedEvents.map((event: PoliticalEvent) => (
-            <Tabs.Trigger value={event.id.toString()} key={event.id}>
-              <p style={{
-                maxWidth: '150px',
-                overflow: 'hidden',
-                textOverflow: 'ellipsis'
-              }}>
-                {event.title}
-              </p>
-            </Tabs.Trigger>
+            event.id > 0
+              ? <Tabs.Trigger value={event.id.toString()} key={event.id}>
+                <p style={{
+                  maxWidth: '150px',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {event.title}
+                </p>
+              </Tabs.Trigger>
+              : null
           ))}
           <Tabs.Trigger
-            value={'addEvent'}
+            value={'0'}
             key={'addEventkey'}>
             <PlusIcon />
           </Tabs.Trigger>
           {eventCreating && (<Tabs.Trigger
-            value={'creatingEvent'}
+            value={'-1'}
             key={'creatingEventkey'}
             style={{ backgroundColor: 'var(--accent-a4)' }}>
             Nuevo evento
@@ -75,18 +96,20 @@ export function EventsTabs () {
       </ScrollArea>
 
       {selectedEvents.map((event: PoliticalEvent) => (
-        <Tabs.Content
-          value={event.id.toString()}
-          key={event.id}
-          style={{
-            height: 'calc(100% - 60px)'
-          }}>
-          <EventL props={{ event }} />
-        </Tabs.Content>
+        event.id > 0
+          ? <Tabs.Content
+            value={event.id.toString()}
+            key={event.id}
+            style={{
+              height: 'calc(100% - 60px)'
+            }}>
+            <EventL props={{ event }} />
+          </Tabs.Content>
+          : null
       ))}
 
       <Tabs.Content
-        value={'addEvent'}
+        value={'0'}
         key={'addEventkey'}
         style={{
           height: 'calc(100% - 60px)'
@@ -102,7 +125,7 @@ export function EventsTabs () {
       </Tabs.Content>
 
       {eventCreating && (<Tabs.Content
-        value={'creatingEvent'}
+        value={'-1'}
         key={'creatingEventkey'}
         style={{
           height: 'calc(100% - 60px)'

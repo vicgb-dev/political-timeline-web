@@ -70,6 +70,12 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
     }
   }, [])
 
+  useEffect(() => {
+    if (eventCreating) {
+      addBigEvent(eventCreating)
+    }
+  }, [eventCreating])
+
   const addBigEvent = (event: PoliticalEvent) => {
     setShouldAddEvent(false)
     setBigEventFocused(event)
@@ -85,14 +91,13 @@ export const EventsProvider = ({ children } : EventsProviderProps) => {
       return
     }
 
-    // Si estoy en la pestana de agregar evento
-    if (shouldAddEvent) {
-      console.log('shouldAddEvent')
+    // Si estoy en la pestana de agregar evento se agrega
+    if (shouldAddEvent || bigEventFocused?.id === -1) {
       setSelectedEvents([...selectedEvents, event])
       return
     }
 
-    // No hay que agregar evento
+    // No hay que agregar evento, sustituir el evento seleccionado
     if (bigEventFocused) {
       // El evento sustituye al evento seleccionado
       const index = selectedEvents.findIndex(eve => eve.id === bigEventFocused.id)

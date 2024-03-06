@@ -7,11 +7,11 @@ import { EventsContext } from '../../context/events-context'
 
 export function CreateEventButton () {
   const { isLogged } = useContext(AuthContext)
-  const { setEventCreating } = useContext(EventsContext)
+  const { eventCreating, setEventCreating } = useContext(EventsContext)
   const routerState = useRouterState()
 
   return (
-    isLogged &&
+    isLogged && !eventCreating &&
     <Link
       to='/my-events'
       search={{ creating: true }}
