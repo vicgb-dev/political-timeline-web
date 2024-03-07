@@ -4,7 +4,7 @@ import { LoginUser } from '../../models/login.interface'
 import { AuthRepo } from '../../repositories/auth-repo'
 
 export class AuthService {
-  static async login(userLogin: LoginUser): Promise<string> {
+  static async login (userLogin: LoginUser): Promise<string> {
     if (DEBUG) {
       await new Promise((resolve) => setTimeout(resolve, 1000))
       AuthRepo.saveToken('test')
@@ -34,11 +34,11 @@ export class AuthService {
     }
   }
 
-  static logout(): void {
+  static logout (): void {
     AuthRepo.logout()
   }
 
-  static isLogged(): boolean {
+  static isLogged (): boolean {
     return AuthRepo.getToken() !== null
   }
 }

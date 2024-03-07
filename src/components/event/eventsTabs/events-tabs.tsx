@@ -1,20 +1,18 @@
 import { Card, Flex, Heading, IconButton, ScrollArea, Tabs } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { EventL } from '../eventL/event.large'
-import { CaretDownIcon, PlusIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from '@radix-ui/react-icons'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
 import { useEvents } from '../../../stores/events-store'
 import { useContext } from 'react'
 import { LayoutContext } from '../../../context/layout-context'
 
-export function EventsTabs() {
+export function EventsTabs () {
   const selectedEvents = useEvents(state => state.selectedEvents)
   const focusedEvent = useEvents(state => state.focusedEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
-  const { floatEvent } = useContext(LayoutContext)
-
-  console.log('selectedEvents', selectedEvents)
+  const { floatEvent, setMinimized, minimized } = useContext(LayoutContext)
 
   const updateValue = (value: string) => {
     console.log('value', value)
@@ -25,13 +23,17 @@ export function EventsTabs() {
     return focusedEvent?.id.toString() ?? '0'
   }
 
+  const handleMinimize = () => {
+    setMinimized(!minimized)
+  }
+
   return (
     <Tabs.Root
       onValueChange={value => updateValue(value)}
       value={getTabsValue()}
       className='h-full'>
-      <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
-        <Tabs.List className={`${floatEvent ? 'rounded-none' : 'rounded-t-xl'} efcolor w-full overflow-x-scroll overflow-y-clip`}>
+      <ScrollArea type='hover' scrollbars="horizontal" style={{ height: 41 }} >
+        <Tabs.List className={`${floatEvent ? 'rounded-none' : 'rounded-t-xl'} pr-16 efcolor w-full overflow-x-scroll overflow-y-clip`}>
           {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
@@ -60,9 +62,10 @@ export function EventsTabs() {
             Nuevo evento
           </Tabs.Trigger>)}
           {/* Boton de MINIMIZAR */}
-          <div className='flex-grow' />
-          <IconButton variant='soft' className=''>
-            <CaretDownIcon />
+          <IconButton variant='solid' className='absolute right-0 translate-y-1 -translate-x-6' onClick={handleMinimize}>
+            {minimized
+              ? <ChevronUpIcon />
+              : <ChevronDownIcon />}
           </IconButton>
         </Tabs.List>
       </ScrollArea>

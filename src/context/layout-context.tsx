@@ -3,15 +3,19 @@ import { useState, createContext, Dispatch, SetStateAction, useEffect, useLayout
 export interface LayoutContextState {
   floatEvent: boolean
   oneColumn: boolean
+  minimized: boolean
   setIsFloatEvent: Dispatch<SetStateAction<boolean>>
   setOneColumn: Dispatch<SetStateAction<boolean>>
+  setMinimized: Dispatch<SetStateAction<boolean>>
 }
 
 export const LayoutContext = createContext<LayoutContextState>({
   floatEvent: true,
   oneColumn: true,
+  minimized: false,
   setIsFloatEvent: () => { },
-  setOneColumn: () => { }
+  setOneColumn: () => { },
+  setMinimized: () => { }
 })
 
 interface LayoutProviderProps {
@@ -21,12 +25,13 @@ interface LayoutProviderProps {
 export const LayoutProvider = ({ children }: LayoutProviderProps) => {
   const [floatEvent, setIsFloatEvent] = useState<boolean>(true)
   const [oneColumn, setOneColumn] = useState<boolean>(true)
+  const [minimized, setMinimized] = useState<boolean>(false)
 
   const updateWindowSize = () => {
     // Get Root element by getElement so i can know the width of the window
 
-    // Radix UI considera 1280px tablet landscape
-    setIsFloatEvent(document.getElementById('html')!.offsetWidth < 1280)
+    // Radix UI considera 1024px tablet landscape
+    setIsFloatEvent(document.getElementById('html')!.offsetWidth < 1024)
     // Radix UI considera 768px tablet portrait
     setOneColumn(document.getElementById('html')!.offsetWidth < 768)
   }
@@ -52,8 +57,10 @@ export const LayoutProvider = ({ children }: LayoutProviderProps) => {
       value={{
         floatEvent,
         oneColumn,
+        minimized,
         setIsFloatEvent,
-        setOneColumn
+        setOneColumn,
+        setMinimized
       }}
     >
       {children}

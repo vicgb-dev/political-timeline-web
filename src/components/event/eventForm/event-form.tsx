@@ -15,7 +15,7 @@ const schema = z.object({
 
 export type EventFormData = z.infer<typeof schema>
 
-export function EventForm() {
+export function EventForm () {
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<EventFormData>({
     defaultValues: {
       date: new Date()
@@ -38,9 +38,11 @@ export function EventForm() {
 
   return (
     <Card size='3' className='h-full efcolor no-border no-top-radius event-card-L'>
-      <Flex direction='column' gap='2' style={{ padding: '20px' }} height='100%'>
-        <Flex className='items-center justify-between gap-4'>
-          <Heading className='flex-grow' size='5'>Crear nuevo evento</Heading>
+      <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
+        <Heading size="7" style={{ textDecoration: 'underline' }}>
+          Crear nuevo evento
+        </Heading>
+        <Flex className='gap-3'>
           <Button variant='soft' disabled={isSubmitting} type="submit">Crear</Button>
           <DialogAB props={{
             title: 'Dejar de editar',
@@ -53,6 +55,8 @@ export function EventForm() {
             <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
           </DialogAB>
         </Flex>
+      </Flex>
+      <Flex direction='column' gap='2' className='h-full pb-8'>
         <Form.Root onSubmit={handleSubmit(onSubmit)} className='h-full pb-6'>
           <ScrollArea type="hover" >
 

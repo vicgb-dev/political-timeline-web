@@ -38,7 +38,7 @@ function RootComponent () {
     <>
       <Outlet />
       <Suspense>
-        <TanStackRouterDevtools />
+        {/* <TanStackRouterDevtools /> */}
       </Suspense>
     </>
   )

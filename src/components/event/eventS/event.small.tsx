@@ -17,7 +17,7 @@ interface EventSProps {
   oneColumn: boolean
 }
 
-export function EventS({ props }: { props: EventSProps }) {
+export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
   const selectedEvents = useEvents(state => state.selectedEvents)
@@ -33,7 +33,7 @@ export function EventS({ props }: { props: EventSProps }) {
   useEffect(() => {
     if (!props.event.idTopic) return
 
-    async function getTopic() {
+    async function getTopic () {
       const readTopic = await TopicService.getTopic(props.event.idTopic!)
       if (readTopic) {
         setTopic(readTopic.title)
@@ -48,10 +48,23 @@ export function EventS({ props }: { props: EventSProps }) {
   }
 
   const focusOnThisEvent = () => {
-    // Si no hay ningun evento enfocado o estoy creando uno, lo añado y lo enfoco
+    // Obtener el nodo DOM de la event seleccionada
+    const eventNode = eventRef.current
+
+    // Desplazar la event seleccionada al centro del viewport
+    if (eventNode) {
+      setTimeout(() => {
+        eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }, 10)
+    }
+
+    // Si no hay ningun evento enfocado o estoy creando uno
     if (focusedEvent === null || focusedEvent.id === -1) {
-      addEvent(props.event)
       setFocusedEvent(props.event)
+      if (!selectedEvents.find((e) => e.id === props.event.id)) {
+        addEvent(props.event)
+        return
+      }
       return
     }
 
@@ -73,20 +86,10 @@ export function EventS({ props }: { props: EventSProps }) {
         setFocusedEvent(props.event)
       }
     }
-
-    // Obtener el nodo DOM de la event seleccionada
-    const eventNode = eventRef.current
-
-    // Desplazar la event seleccionada al centro del viewport
-    if (eventNode) {
-      setTimeout(() => {
-        eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
-      }, 10)
-    }
   }
 
   return (
-    <Box ref={eventRef} className={
+    <Box id={`event-${props.event.id}`} ref={eventRef} className={
       `event-card-S 
       ${isLeft ? 'isLeft' : 'isRight'} 
       ${props.oneColumn ? 'one-column' : 'two-columns'}`

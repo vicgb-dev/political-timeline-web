@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 .radix-themes {
 	/* --default-font-family: "Titillium Web"; */
 	--default-font-family: "Sarabun";

@@ -9,12 +9,6 @@ html {
 	height: 100%;
 }
 
-main {
-	padding-top: 56px;
-	padding-left: 25px;
-	padding-right: 25px;
-}
-
 /* --color-panel-solid es una variable de Radix UI */
 /* ef = Event Focused */
 .efcolor {

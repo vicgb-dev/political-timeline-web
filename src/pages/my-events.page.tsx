@@ -5,13 +5,13 @@ import { Header } from '../components/header/header'
 import { TimeLine } from '../components/timeline/timeline'
 import { Route } from '../routes/my-events'
 
-export function MyEventsPage() {
+export function MyEventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
   const { creating } = Route.useSearch()
 
   // Obtener los eventos
   useEffect(() => {
-    async function getMyEvents() {
+    async function getMyEvents () {
       try {
         const eventsData = await EventsService.getMyEvents()
         setEvents(eventsData)
@@ -28,7 +28,7 @@ export function MyEventsPage() {
       <header>
         <Header />
       </header>
-      <main className='pt-14 pl-6 pr-6'>
+      <main className='pt-14'>
         <TimeLine props={{ events }} />
       </main>
     </>

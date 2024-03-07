@@ -1,6 +1,9 @@
 .max-width-1350 {
 	max-width: 1350px;
 }
+.max-width-1500 {
+	max-width: 1500px;
+}
 
 .events-two-thirds {
 	max-width: 30%;
@@ -8,11 +11,11 @@
 
 .event-L-container {
 	width: calc((100% - (100% - 1500px)) * 0.635);
-	height: calc(100% - 140px);
+	height: calc(100% - 90px);
 }
 
 @media screen and (max-width: 1520px) {
 	.event-L-container {
-		width: 62%;
+		width: calc(62% + 30px);
 	}
 }

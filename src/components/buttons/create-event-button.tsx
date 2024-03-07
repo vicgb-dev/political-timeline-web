@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/auth-context'
 import { useContext } from 'react'
 import { useEvents } from '../../stores/events-store'
 
-export function CreateEventButton() {
+export function CreateEventButton () {
   const { isLogged } = useContext(AuthContext)
   const events = useEvents(state => state.selectedEvents)
   const addEvent = useEvents(state => state.addEvent)
@@ -31,7 +31,7 @@ export function CreateEventButton() {
   }
 
   return (
-    !events.find(event => event.id === -1) &&
+    isLogged && !events.find(event => event.id === -1) &&
     <Link
       to='/my-events'
       search={{ creating: true }}

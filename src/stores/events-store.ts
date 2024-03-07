@@ -9,6 +9,7 @@ interface EventsState {
   removeEvent: (event: PoliticalEvent) => void
   removeEventById: (id: number) => void
   setFocusedEvent: (event: PoliticalEvent | null) => void
+  scrollTo: (eventId: number) => void
 }
 
 export const useEvents = create<EventsState>((set) => ({
@@ -18,16 +19,22 @@ export const useEvents = create<EventsState>((set) => ({
   addEventAt: (index: number, event: PoliticalEvent) => set((state) => ({ selectedEvents: addEventAt(state, index, event) })),
   removeEvent: (event: PoliticalEvent) => set((state) => ({ selectedEvents: handleRemoveEvent(state, event, state.setFocusedEvent) })),
   removeEventById: (id: number) => set((state) => ({ selectedEvents: handleRemoveEventById(state, id, state.setFocusedEvent) })),
-  setFocusedEvent: (event: PoliticalEvent | null) => set({ focusedEvent: event })
+  setFocusedEvent: (event: PoliticalEvent | null) => set({ focusedEvent: event }),
+  scrollTo: (eventId: number) => {
+    const eventNode = document.getElementById(`event-${eventId}`)
+    if (eventNode) {
+      eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }
 }))
 
-function addEventAt(state: EventsState, index: number, event: PoliticalEvent): PoliticalEvent[] {
+function addEventAt (state: EventsState, index: number, event: PoliticalEvent): PoliticalEvent[] {
   state.selectedEvents.splice(index, 0, event)
   console.log(state.selectedEvents)
   return state.selectedEvents
 }
 
-function handleRemoveEvent(state: EventsState, event: PoliticalEvent, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
+function handleRemoveEvent (state: EventsState, event: PoliticalEvent, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
   const newSelectedEvents = state.selectedEvents.filter((e) => e.id !== event.id)
   if (state.focusedEvent?.id === event.id) {
     setFocusedEvent(null)
@@ -35,7 +42,7 @@ function handleRemoveEvent(state: EventsState, event: PoliticalEvent, setFocused
   return newSelectedEvents
 }
 
-function handleRemoveEventById(state: EventsState, eventId: number, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
+function handleRemoveEventById (state: EventsState, eventId: number, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
   const newSelectedEvents = state.selectedEvents.filter((e) => e.id !== eventId)
   if (state.focusedEvent?.id === eventId) {
     setFocusedEvent(null)
