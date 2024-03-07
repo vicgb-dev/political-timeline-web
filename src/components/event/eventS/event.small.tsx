@@ -1,15 +1,15 @@
 import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ALIGN } from '../../../constants/enums'
 import { TopicService } from '../../../services/topic-service'
 import { getDate } from '../../../tools/date-tools'
 import { CalendarLineEvent } from '../eventsDeco/calendar-line-event'
-import '../event.css'
 import { shuffle } from '../../../tools/array-tools'
 import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
-import { useEvents } from '../../../states/events-layout'
+import { useEvents } from '../../../stores/events-store'
+import '../event.css'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -21,7 +21,11 @@ export function EventS({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
   const selectedEvents = useEvents(state => state.selectedEvents)
-  const addBigEvent = useEvents(state => state.addEvent)
+  const addEvent = useEvents(state => state.addEvent)
+  const addEventAt = useEvents(state => state.addEventAt)
+  const focusedEvent = useEvents(state => state.focusedEvent)
+  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+  const removeEvent = useEvents(state => state.removeEvent)
   const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
@@ -44,7 +48,31 @@ export function EventS({ props }: { props: EventSProps }) {
   }
 
   const focusOnThisEvent = () => {
-    addBigEvent(props.event)
+    // Si no hay ningun evento enfocado o estoy creando uno, lo añado y lo enfoco
+    if (focusedEvent === null || focusedEvent.id === -1) {
+      addEvent(props.event)
+      setFocusedEvent(props.event)
+      return
+    }
+
+    // Si ya estoy enfocado en este event, no hago nada
+    if (focusedEvent.id === props.event.id) return
+
+    // Si ya esta en eventos, lo enfoco
+    if (selectedEvents.find((e) => e.id === props.event.id)) {
+      setFocusedEvent(props.event)
+      return
+    }
+
+    // Si mi foco está en otro evento, quito ese evento, añado este y lo enfoco
+    if (focusedEvent.id !== props.event.id) {
+      const index = selectedEvents.findIndex(event => event.id === focusedEvent.id)
+      if (index !== -1) {
+        removeEvent(focusedEvent)
+        addEventAt(index, props.event)
+        setFocusedEvent(props.event)
+      }
+    }
 
     // Obtener el nodo DOM de la event seleccionada
     const eventNode = eventRef.current

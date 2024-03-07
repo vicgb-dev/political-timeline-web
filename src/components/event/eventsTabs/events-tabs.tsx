@@ -4,13 +4,15 @@ import { EventL } from '../eventL/event.large'
 import { CaretDownIcon, PlusIcon } from '@radix-ui/react-icons'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
-import { useEvents } from '../../../states/events-layout'
+import { useEvents } from '../../../stores/events-store'
 
 export function EventsTabs() {
 
   const selectedEvents = useEvents(state => state.selectedEvents)
   const focusedEvent = useEvents(state => state.focusedEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+
+  console.log('selectedEvents', selectedEvents)
 
   const updateValue = (value: string) => {
     console.log('value', value)

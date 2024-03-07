@@ -3,16 +3,17 @@ import { Button } from '@radix-ui/themes'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { AuthContext } from '../../context/auth-context'
 import { useContext } from 'react'
-import { useEvents } from '../../states/events-layout'
+import { useEvents } from '../../stores/events-store'
 
 export function CreateEventButton() {
   const { isLogged } = useContext(AuthContext)
   const events = useEvents(state => state.selectedEvents)
   const addEvent = useEvents(state => state.addEvent)
+  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
   const routerState = useRouterState()
 
   const addEventCreating = () => {
-    addEvent({
+    const newEvent = {
       id: -1,
       title: '',
       summary: '',
@@ -23,11 +24,14 @@ export function CreateEventButton() {
       eventDate: new Date(),
       importance: 1,
       eventImg: ''
-    })
+    }
+
+    addEvent(newEvent)
+    setFocusedEvent(newEvent)
   }
 
   return (
-    isLogged && !events.find(event => event.id !== -1) &&
+    !events.find(event => event.id === -1) &&
     <Link
       to='/my-events'
       search={{ creating: true }}
