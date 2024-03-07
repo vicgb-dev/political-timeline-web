@@ -1,26 +1,26 @@
 #root {
-  max-width: 1500px;
-  margin: 0 auto;
-  text-align: center;
+	max-width: 1500px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 html {
-  width: 100%;
-  height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 main {
-  padding-top: 80px;
-  padding-left: 25px;
-  padding-right: 25px;
+	padding-top: 56px;
+	padding-left: 25px;
+	padding-right: 25px;
 }
 
 /* --color-panel-solid es una variable de Radix UI */
 /* ef = Event Focused */
-.efcolor{
-  background-color: var(--color-panel-solid) !important;
+.efcolor {
+	background-color: var(--color-panel-solid) !important;
 }
 
-.border-radius-5{
-  border-radius: var(--radius-5) !important;
+.border-radius-5 {
+	border-radius: var(--radius-5) !important;
 }

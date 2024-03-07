@@ -5,12 +5,14 @@ import { CaretDownIcon, PlusIcon } from '@radix-ui/react-icons'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
 import { useEvents } from '../../../stores/events-store'
+import { useContext } from 'react'
+import { LayoutContext } from '../../../context/layout-context'
 
 export function EventsTabs() {
-
   const selectedEvents = useEvents(state => state.selectedEvents)
   const focusedEvent = useEvents(state => state.focusedEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+  const { floatEvent } = useContext(LayoutContext)
 
   console.log('selectedEvents', selectedEvents)
 
@@ -29,7 +31,7 @@ export function EventsTabs() {
       value={getTabsValue()}
       className='h-full'>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
-        <Tabs.List className='efcolor w-full' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
+        <Tabs.List className={`${floatEvent ? 'rounded-none' : 'rounded-t-xl'} efcolor w-full overflow-x-scroll overflow-y-clip`}>
           {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
@@ -86,9 +88,9 @@ export function EventsTabs() {
         style={{
           height: 'calc(100% - 60px)'
         }}>
-        <Card variant='surface' className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
-          <Flex align='center' direction='column' gap='5' justify='center' style={{ height: '100%' }}>
-            <Heading style={{ textWrap: 'pretty', textAlign: 'center' }}>
+        <Card size='3' variant='surface' className='efcolor no-border no-top-radius event-card-L h-full'>
+          <Flex className='flex-col items-center content-center gap-5 center h-full justify-center' justify='center'>
+            <Heading className='text-pretty text-center'>
               Elige un evento y se mostrará aqui
             </Heading>
             {!selectedEvents.find(event => event.id === -1) && <CreateEventButton />}
@@ -97,14 +99,16 @@ export function EventsTabs() {
       </Tabs.Content>
 
       {/* Contenido de CREAR */}
-      {selectedEvents.find(event => event.id === -1) && (<Tabs.Content
-        value={'-1'}
-        key={'creatingEventkey'}
-        style={{
-          height: 'calc(100% - 60px)'
-        }}>
-        <EventForm />
-      </Tabs.Content>)}
-    </Tabs.Root>
+      {
+        selectedEvents.find(event => event.id === -1) && (<Tabs.Content
+          value={'-1'}
+          key={'creatingEventkey'}
+          style={{
+            height: 'calc(100% - 60px)'
+          }}>
+          <EventForm />
+        </Tabs.Content>)
+      }
+    </Tabs.Root >
   )
 }

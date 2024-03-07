@@ -4,7 +4,7 @@ import { ALIGN } from '../../constants/enums'
 import { Box, Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
 import { useContext, useEffect } from 'react'
-import { LayoutContext as LayoutContext } from '../../context/layout-context'
+import { LayoutContext } from '../../context/layout-context'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
 import './timeline.css'
 import { useEvents } from '../../stores/events-store'
@@ -59,18 +59,8 @@ export function TimeLine({ props }: { props: TimeLineProps }) {
         ? <div
           className='fixed z-10 w-full top-0 -ml-6 mt-14'
           style={{
-            height: 'calc(100% - 56px)'
-          }}
-        // style={{
-        //   position: 'fixed',
-        //   zIndex: '10',
-        //   width: '100%',
-        //   height: 'calc(100% - 50px)',
-        //   marginLeft: '-25px', /* 25px de padding del main y 8px del margen del body */
-        //   paddingBottom: '35px'
-        // }}
-        >
-          {/* <EventL props={{ event: focusedEvent! }}/> */}
+            height: 'calc(100% - 35px)'
+          }}>
           <EventsTabs />
         </div>
         : null
@@ -80,8 +70,8 @@ export function TimeLine({ props }: { props: TimeLineProps }) {
       {showTwoThirdsEvent
         ? (
           <div
-            className='event-L-parent'>
-            <div className='event-L-container'>
+            className='flex flex-col w-full'>
+            <div className='fixed self-end pt-5 z-10 event-L-container'>
               {/* <EventL props={{ event: focusedEvent! }}/> */}
               <EventsTabs />
             </div>
@@ -94,18 +84,16 @@ export function TimeLine({ props }: { props: TimeLineProps }) {
         justify='center'
         align='start'
         style={{ paddingTop: '20px' }}
-        className={`${showTwoThirdsEvent ? 'events-two-thirds' : 'max-width-1350 layout-center'} ${oneColumn ? 'one-clumn-timeline' : ''}`}>
+        className={`${showTwoThirdsEvent ? 'events-two-thirds' : 'max-width-1350 my-0 mx-auto'} ${oneColumn ? '-ml-5 pr-7' : ''}`}>
         {!props.events
           ? (Array.from({ length: 5 }, (_, index) => (
-            <Box
-              key={index}
-              style={{
-                marginTop: '-60px',
-                marginRight: index % 2 === 0 ? '500px' : 0,
-                marginLeft: index % 2 === 1 ? '500px' : 0
-              }}>
-              <EventSSkeleton />
-            </Box>)))
+            <EventSSkeleton
+              key={`${index}event`}
+              props={{
+                oneColumn: isOneColumn,
+                column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT
+              }} />
+          )))
           : (props.events.map((event: PoliticalEvent, index: number) => (
             // TODO: incluir la fecha al cambiar de mes
             // { showDate(event.id) ? <TimelineDate date={getEventDate(event.id)} key={`${event.id}date`}/> : null}

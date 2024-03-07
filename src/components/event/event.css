@@ -1,29 +1,29 @@
 /* Estilos de la tarjeta de evento */
-.event-card-S{
+.event-card-S {
   min-width: 300px;
   position: relative;
 }
 
-.event-card-L .rt-CardInner{
+.event-card-L .rt-CardInner {
   display: flex;
   flex-direction: column;
 }
 
-.no-border{
+.no-border {
   border-width: 0px !important;
 }
 
-.no-top-radius{
+.no-top-radius {
   border-top-left-radius: 0px !important;
   border-top-right-radius: 0px !important;
 }
 
-.event-card-L.rt-Card:where(.rt-variant-surface)::after{
-    border-top-left-radius: 0px !important;
-    border-top-right-radius: 0px !important;
+.event-card-L.rt-Card:where(.rt-variant-surface)::after {
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
 }
 
-.event-footer{
+.event-footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -32,59 +32,60 @@
   border-top: 1px solid var(--gray-2);
 }
 
-.event-blur{
-backdrop-filter: blur(15px);
+.event-blur {
+  backdrop-filter: blur(15px);
 }
 
-.two-columns{
+.two-columns {
   max-width: calc(50% - 30px);
   transition: all 0.5s ease-in-out;
   margin-bottom: -80px;
 }
 
-.one-column{
+.one-column {
   margin-bottom: 30px;
 }
 
-.one-column-margins{
+.one-column-margins {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-.isLeft{
+.isLeft {
   align-self: flex-start;
   /* Se aplica cuando es una columna y el resumen es muy corto */
   width: 100%;
 }
 
-.isRight{
+.isRight {
   align-self: flex-end;
+  width: 100%;
 }
 
-.short-description{
+.short-description {
   opacity: 0.9;
   text-wrap: pretty;
 }
 
 /* Desplegables de tarjeta de evento */
-.no-height{
+.no-height {
   max-height: 0;
   transition: max-height 0.5s cubic-bezier(0, 0.53, 0.24, 0.99);
 }
 
-.full-height{
+.full-height {
   max-height: 800px;
   transition: max-height 0.5s cubic-bezier(0.35, 0.09, 0.24, 0.99)
 }
 
 /* Estilos al seleccionar la tarjeta de evento */
-.selected{
-    background-color: var(--accent-4) !important;
-    transition: background-color 0.5s ease-in-out;
+.selected {
+  background-color: var(--accent-4) !important;
+  transition: background-color 0.5s ease-in-out;
 }
 
-.no-selected{
-    transition: background-color 0.5s ease-in-out;
+.no-selected {
+  transition: background-color 0.5s ease-in-out;
 }
 
 /* Estilos del esqueleto de la tarjeta de evento */
@@ -92,6 +93,7 @@ backdrop-filter: blur(15px);
   0% {
     background-position: -200px 0;
   }
+
   100% {
     background-position: 200px 0;
   }
@@ -99,18 +101,20 @@ backdrop-filter: blur(15px);
 
 .skeleton-container {
   background-image: linear-gradient(90deg, #1f1f1f 25%, #2e2e2e 50%, #1f1f1f 75%) !important;
-  background-size: 200px 100%; /* Ancho de la animación x Altura del contenedor */
-  animation: skeleton-loading 1.5s infinite linear; /* La animación se repite infinitamente */
+  background-size: 200px 100%;
+  /* Ancho de la animación x Altura del contenedor */
+  animation: skeleton-loading 1.5s infinite linear;
+  /* La animación se repite infinitamente */
   border-radius: 15px;
 }
 
-.transparent{
+.transparent {
   background-color: transparent !important;
   color: transparent !important;
 }
 
 /* Estilo del icono del calendario y la linea del timeline */
-.calendar-icon{
+.calendar-icon {
   padding: 7px;
   background-color: var(--accent-12);
   border-radius: 16px;
@@ -119,7 +123,7 @@ backdrop-filter: blur(15px);
   position: absolute;
 }
 
-.line{
+.line {
   position: absolute;
   width: 2px;
   background: white;
@@ -127,31 +131,31 @@ backdrop-filter: blur(15px);
   transition: height 0.5s ease-in-out;
 }
 
-.one-column-line{
+.one-column-line {
   height: calc(100% - 30px);
 }
 
-.two-column-line{
+.two-column-line {
   height: calc(100% - 140px);
 }
 
-.line-right{
+.line-right {
   left: 0;
   margin-left: -31px;
 }
 
-.line-left{
+.line-left {
   right: 0;
   margin-right: -31px;
 }
 
-.calendar-icon-left{
+.calendar-icon-left {
   right: 0;
   margin-right: -49px;
   margin-top: -10px;
 }
 
-.calendar-icon-right{
+.calendar-icon-right {
   left: 0;
   margin-left: -49px;
   margin-top: -10px;

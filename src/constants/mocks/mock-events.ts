@@ -17,7 +17,7 @@ export const fakeEvents: PoliticalEvent[] = [
     id: 2,
     title: 'Evento 2',
     summary: 'Resumen del evento',
-    description: 'Descripción del evento 2 Descripción del evento 2 Descripción del evento 2 Descripción del evento 2 Descripción del evento 2',
+    description: 'Aceptar cookies y acceder de forma gratuita La publicidad digital personalizada, basada en la información recogida mediante cookies o tecnologías similares, nos permite financiar nuestra actividad para seguir ofreciéndote contenido con altos estándares de calidad sin coste.',
     publishingStatus: 'published',
     idTopic: 1,
     idAuthor: '2',

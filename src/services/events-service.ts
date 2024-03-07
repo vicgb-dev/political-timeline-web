@@ -5,12 +5,12 @@ import { PoliticalEvent } from '../models/political-event.interface'
 import { AuthRepo } from '../repositories/auth-repo'
 
 export class EventsService {
-  static async getPublishedEvents (): Promise<PoliticalEvent[]> {
+  static async getPublishedEvents(): Promise<PoliticalEvent[]> {
     if (DEBUG) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(fakeEvents)
-        }, 500)
+        }, 50000)
       })
     }
 
@@ -30,7 +30,7 @@ export class EventsService {
     }
   }
 
-  static async getMyEvents (): Promise<PoliticalEvent[]> {
+  static async getMyEvents(): Promise<PoliticalEvent[]> {
     if (DEBUG) {
       return new Promise((resolve) => {
         setTimeout(() => {
