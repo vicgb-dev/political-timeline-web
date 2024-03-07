@@ -1,38 +1,30 @@
 import { Card, Flex, Heading, IconButton, ScrollArea, Tabs } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { EventL } from '../eventL/event.large'
-import { useContext } from 'react'
 import { CaretDownIcon, PlusIcon } from '@radix-ui/react-icons'
-import { EventsContext } from '../../../context/events-context'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
+import { useEvents } from '../../../states/events-layout'
 
-export function EventsTabs () {
-  const {
-    selectedEvents,
-    bigEventFocused,
-    setBigEventFocused,
-    shouldAddEvent,
-    setShouldAddEvent,
-    eventCreating
-  } = useContext(EventsContext)
+export function EventsTabs() {
+
+  const selectedEvents = useEvents(state => state.selectedEvents)
+  const focusedEvent = useEvents(state => state.focusedEvent)
+  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
 
   const updateValue = (value: string) => {
     console.log('value', value)
-    setShouldAddEvent(value === '0')
-
-    setBigEventFocused(selectedEvents.find((e) => e.id.toString() === value) ?? null)
+    setFocusedEvent(selectedEvents.find((e) => e.id.toString() === value) ?? null)
   }
 
   const getTabsValue = (): string => {
-    if (shouldAddEvent) return '0'
-    return bigEventFocused?.id.toString() ?? '0'
+    return focusedEvent?.id.toString() ?? '0'
   }
 
   return (
     <Tabs.Root
       onValueChange={value => updateValue(value)}
-      value={ getTabsValue() }
+      value={getTabsValue()}
       className='h-full'>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
         <Tabs.List className='efcolor w-full' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
@@ -57,7 +49,7 @@ export function EventsTabs () {
             <PlusIcon />
           </Tabs.Trigger>
           {/* Tab de CREAR */}
-          {eventCreating && (<Tabs.Trigger
+          {selectedEvents.find(event => event.id === -1) && (<Tabs.Trigger
             value={'-1'}
             key={'creatingEventkey'}
             style={{ backgroundColor: 'var(--accent-a4)' }}>
@@ -95,15 +87,15 @@ export function EventsTabs () {
         <Card variant='surface' className='efcolor no-border no-top-radius event-card-L' style={{ height: '100%' }}>
           <Flex align='center' direction='column' gap='5' justify='center' style={{ height: '100%' }}>
             <Heading style={{ textWrap: 'pretty', textAlign: 'center' }}>
-                Elige un evento y se mostrará aqui
+              Elige un evento y se mostrará aqui
             </Heading>
-            {!eventCreating && <CreateEventButton />}
+            {!selectedEvents.find(event => event.id === -1) && <CreateEventButton />}
           </Flex>
         </Card>
       </Tabs.Content>
 
       {/* Contenido de CREAR */}
-      {eventCreating && (<Tabs.Content
+      {selectedEvents.find(event => event.id === -1) && (<Tabs.Content
         value={'-1'}
         key={'creatingEventkey'}
         style={{

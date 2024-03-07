@@ -7,10 +7,12 @@ export const FakeGroups: Group[] = [
   { id: 4, name: 'PODEMOS', color: 'purple' },
   { id: 5, name: 'SUMAR', color: 'pink' },
   { id: 5, name: 'JUNTS', color: 'cyan' },
-  { id: 5, name: 'ERC', color: 'amber' }
+  { id: 5, name: 'ERC', color: 'amber' },
+  { id: 6, name: 'PACMA', color: 'grass' },
+  { id: 7, name: 'BNG', color: 'sky' }
 ]
 
-export function getColor (name: string): 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray' {
+export function getColor(name: string): 'tomato' | 'red' | 'ruby' | 'crimson' | 'pink' | 'plum' | 'purple' | 'violet' | 'iris' | 'indigo' | 'blue' | 'cyan' | 'teal' | 'jade' | 'green' | 'grass' | 'brown' | 'orange' | 'sky' | 'mint' | 'lime' | 'yellow' | 'amber' | 'gold' | 'bronze' | 'gray' {
   if (name === 'tomato') return 'tomato'
   if (name === 'red') return 'red'
   if (name === 'ruby') return 'ruby'

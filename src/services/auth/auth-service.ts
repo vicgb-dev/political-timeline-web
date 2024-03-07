@@ -1,9 +1,16 @@
 import { HOST, LOGIN, USER } from '../../constants/api'
+import { DEBUG } from '../../constants/debug'
 import { LoginUser } from '../../models/login.interface'
 import { AuthRepo } from '../../repositories/auth-repo'
 
 export class AuthService {
-  static async login (userLogin: LoginUser): Promise<string> {
+  static async login(userLogin: LoginUser): Promise<string> {
+    if (DEBUG) {
+      await new Promise((resolve) => setTimeout(resolve, 1000))
+      AuthRepo.saveToken('test')
+      return 'test'
+    }
+
     try {
       const response = await fetch(`${HOST}${USER}${LOGIN}`, {
         method: 'POST',
@@ -27,11 +34,11 @@ export class AuthService {
     }
   }
 
-  static logout (): void {
+  static logout(): void {
     AuthRepo.logout()
   }
 
-  static isLogged (): boolean {
+  static isLogged(): boolean {
     return AuthRepo.getToken() !== null
   }
 }

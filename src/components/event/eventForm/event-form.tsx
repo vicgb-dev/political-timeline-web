@@ -5,8 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as Form from '@radix-ui/react-form'
 import './event-form.css'
 import { DialogAB } from '../../../shared/dialog/dialog-ab'
-import { EventsContext } from '../../../context/events-context'
-import { useContext } from 'react'
+import { useEvents } from '../../../states/events-layout'
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
@@ -16,7 +15,7 @@ const schema = z.object({
 
 export type EventFormData = z.infer<typeof schema>
 
-export function EventForm () {
+export function EventForm() {
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<EventFormData>({
     defaultValues: {
       date: new Date()
@@ -24,7 +23,7 @@ export function EventForm () {
     resolver: zodResolver(schema)
   })
 
-  const { setEventCreating } = useContext(EventsContext)
+  const removeBigEventById = useEvents(state => state.removeEventById)
 
   const onSubmit: SubmitHandler<EventFormData> = async (data: EventFormData) => {
     try {
@@ -49,7 +48,7 @@ export function EventForm () {
             btnYesText: 'Seguir editando',
             btnYesAction: () => { console.log('A') },
             btnNoText: 'Dejar de editar',
-            btnNoAction: () => { setEventCreating(null) }
+            btnNoAction: () => { removeBigEventById(-1) }
           }}>
             <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
           </DialogAB>
@@ -61,14 +60,14 @@ export function EventForm () {
               <div className="INFO">INFO</div>
               <div className="TITLE">
                 <label>Titulo
-                  <TextFieldInput {...register('title')} placeholder="Titulo"/>
+                  <TextFieldInput {...register('title')} placeholder="Titulo" />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                   <Text size='1' color='red'>asdasd</Text>
                 </label>
               </div>
               <div className="DATE">
                 <label>Fecha y hora
-                  <TextFieldInput {...register('date')} type="date"/>
+                  <TextFieldInput {...register('date')} type="date" />
                   <Text size='1' color='red'>asdasd</Text>
                 </label>
               </div>

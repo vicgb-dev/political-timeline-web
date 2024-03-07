@@ -4,12 +4,12 @@ import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon
 import { useContext, useEffect, useRef, useState } from 'react'
 import { ALIGN } from '../../../constants/enums'
 import { TopicService } from '../../../services/topic-service'
-import { EventsContext } from '../../../context/events-context'
 import { getDate } from '../../../tools/date-tools'
 import { CalendarLineEvent } from '../eventsDeco/calendar-line-event'
 import '../event.css'
 import { shuffle } from '../../../tools/array-tools'
 import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
+import { useEvents } from '../../../states/events-layout'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -17,10 +17,11 @@ interface EventSProps {
   oneColumn: boolean
 }
 
-export function EventS ({ props }: { props: EventSProps }) {
+export function EventS({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
-  const { selectedEvents, addBigEvent } = useContext(EventsContext)
+  const selectedEvents = useEvents(state => state.selectedEvents)
+  const addBigEvent = useEvents(state => state.addEvent)
   const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
@@ -28,7 +29,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   useEffect(() => {
     if (!props.event.idTopic) return
 
-    async function getTopic () {
+    async function getTopic() {
       const readTopic = await TopicService.getTopic(props.event.idTopic!)
       if (readTopic) {
         setTopic(readTopic.title)
@@ -62,15 +63,15 @@ export function EventS ({ props }: { props: EventSProps }) {
       ${isLeft ? 'isLeft' : 'isRight'} 
       ${props.oneColumn ? 'one-column' : 'two-columns'}`
     } >
-      <CalendarLineEvent props={{ align: isLeft ? ALIGN.LEFT : ALIGN.RIGHT, oneColumn: props.oneColumn }}/>
+      <CalendarLineEvent props={{ align: isLeft ? ALIGN.LEFT : ALIGN.RIGHT, oneColumn: props.oneColumn }} />
       {/* Por encima */}
       <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
         {/* Topic */}
         <Link size='2' href="" target="_blank" className='text-black'>
-          { topic }
+          {topic}
         </Link>
         {/* Fecha */}
-        <Text size='2'>{ getDate(props.event.eventDate) }</Text>
+        <Text size='2'>{getDate(props.event.eventDate)}</Text>
       </Flex>
       <Card size="3" className={`event-blur ${selectedEvents?.find((e) => e.id === props.event.id) ? 'selected' : 'no-selected'}`} >
         {/* Titulo */}
@@ -83,10 +84,10 @@ export function EventS ({ props }: { props: EventSProps }) {
         >
           <Flex gap="3" align="start" direction="column" width='100%'>
             <Heading size="6">
-              { props.event.title }
+              {props.event.title}
             </Heading>
             <Text className='short-description'>
-              { props.event.summary }
+              {props.event.summary}
             </Text>
           </Flex>
         </Button>
@@ -94,7 +95,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         <Flex gap="2" width='100%' py='2' wrap='wrap'>
           {
             shuffle(FakeGroups).slice(0, Math.random() * (5)).map((party, index) => (
-              <Badge key={index} variant='outline' radius='large' color= {getColor(party.color)} >
+              <Badge key={index} variant='outline' radius='large' color={getColor(party.color)} >
                 {party.name}
               </Badge>
             ))
@@ -122,7 +123,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         <div className={`${buttonsExpanded ? 'full-height' : 'no-height'} `}>
           <Flex gap="3" pt='5' align="center" direction="column">
             <Heading size="1" weight="bold">
-            Personajes públicos mencionados en el evento: Personajes públicos mencionados en el asd asd as asdsd
+              Personajes públicos mencionados en el evento: Personajes públicos mencionados en el asd asd as asdsd
             </Heading>
           </Flex>
         </div>

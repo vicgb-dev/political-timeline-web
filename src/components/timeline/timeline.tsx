@@ -7,13 +7,15 @@ import { useContext, useEffect } from 'react'
 import { EventsContext } from '../../context/events-context'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
 import './timeline.css'
+import { useEvents } from '../../states/events-layout'
 
 interface TimeLineProps {
   events: PoliticalEvent[] | null
 }
 
-export function TimeLine ({ props }: { props: TimeLineProps }) {
-  const { oneColumn, selectedEvents, floatEvent, eventCreating } = useContext(EventsContext)
+export function TimeLine({ props }: { props: TimeLineProps }) {
+  const { oneColumn, floatEvent, eventCreating } = useContext(EventsContext)
+  const selectedEvents = useEvents(state => state.selectedEvents)
 
   useEffect(() => {
     if (isFocusedEvent && floatEvent) {
@@ -26,7 +28,8 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
   const isFocusedEvent: boolean = (selectedEvents !== null && selectedEvents.length > 0) || eventCreating !== null
   const isOneColumn: boolean = oneColumn || (isFocusedEvent && !floatEvent)
   const showFloatEvent: boolean = isFocusedEvent && floatEvent
-  const showFocusedEvent: boolean = isFocusedEvent && !floatEvent && selectedEvents?.length > 0
+  //const showFocusedEvent: boolean = isFocusedEvent && !floatEvent && selectedEvents?.length > 0
+  const showFocusedEvent: boolean = selectedEvents.length > 0
 
   const showDate = (eventId: number): boolean => {
     const eventIndex = props.events?.findIndex((event: PoliticalEvent) => event.id === eventId)
@@ -70,7 +73,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
           // }}
         >
           {/* <EventL props={{ event: focusedEvent! }}/> */}
-          <EventsTabs/>
+          <EventsTabs />
         </div>
         : null
       }
@@ -82,7 +85,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
             className='event-L-parent'>
             <div className='event-L-container'>
               {/* <EventL props={{ event: focusedEvent! }}/> */}
-              <EventsTabs/>
+              <EventsTabs />
             </div>
           </div>
         )
@@ -103,7 +106,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
                 marginRight: index % 2 === 0 ? '500px' : 0,
                 marginLeft: index % 2 === 1 ? '500px' : 0
               }}>
-              <EventSSkeleton/>
+              <EventSSkeleton />
             </Box>)))
           : (props.events.map((event: PoliticalEvent, index: number) => (
             // TODO: incluir la fecha al cambiar de mes
@@ -114,7 +117,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
                 oneColumn: isOneColumn,
                 event,
                 column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT
-              }}/>
+              }} />
           )))
         }
       </Flex>
