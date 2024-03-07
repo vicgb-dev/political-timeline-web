@@ -56,16 +56,18 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
       {/* Mostrar evento grande como dialogo */}
       {showFloatEvent
         ? <div
+          className='fixed z-10 w-full top-0 -ml-6 mt-14'
           style={{
-            position: 'fixed',
-            paddingTop: '20px',
-            bottom: '0',
-            zIndex: '10',
-            width: '100%',
-            height: 'calc(100% - 100px)',
-            marginLeft: '-34px', /* 25px de padding del main y 8px del margen del body */
-            paddingBottom: '35px'
+            height: 'calc(100% - 56px)'
           }}
+          // style={{
+          //   position: 'fixed',
+          //   zIndex: '10',
+          //   width: '100%',
+          //   height: 'calc(100% - 50px)',
+          //   marginLeft: '-25px', /* 25px de padding del main y 8px del margen del body */
+          //   paddingBottom: '35px'
+          // }}
         >
           {/* <EventL props={{ event: focusedEvent! }}/> */}
           <EventsTabs/>

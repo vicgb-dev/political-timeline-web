@@ -1,8 +1,8 @@
-import { Card, Flex, Heading, ScrollArea, Tabs } from '@radix-ui/themes'
+import { Card, Flex, Heading, IconButton, ScrollArea, Tabs } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { EventL } from '../eventL/event.large'
-import { useContext, useEffect, useState } from 'react'
-import { PlusIcon } from '@radix-ui/react-icons'
+import { useContext } from 'react'
+import { CaretDownIcon, PlusIcon } from '@radix-ui/react-icons'
 import { EventsContext } from '../../../context/events-context'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
@@ -35,7 +35,7 @@ export function EventsTabs () {
       value={ getTabsValue() }
       className='h-full'>
       <ScrollArea type="hover" scrollbars="horizontal" style={{ height: 41 }}>
-        <Tabs.List className='efcolor' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
+        <Tabs.List className='efcolor w-full' style={{ overflowX: 'scroll', overflowY: 'clip', borderRadius: '12px 12px 0px 0px' }}>
           {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
@@ -63,6 +63,11 @@ export function EventsTabs () {
             style={{ backgroundColor: 'var(--accent-a4)' }}>
             Nuevo evento
           </Tabs.Trigger>)}
+          {/* Boton de MINIMIZAR */}
+          <div className='flex-grow' />
+          <IconButton variant='soft' className=''>
+            <CaretDownIcon />
+          </IconButton>
         </Tabs.List>
       </ScrollArea>
 
