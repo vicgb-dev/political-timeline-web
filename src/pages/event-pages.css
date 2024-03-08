@@ -1,0 +1,27 @@
+
+.events-header-page{
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: var(--gray-2);
+}
+
+.events-main-page{
+    display: flex;
+    flex-direction: row-reverse;
+    padding-top: 56px;
+    width: 100%;
+    max-width: 1500px;
+}
+
+.lateral-menu-line{
+    /* degradado de izquierda a derecha */
+    background: linear-gradient(180deg, var(--gray-2) 10%, rgba(255, 255, 255, 0) 100%);
+    /* background-color: red; */
+    width: 2px;
+    top: -50px;
+    right: 0;
+}

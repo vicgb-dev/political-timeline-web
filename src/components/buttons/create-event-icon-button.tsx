@@ -1,8 +1,9 @@
-import { Button } from '@radix-ui/themes'
+import { CardStackPlusIcon } from '@radix-ui/react-icons'
+import { IconButton } from '@radix-ui/themes'
 import { Link } from '@tanstack/react-router'
 import { useEvents } from '../../stores/events-store'
 
-export function CreateEventButton () {
+export function CreateEventIconButton () {
   const addEvent = useEvents(state => state.addEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
 
@@ -25,15 +26,18 @@ export function CreateEventButton () {
   }
 
   return (
-    <Link to='/my-events' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }} search={{ creating: true }}>
-      <Button
+    <Link
+      to='/my-events'
+      search={{ creating: true }}
+      style={{ textDecoration: 'none', color: 'inherit' }}>
+      <IconButton
         size='2'
-        variant='soft'
-        style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} tabIndex={-1}
+        variant='surface'
+        style={{ marginLeft: 'auto', cursor: 'pointer' }}
         onClick={() => addEventCreating()
         }>
-        Crear evento
-      </Button>
+        <CardStackPlusIcon />
+      </IconButton>
     </Link>
   )
 }

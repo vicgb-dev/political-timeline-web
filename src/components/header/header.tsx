@@ -1,18 +1,24 @@
-import { Link, useRouterState } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router'
 import { SearchBar } from '../search/search-bar'
 import { SearchBarInfoButton } from '../search/searchbar-info-button'
-import { SearchBarUserButton } from '../search/searchbar-user-button'
-import { CreateEventButton } from '../buttons/create-event-button'
 import './header.css'
-import { SearchBarThemeButton } from '../search/searchbar-theme-button'
 import { IconButton } from '@radix-ui/themes'
-import { DropdownMenuIcon, HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { Cross1Icon, HamburgerMenuIcon } from '@radix-ui/react-icons'
+import { useLayoutStore } from '../../stores/layout-store'
 
 export function Header () {
-  const routerState = useRouterState()
+  const toggleSidebar = useLayoutStore(state => state.toggleSidebar)
+  const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
+
   return (
-    <div className='fixed w-full top-0 left-1/2 -translate-x-1/2 flex justify-center p-4 z-10 bg-[color:var(--gray-2)]'>
-      <div className='max-w-4xl w-full flex items-center p-3 h-5 gap-5'>
+    <div className='w-full flex justify-center p-2'>
+      <div className='max-w-4xl w-full flex items-center gap-5'>
+
+        <IconButton onClick={toggleSidebar}>
+          {isSidebarOpen
+            ? <Cross1Icon />
+            : <HamburgerMenuIcon />}
+        </IconButton>
         <Link to='/' className='logo w-20  '>
           <svg width="398" height="160" viewBox="0 0 398 160" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect className='vertical' x="76" width="15" height="146" rx="5"/>
@@ -21,14 +27,9 @@ export function Header () {
             <rect className='right-event' x="167" y="19" width="19" height="65" rx="5" transform="rotate(90 167 19)"/>
           </svg>
         </Link>
-        {/* <SearchBarInfoButton /> */}
         <SearchBar />
-        {/* <SearchBarUserButton /> */}
-        {/* <SearchBarThemeButton /> */}
+        <SearchBarInfoButton />
         {/* {routerState.location.pathname !== '/my-events' && <CreateEventButton />} */}
-        <IconButton>
-          <HamburgerMenuIcon />
-        </IconButton>
       </div>
     </div>
   )

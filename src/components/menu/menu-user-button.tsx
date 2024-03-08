@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../context/auth-context'
 import { PopoverUserMenu } from '../popover/popover-user-menu'
 
-export function SearchBarUserButton () {
+export function MenuUserButton () {
   const { isLogged } = useContext(AuthContext)
 
   return (
@@ -15,7 +15,7 @@ export function SearchBarUserButton () {
           <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
         </PopoverUserMenu>
         : <LoginDialog>
-          <Button variant='surface' size='2'>Iniciar sesión</Button>
+          <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
         </LoginDialog> }
 
     </>

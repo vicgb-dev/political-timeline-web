@@ -3,7 +3,7 @@ import { EventS } from '../event/eventS/event.small'
 import { ALIGN } from '../../constants/enums'
 import { Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
 import './timeline.css'
 import { useEvents } from '../../stores/events-store'
@@ -17,6 +17,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
   const floatEvent = useLayoutStore(state => state.floatEvent)
   const oneColumn = useLayoutStore(state => state.oneColumn)
   const minimized = useLayoutStore(state => state.minimized)
+  const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
   const selectedEvents = useEvents(state => state.selectedEvents)
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
       {/* Mostrar evento grande dos tercios */}
       {showTwoThirdsEvent && !minimized
         ? (<div className='flex flex-col w-full'>
-          <div className='fixed self-end pt-5 z-10 mr-5 event-L-container'>
+          <div className={`${isSidebarOpen ? 'event-L-container-with-menu' : 'event-L-container'} fixed self-end pt-5 z-10 mr-5`}>
             {/* <EventL props={{ event: focusedEvent! }}/> */}
             <EventsTabs />
           </div>
@@ -87,13 +88,11 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
         : null
       }
       <Flex
-        className={`flex-col justify-center items-start pt-5 px-5
-        ${showTwoThirdsEvent && !minimized
-      ? 'events-two-thirds'
-      : 'max-width-1350 my-0 mx-auto'} 
-      ${oneColumn
-      ? 'pr-16'
-      : ''}`}>
+        className={`flex-col w-full justify-center items-start pt-5 px-5 ${showTwoThirdsEvent && !minimized
+          ? 'events-two-thirds'
+          : ''} ${oneColumn
+          ? 'pr-16'
+          : ''}`}>
         {!props.events
           ? (Array.from({ length: 5 }, (_, index) => (
             <EventSSkeleton

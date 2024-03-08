@@ -4,6 +4,8 @@ import { EventsService } from '../services/events-service'
 import { Header } from '../components/header/header'
 import { TimeLine } from '../components/timeline/timeline'
 import { Route } from '../routes/my-events'
+import './event-pages.css'
+import { TimeLineMenu } from '../components/timeline/timeline-menu'
 
 export function MyEventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
@@ -25,11 +27,12 @@ export function MyEventsPage () {
 
   return (
     <>
-      <header>
+      <header className='events-header-page'>
         <Header />
       </header>
-      <main className='pt-14'>
+      <main className='events-main-page'>
         <TimeLine props={{ events }} />
+        <TimeLineMenu />
       </main>
     </>
   )

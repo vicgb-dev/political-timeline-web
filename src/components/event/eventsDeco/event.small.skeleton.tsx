@@ -22,7 +22,7 @@ export function EventSSkeleton ({ props }: { props: EventSkeletonProps }) {
     } >
       <CalendarLineEvent props={{ align: isLeft ? ALIGN.LEFT : ALIGN.RIGHT, oneColumn: props.oneColumn }} />
       {/* Por encima */}
-      <Flex gap="3" justify='between' className={`${isLeft ? 'flex-row' : 'flex-row-reverse'} h-full min-h-5`}>
+      <Flex gap="3" justify='between' className={`${isLeft ? 'flex-row' : 'flex-row-reverse'} min-h-5`}>
         <Text size='2'></Text>
       </Flex>
       <Card size="3" className='event-blur no-selected' >

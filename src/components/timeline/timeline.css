@@ -24,3 +24,20 @@
 		width: calc(100% - 400px);
 	}
 }
+
+
+.event-L-container-with-menu {
+	width: calc((100% - (100% - 1450px)) * 0.635);
+	height: calc(100% - 90px);
+}
+
+@media screen and (max-width: 1520px) {
+	.event-L-container-with-menu {
+		width: calc(65% - 70px);
+	}
+}
+@media screen and (max-width: 1160px) {
+	.event-L-container-with-menu {
+		width: calc(100% - 470px);
+	}
+}

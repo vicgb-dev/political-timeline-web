@@ -2,7 +2,7 @@ import { BlendingModeIcon, CheckCircledIcon, InfoCircledIcon } from '@radix-ui/r
 import { Flex, Grid, Heading, IconButton, Popover, useThemeContext } from '@radix-ui/themes'
 import { useEffect } from 'react'
 
-export function SearchBarThemeButton () {
+export function MenuThemeButton () {
   const { onAccentColorChange, accentColor } = useThemeContext()
 
   useEffect(() => {
