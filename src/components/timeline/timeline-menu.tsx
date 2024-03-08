@@ -1,19 +1,19 @@
-import { ExitIcon, GearIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
+import { ExitIcon, GearIcon, InfoCircledIcon } from '@radix-ui/react-icons'
 import { Flex, IconButton } from '@radix-ui/themes'
 import { MenuThemeButton } from '../menu/menu-theme-button'
 import { useLayoutStore } from '../../stores/layout-store'
 import { MenuUserButton } from '../menu/menu-user-button'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/auth-context'
-import { useEvents } from '../../stores/events-store'
 import { CreateEventIconButton } from '../buttons/create-event-icon-button'
 import { Link } from '@tanstack/react-router'
 import { DialogAB } from '../../shared/dialog/dialog-ab'
+import { SearchBarLogo } from '../search/search-bar-logo'
 
 export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
-  const events = useEvents(state => state.selectedEvents)
   const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
+  const oneColumn = useLayoutStore(state => state.oneColumn)
   return (
     <div hidden={!isSidebarOpen} className='left-0 min-w-16 max-w-16 w-16'>
       <Flex
@@ -22,12 +22,13 @@ export function TimeLineMenu () {
         gap='5'
         className='sticky pt-5 top-14 w-full'>
         <div className='absolute pt-5 lateral-menu-line h-96'/>
+        {oneColumn && <SearchBarLogo isInMenu={oneColumn}/>}
         <MenuUserButton />
-        {isLogged && !events.find(event => event.id === -1) && <CreateEventIconButton />}
+        {isLogged && <CreateEventIconButton />}
         <MenuThemeButton />
         <Link to='/about' className='no-underline text-inherit'>
           <IconButton variant='surface' style={{ cursor: 'pointer' }} onClick={() => console.log()}>
-            <QuestionMarkIcon />
+            <InfoCircledIcon />
           </IconButton>
         </Link>
         <IconButton variant='surface'>
