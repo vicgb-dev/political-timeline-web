@@ -11,25 +11,25 @@ interface EventSkeletonProps {
   oneColumn: boolean
 }
 
-export function EventSSkeleton({ props }: { props: EventSkeletonProps }) {
+export function EventSSkeleton ({ props }: { props: EventSkeletonProps }) {
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
 
   return (
     <Box className={
-      `event-card-S 
+      `event-card-S min-h-52
       ${isLeft ? 'isLeft' : 'isRight'} 
       ${props.oneColumn ? 'one-column' : 'two-columns'}`
     } >
       <CalendarLineEvent props={{ align: isLeft ? ALIGN.LEFT : ALIGN.RIGHT, oneColumn: props.oneColumn }} />
       {/* Por encima */}
-      <Flex gap="3" justify='between' style={{ flexDirection: (isLeft ? 'row' : 'row-reverse') }}>
+      <Flex gap="3" justify='between' className={`${isLeft ? 'flex-row' : 'flex-row-reverse'} h-full min-h-5`}>
         <Text size='2'></Text>
       </Flex>
       <Card size="3" className='event-blur no-selected' >
         {/* Titulo */}
         <Button
           highContrast
-          style={{ width: '100%', marginBottom: '5px' }}
+          className='w-full mb-5 min-h-20'
           variant='ghost'
           size='2'
         >
@@ -40,16 +40,6 @@ export function EventSSkeleton({ props }: { props: EventSkeletonProps }) {
             </Text>
           </Flex>
         </Button>
-        {/* Partidos */}
-        <Flex gap="2" width='100%' py='2' wrap='wrap'>
-          {
-            shuffle(FakeGroups).slice(0, Math.random() * (5)).map((party, index) => (
-              <Badge key={index} variant='outline' radius='large' color={getColor(party.color)} >
-                {party.name}
-              </Badge>
-            ))
-          }
-        </Flex>
         {/* Botones */}
         <Flex gap="4" pt='4' align="center">
           <IconButton variant='ghost' size='2' >
