@@ -1,8 +1,16 @@
 .max-width-1350 {
 	max-width: 1350px;
 }
+
 .max-width-1500 {
 	max-width: 1500px;
+}
+
+.-h-full-35{
+	height: calc(100% - 35px);
+}
+.transition-all-custom{
+	transition: all 0.3s ease-in-out;
 }
 
 .events-two-thirds {

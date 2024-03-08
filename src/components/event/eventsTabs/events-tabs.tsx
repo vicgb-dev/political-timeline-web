@@ -33,9 +33,9 @@ export function EventsTabs () {
     <Tabs.Root
       onValueChange={value => updateValue(value)}
       value={getTabsValue()}
-      className='h-full'>
+      className='h-full transition-all'>
       <ScrollArea type='hover' scrollbars="horizontal" style={{ height: 41 }} >
-        <Tabs.List className={`${floatEvent ? 'rounded-none' : 'rounded-t-xl'} pr-16 efcolor w-full overflow-x-scroll overflow-y-clip`}>
+        <Tabs.List className={`${floatEvent && !minimized ? 'rounded-none' : 'rounded-t-xl'} pr-16 efcolor w-full overflow-x-scroll overflow-y-clip`}>
           {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0

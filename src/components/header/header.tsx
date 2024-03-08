@@ -11,15 +11,15 @@ export function Header () {
   const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
 
   return (
-    <div className='w-full flex justify-center p-2'>
-      <div className='max-w-4xl w-full flex items-center gap-5'>
+    <div className='w-full flex justify-center py-2-custom'>
+      <div className='w-full flex items-center gap-5 max-width-1500 px-5-custom'>
 
         <IconButton onClick={toggleSidebar}>
           {isSidebarOpen
             ? <Cross1Icon />
             : <HamburgerMenuIcon />}
         </IconButton>
-        <Link to='/' className='logo w-20  '>
+        <Link to='/' className='logo tablet:w-20 mobile:w-5 '>
           <svg width="398" height="160" viewBox="0 0 398 160" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect className='vertical' x="76" width="15" height="146" rx="5"/>
             <rect className='left-event' x="65" width="19" height="65" rx="5" transform="rotate(90 65 0)"/>

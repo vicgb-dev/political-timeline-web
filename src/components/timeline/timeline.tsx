@@ -28,8 +28,6 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
     }
   }, [selectedEvents, floatEvent, minimized])
 
-  console.log('oneColumn', oneColumn)
-
   const isOneColumn: boolean = oneColumn || (selectedEvents.length > 0 && !floatEvent && !minimized)
   const showFloatEvent: boolean = selectedEvents.length > 0 && floatEvent
   const showTwoThirdsEvent: boolean = selectedEvents.length > 0 && !floatEvent
@@ -57,16 +55,28 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
     return currentDate
   }
 
+  function minimizedClases (): string {
+    return minimized ? 'fixed z-10 w-full max-width-1500 h-full bottom-0 translate-y-full -top-28 px-5' : ''
+  }
+
+  function fullScreenClases (): string {
+    return showFloatEvent && !minimized ? 'fixed z-10 w-full top-0 mt-14 -translate-y-px -h-full-35' : ''
+  }
+
+  function fullScreenStyles (): string {
+    return showFloatEvent && !minimized ? 'height: calc(100% - 35px)' : ''
+  }
+
   return (
     <>
-      {selectedEvents.length > 0 && minimized
-        ? <div className='fixed z-10 w-full max-width-1500 h-full bottom-0 translate-y-full -top-28 px-5'>
+      {(selectedEvents.length > 0 && minimized) || (showFloatEvent && !minimized)
+        ? <div className={`transition-all-custom ${minimizedClases()} ${fullScreenClases()}`}>
           <EventsTabs />
         </div>
         : null}
 
       {/* Mostrar evento grande como dialogo */}
-      {showFloatEvent && !minimized
+      {/* {showFloatEvent && !minimized
         ? <div
           className='fixed z-10 w-full top-0 mt-14 -translate-y-px'
           style={{
@@ -75,7 +85,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
           <EventsTabs />
         </div>
         : null
-      }
+      } */}
 
       {/* Mostrar evento grande dos tercios */}
       {showTwoThirdsEvent && !minimized

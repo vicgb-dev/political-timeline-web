@@ -11,6 +11,7 @@ export interface LoginFormData{
   email: string
   password: string
 }
+
 export function LoginDialog ({ children }: {children: React.ReactNode}) {
   const { login } = useContext(AuthContext)
 
