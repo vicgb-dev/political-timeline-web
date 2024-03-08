@@ -1,7 +1,7 @@
 import { ArchiveIcon, Cross1Icon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { Badge, Text, Card, Flex, Heading, IconButton, ScrollArea } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import '../event.css'
 import { shuffle } from '../../../tools/array-tools'
 import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
@@ -26,7 +26,7 @@ export function EventL ({ props }: { props: EventLProps }) {
   }
 
   return (
-    <Card size='3' style={{ height: '100%' }} className='event-card-L event-blur efcolor no-border no-top-radius'>
+    <Card size='3' className='h-full event-card-L event-blur efcolor no-border no-top-radius'>
       {/* Titulo */}
       <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
         <Heading size="7" style={{ textDecoration: 'underline' }}>
