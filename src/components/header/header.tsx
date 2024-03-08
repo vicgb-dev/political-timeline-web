@@ -5,6 +5,8 @@ import { SearchBarUserButton } from '../search/searchbar-user-button'
 import { CreateEventButton } from '../buttons/create-event-button'
 import './header.css'
 import { SearchBarThemeButton } from '../search/searchbar-theme-button'
+import { IconButton } from '@radix-ui/themes'
+import { DropdownMenuIcon, HamburgerMenuIcon } from '@radix-ui/react-icons'
 
 export function Header () {
   const routerState = useRouterState()
@@ -19,11 +21,14 @@ export function Header () {
             <rect className='right-event' x="167" y="19" width="19" height="65" rx="5" transform="rotate(90 167 19)"/>
           </svg>
         </Link>
-        <SearchBarInfoButton />
+        {/* <SearchBarInfoButton /> */}
         <SearchBar />
-        <SearchBarUserButton />
-        <SearchBarThemeButton />
-        {routerState.location.pathname !== '/my-events' && <CreateEventButton />}
+        {/* <SearchBarUserButton /> */}
+        {/* <SearchBarThemeButton /> */}
+        {/* {routerState.location.pathname !== '/my-events' && <CreateEventButton />} */}
+        <IconButton>
+          <HamburgerMenuIcon />
+        </IconButton>
       </div>
     </div>
   )

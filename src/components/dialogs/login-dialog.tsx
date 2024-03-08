@@ -8,8 +8,8 @@ import './login-dialog.css'
 import { AuthContext } from '../../context/auth-context'
 
 export interface LoginFormData{
-    email: string
-    password: string
+  email: string
+  password: string
 }
 export function LoginDialog ({ children }: {children: React.ReactNode}) {
   const { login } = useContext(AuthContext)

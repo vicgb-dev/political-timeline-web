@@ -4,17 +4,19 @@ import { ALIGN } from '../../constants/enums'
 import { Flex } from '@radix-ui/themes'
 import { EventSSkeleton } from '../event/eventsDeco/event.small.skeleton'
 import { useContext, useEffect } from 'react'
-import { LayoutContext } from '../../context/layout-context'
 import { EventsTabs } from '../event/eventsTabs/events-tabs'
 import './timeline.css'
 import { useEvents } from '../../stores/events-store'
+import { useLayoutStore } from '../../stores/layout-store'
 
 interface TimeLineProps {
   events: PoliticalEvent[] | null
 }
 
 export function TimeLine ({ props }: { props: TimeLineProps }) {
-  const { oneColumn, floatEvent, minimized } = useContext(LayoutContext)
+  const floatEvent = useLayoutStore(state => state.floatEvent)
+  const oneColumn = useLayoutStore(state => state.oneColumn)
+  const minimized = useLayoutStore(state => state.minimized)
   const selectedEvents = useEvents(state => state.selectedEvents)
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
 
   return (
     <>
-      {minimized
+      {selectedEvents.length > 0 && minimized
         ? <div className='fixed z-10 w-full max-width-1500 h-full bottom-0 translate-y-full -top-28 px-5'>
           <EventsTabs />
         </div>

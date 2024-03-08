@@ -6,13 +6,15 @@ import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
 import { useEvents } from '../../../stores/events-store'
 import { useContext } from 'react'
-import { LayoutContext } from '../../../context/layout-context'
+import { useLayoutStore } from '../../../stores/layout-store'
 
 export function EventsTabs () {
   const selectedEvents = useEvents(state => state.selectedEvents)
   const focusedEvent = useEvents(state => state.focusedEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
-  const { floatEvent, setMinimized, minimized } = useContext(LayoutContext)
+  const floatEvent = useLayoutStore(state => state.floatEvent)
+  const minimized = useLayoutStore(state => state.minimized)
+  const setMinimized = useLayoutStore(state => state.setMinimized)
 
   const updateValue = (value: string) => {
     console.log('value', value)
