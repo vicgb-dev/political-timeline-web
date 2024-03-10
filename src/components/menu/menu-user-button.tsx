@@ -1,4 +1,4 @@
-import { PersonIcon } from '@radix-ui/react-icons'
+import { PersonIcon, TriangleDownIcon } from '@radix-ui/react-icons'
 import { IconButton } from '@radix-ui/themes'
 import { LoginDialog } from '../dialogs/login-dialog'
 import { useContext } from 'react'
@@ -12,7 +12,10 @@ export function MenuUserButton () {
     <>
       {isLogged
         ? <PopoverUserMenu>
-          <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>
+          <IconButton variant='surface' size='2' className='relative'>
+            <PersonIcon />
+            <TriangleDownIcon className='absolute ml-12' />
+          </IconButton>
         </PopoverUserMenu>
         : <LoginDialog>
           <IconButton variant='surface' size='2' ><PersonIcon /></IconButton>

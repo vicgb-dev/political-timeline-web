@@ -107,8 +107,8 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
                 event,
                 column: index % 2 === 0 ? ALIGN.LEFT : ALIGN.RIGHT
               }} />
-          )))
-        }
+          )))}
+        <div className='pb-56' />
       </Flex>
     </>
   )

@@ -1,12 +1,13 @@
-import { InfoCircledIcon } from '@radix-ui/react-icons'
+import { InfoCircledIcon, TriangleDownIcon } from '@radix-ui/react-icons'
 import { Code, Flex, Heading, IconButton, Popover, Text } from '@radix-ui/themes'
 
 export function SearchBarInfoButton () {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <IconButton variant='surface' size='2' >
+        <IconButton variant='surface' size='2' className='relative' >
           <InfoCircledIcon />
+          <TriangleDownIcon className='absolute ml-12' />
         </IconButton>
       </Popover.Trigger>
       <Popover.Content >

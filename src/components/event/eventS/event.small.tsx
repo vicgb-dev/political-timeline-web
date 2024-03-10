@@ -10,6 +10,7 @@ import { shuffle } from '../../../tools/array-tools'
 import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 import { useEvents } from '../../../stores/events-store'
 import '../event.css'
+import { Group } from '../../../models/group.interface'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -20,6 +21,7 @@ interface EventSProps {
 export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
+  const [parties, setParties] = useState<Group[]>([])
   const selectedEvents = useEvents(state => state.selectedEvents)
   const toggleEvent = useEvents(state => state.toggleEvent)
   const eventRef = useRef<HTMLDivElement>(null)
@@ -27,6 +29,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
 
   useEffect(() => {
+    setParties(shuffle(FakeGroups).slice(0, Math.random() * (5)))
     if (!props.event.idTopic) return
 
     async function getTopic () {
@@ -77,7 +80,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         {/* Titulo */}
         <Button
           highContrast
-          style={{ width: '100%', marginBottom: '5px' }}
+          style={{ width: '100%', marginBottom: '5px', cursor: 'pointer' }}
           variant='ghost'
           size='2'
           onClick={focusOnThisEvent}
@@ -94,7 +97,7 @@ export function EventS ({ props }: { props: EventSProps }) {
         {/* Partidos */}
         <Flex gap="2" width='100%' py='2' wrap='wrap'>
           {
-            shuffle(FakeGroups).slice(0, Math.random() * (5)).map((party, index) => (
+            parties.map((party, index) => (
               <Badge key={index} variant='outline' radius='large' color={getColor(party.color)} >
                 {party.name}
               </Badge>

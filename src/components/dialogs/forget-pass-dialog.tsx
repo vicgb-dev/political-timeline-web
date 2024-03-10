@@ -21,7 +21,7 @@ export function ForgetPassDialog ({ children }: {children: React.ReactNode}) {
   const onSubmit: SubmitHandler<ForgetPasswordData> = async (data: ForgetPasswordData) => {
     try {
       // TODO: Send email
-      await new Promise((resolve, reject) => {
+      await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
       console.log(data)

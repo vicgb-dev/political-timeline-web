@@ -27,7 +27,7 @@ export function SignUpDialog ({ children }: {children: React.ReactNode}) {
   const onSubmit: SubmitHandler<signUpData> = async (data: signUpData) => {
     try {
       // TODO: SignUp logic
-      await new Promise((resolve, reject) => {
+      await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
       console.log(data)

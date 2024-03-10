@@ -1,0 +1,32 @@
+@keyframes rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+.out-top {
+	animation: rotate 15s linear infinite;
+	transform-origin: 13px 25px;
+    fill: var(--accent-2);
+    /* filter: saturate(0); */
+}
+.in-top {
+	animation: rotate 5s linear infinite;
+	transform-origin: 13px 25px;
+    fill: var(--accent-3);
+    /* filter: saturate(0); */
+}
+.out-bottom {
+	animation: rotate 20s linear infinite;
+	transform-origin: 84px 93px;
+    fill: var(--accent-7);
+    /* filter: saturate(0); */
+}
+.in-bottom {
+	animation: rotate 10s linear infinite;
+	transform-origin: 84px 93px;
+    fill: var(--accent-1);
+    /* filter: saturate(0); */
+}

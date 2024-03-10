@@ -29,12 +29,11 @@ export function EventL ({ props }: { props: EventLProps }) {
   return (
     <Card size='3' className='h-full event-card-L event-blur efcolor no-border no-top-radius'>
       {/* Titulo */}
-      <Flex gap="3" align="center" justify="start" direction="row" pb='4' >
+      <Flex gap="3" align="center" justify="start" direction="row" pb='4' style={{ paddingRight: 10 }}>
         <Heading size="7" className='underline w-full'>
           {props.event.title}
         </Heading>
         <PopoverEventLargeMenu>
-
           <IconButton variant='ghost'>
             <DotsVerticalIcon />
           </IconButton>

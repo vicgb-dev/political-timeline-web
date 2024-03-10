@@ -26,7 +26,7 @@ export function EventForm () {
 
   const onSubmit: SubmitHandler<EventFormData> = async (data: EventFormData) => {
     try {
-      await new Promise((resolve, reject) => {
+      await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
       console.log(data)

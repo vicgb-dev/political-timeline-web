@@ -1,4 +1,4 @@
-import { BlendingModeIcon, CheckCircledIcon } from '@radix-ui/react-icons'
+import { BlendingModeIcon, CheckCircledIcon, TriangleDownIcon } from '@radix-ui/react-icons'
 import { Flex, Grid, Heading, IconButton, Popover, useThemeContext } from '@radix-ui/themes'
 import { useEffect } from 'react'
 
@@ -17,8 +17,9 @@ export function MenuThemeButton () {
   return (
     <Popover.Root>
       <Popover.Trigger>
-        <IconButton variant='surface' size='2' >
+        <IconButton variant='surface' size='2' className='relative' >
           <BlendingModeIcon />
+          <TriangleDownIcon className='absolute ml-12' />
         </IconButton>
       </Popover.Trigger>
       <Popover.Content >

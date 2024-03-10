@@ -9,7 +9,6 @@ import { CreateEventIconButton } from '../buttons/create-event-icon-button'
 import { Link as RLink } from '@tanstack/react-router'
 import { DialogAB } from '../../shared/dialog/dialog-ab'
 import { SearchBarLogo } from '../search/search-bar-logo'
-import { SignUpDialog } from '../dialogs/sign-up-dialog'
 
 export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
@@ -17,7 +16,7 @@ export function TimeLineMenu () {
   const oneColumn = useLayoutStore(state => state.oneColumn)
 
   return (
-    <div hidden={!isSidebarOpen} className='left-0 min-w-16 max-w-16 w-16'>
+    <div hidden={!isSidebarOpen} className='left-0 min-w-20  w-16'>
       <Flex
         direction='column'
         align='center'
@@ -50,9 +49,6 @@ export function TimeLineMenu () {
           </IconButton>
         </DialogAB>
         }
-        <SignUpDialog>
-          <Link href='#'> Regístrate</Link>
-        </SignUpDialog>
       </Flex>
     </div>
   )
