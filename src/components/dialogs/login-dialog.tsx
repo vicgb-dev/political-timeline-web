@@ -6,6 +6,7 @@ import { EyeNoneIcon, EyeOpenIcon, LockClosedIcon, PersonIcon } from '@radix-ui/
 import * as Form from '@radix-ui/react-form'
 import { AuthContext } from '../../context/auth-context'
 import { ForgetPassDialog } from './forget-pass-dialog'
+import { SignUpDialog } from './sign-up-dialog'
 
 export interface LoginFormData{
   email: string
@@ -159,7 +160,11 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
           <Link size='2' >¿Olvidaste tu contraseña?</Link>
         </ForgetPassDialog>
         <Separator size='4'/>
-        <Text size='3'>¿No tienes una cuenta? <Link href='#'>Regístrate</Link></Text>
+        <Text size='3'>¿No tienes una cuenta?
+          <SignUpDialog>
+            <Link href='#'> Regístrate</Link>
+          </SignUpDialog>
+        </Text>
 
       </Dialog.Content>
     </Dialog.Root>

@@ -1,14 +1,15 @@
 import { ExitIcon, GearIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
-import { Flex, IconButton } from '@radix-ui/themes'
+import { Flex, IconButton, Link } from '@radix-ui/themes'
 import { MenuThemeButton } from '../menu/menu-theme-button'
 import { useLayoutStore } from '../../stores/layout-store'
 import { MenuUserButton } from '../menu/menu-user-button'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/auth-context'
 import { CreateEventIconButton } from '../buttons/create-event-icon-button'
-import { Link } from '@tanstack/react-router'
+import { Link as RLink } from '@tanstack/react-router'
 import { DialogAB } from '../../shared/dialog/dialog-ab'
 import { SearchBarLogo } from '../search/search-bar-logo'
+import { SignUpDialog } from '../dialogs/sign-up-dialog'
 
 export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
@@ -27,11 +28,11 @@ export function TimeLineMenu () {
         <MenuUserButton />
         {isLogged && <CreateEventIconButton />}
         <MenuThemeButton />
-        <Link to='/about' className='no-underline text-inherit'>
+        <RLink to='/about' className='no-underline text-inherit'>
           <IconButton variant='surface' style={{ cursor: 'pointer' }} tabIndex={-1}>
             <QuestionMarkIcon />
           </IconButton>
-        </Link>
+        </RLink>
         <IconButton variant='surface'>
           <GearIcon />
         </IconButton>
@@ -49,6 +50,9 @@ export function TimeLineMenu () {
           </IconButton>
         </DialogAB>
         }
+        <SignUpDialog>
+          <Link href='#'> Regístrate</Link>
+        </SignUpDialog>
       </Flex>
     </div>
   )
