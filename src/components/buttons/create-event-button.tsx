@@ -2,9 +2,16 @@ import { Button } from '@radix-ui/themes'
 import { Link } from '@tanstack/react-router'
 import { useEvents } from '../../stores/events-store'
 import { useLayoutStore } from '../../stores/layout-store'
+import { Cross1Icon, Cross2Icon, PlusIcon } from '@radix-ui/react-icons'
+
+interface CreateEventButtonProps {
+  fullWidth?: boolean
+  showText?: boolean
+  showIcon?: boolean
+}
 
 // TODO: combinar con CreateEventIconButton
-export function CreateEventButton () {
+export function CreateEventButton ({ props }: {props: CreateEventButtonProps}) {
   const toggleEvent = useEvents(state => state.toggleEvent)
   const setMinimized = useLayoutStore(state => state.setMinimized)
 
@@ -27,13 +34,14 @@ export function CreateEventButton () {
   }
 
   return (
-    <Link to='/my-events' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }} search={{ creating: true }}>
+    <Link to='/my-events' style={{ width: `${props.fullWidth ? '100%' : ''}`, textDecoration: 'none', color: 'inherit' }} search={{ creating: true }}>
       <Button
         size='2'
         variant='soft'
         style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} tabIndex={-1}
         onClick={() => addEventCreating()}>
-        Crear evento
+        {props.showIcon ? <PlusIcon /> : null}
+        {props.showText ? <p>Crear evento</p> : null}
       </Button>
     </Link>
   )

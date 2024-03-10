@@ -6,6 +6,8 @@ import '../event.css'
 import { shuffle } from '../../../tools/array-tools'
 import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 import { useEvents } from '../../../stores/events-store'
+import { useLayoutStore } from '../../../stores/layout-store'
+import { PopoverEventLargeMenu } from '../../popover/event-large-menu'
 
 interface EventLProps {
   event: PoliticalEvent
@@ -14,6 +16,7 @@ interface EventLProps {
 export function EventL ({ props }: { props: EventLProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const toggleEvent = useEvents(state => state.toggleEvent)
+  const floatEvent = useLayoutStore(state => state.floatEvent)
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
@@ -26,13 +29,19 @@ export function EventL ({ props }: { props: EventLProps }) {
   return (
     <Card size='3' className='h-full event-card-L event-blur efcolor no-border no-top-radius'>
       {/* Titulo */}
-      <Flex gap="3" align="start" justify="between" direction="row" pb='4' >
-        <Heading size="7" style={{ textDecoration: 'underline' }}>
+      <Flex gap="3" align="center" justify="start" direction="row" pb='4' >
+        <Heading size="7" className='underline w-full'>
           {props.event.title}
         </Heading>
-        <IconButton onClick={closeEvent}>
+        <PopoverEventLargeMenu>
+
+          <IconButton variant='ghost'>
+            <DotsVerticalIcon />
+          </IconButton>
+        </PopoverEventLargeMenu>
+        {floatEvent && <IconButton variant='ghost' onClick={closeEvent}>
           <Cross1Icon />
-        </IconButton>
+        </IconButton>}
       </Flex>
       <ScrollArea type='hover'>
         <Text className='text-pretty'>

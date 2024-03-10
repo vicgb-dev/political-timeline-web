@@ -24,6 +24,10 @@ export function Header () {
         <SearchBarLogo />
         <SearchBar />
         <SearchBarInfoButton />
+        {/* Div para empujar a la barra y alinearla con el boton de minimizar de los tabs */}
+        {floatEvent
+          ? <div style={{ marginLeft: -12 }}/>
+          : <div style={{ marginLeft: 8 }}/>}
         {/* {routerState.location.pathname !== '/my-events' && <CreateEventButton />} */}
       </div>
     </div>

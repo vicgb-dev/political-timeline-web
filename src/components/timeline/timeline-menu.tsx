@@ -1,4 +1,4 @@
-import { ExitIcon, GearIcon, InfoCircledIcon } from '@radix-ui/react-icons'
+import { ExitIcon, GearIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
 import { Flex, IconButton } from '@radix-ui/themes'
 import { MenuThemeButton } from '../menu/menu-theme-button'
 import { useLayoutStore } from '../../stores/layout-store'
@@ -29,7 +29,7 @@ export function TimeLineMenu () {
         <MenuThemeButton />
         <Link to='/about' className='no-underline text-inherit'>
           <IconButton variant='surface' style={{ cursor: 'pointer' }} tabIndex={-1}>
-            <InfoCircledIcon />
+            <QuestionMarkIcon />
           </IconButton>
         </Link>
         <IconButton variant='surface'>

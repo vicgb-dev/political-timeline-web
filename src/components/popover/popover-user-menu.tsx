@@ -32,7 +32,8 @@ export function PopoverUserMenu ({ children }: {children: React.ReactNode}) {
               Mis eventos
             </Button>
           </Link>
-          {isLogged && !events.find(event => event.id === -1) && <CreateEventButton />}
+          {isLogged && !events.find(event => event.id === -1) &&
+          <CreateEventButton props={{ fullWidth: true, showIcon: false, showText: true }}/>}
           <Link to='/about' style={{ width: '100%', textDecoration: 'none', color: 'inherit' }}>
             <Button size='2'style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} variant='soft' tabIndex={-1}>
               Configuración

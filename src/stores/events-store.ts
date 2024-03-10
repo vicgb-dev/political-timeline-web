@@ -24,15 +24,35 @@ function toggleEvent (state: EventsState, event: PoliticalEvent, setFocusedEvent
   if (state.selectedEvents.find((e) => e.id === event.id)) {
     // Si estaba enfocado, le paso el foco a otro evento
     if (state.focusedEvent?.id === event.id) {
-      // Quitamos este evento y el de crear
+      // Quitamos el evento de crear
       const tempEvents = state.selectedEvents.filter((e) => e.id !== -1)
       const thisEventIndex = tempEvents.indexOf(event)
 
-      console.log('tempEvents', tempEvents)
-      console.log('thisEventIndex', thisEventIndex)
+      // Si habia mas eventos, vamos al anterior, si no, al siguiente, sino a la pantalla de añadir evento
+      let newIndex: number | null = null
 
-      // Si habia mas eventos, vamos al anterior, si no, a la pantalla de añadir evento
-      setFocusedEvent(tempEvents.length > 0 ? tempEvents[thisEventIndex - 1] : null)
+      // Si solo hay este evento
+      if (tempEvents.length === 1) {
+        const createEvent = state.selectedEvents.find((e) => e.id === -1)
+        if (createEvent) {
+          // Si hay un evento de crear, lo enfocamos
+          setFocusedEvent(createEvent)
+        } else {
+          // Si no, quitamos el foco
+          setFocusedEvent(null)
+        }
+      }
+
+      // Si hay mas eventos
+      if (tempEvents.length > 1) {
+        if (thisEventIndex === 0) {
+          newIndex = thisEventIndex + 1
+        } else {
+          newIndex = thisEventIndex - 1
+        }
+      }
+
+      setFocusedEvent(newIndex !== null ? tempEvents[newIndex] : null)
       // setFocusedEvent(state.selectedEvents.indexOf(event) > 0 ? state.selectedEvents[state.selectedEvents.indexOf(event) - 1] : null)
     }
     return state.selectedEvents.filter((e) => e.id !== event.id)

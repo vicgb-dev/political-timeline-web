@@ -1,7 +1,7 @@
-import { Card, Flex, Heading, IconButton, ScrollArea, Tabs } from '@radix-ui/themes'
+import { Card, Flex, Heading, IconButton, ScrollArea, Separator, Tabs, Text } from '@radix-ui/themes'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { EventL } from '../eventL/event.large'
-import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon, ChevronUpIcon, Cross1Icon, PlusIcon } from '@radix-ui/react-icons'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
 import { useEvents } from '../../../stores/events-store'
@@ -11,6 +11,7 @@ export function EventsTabs () {
   const selectedEvents = useEvents(state => state.selectedEvents)
   const focusedEvent = useEvents(state => state.focusedEvent)
   const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+  const toggleEvent = useEvents(state => state.toggleEvent)
   const floatEvent = useLayoutStore(state => state.floatEvent)
   const minimized = useLayoutStore(state => state.minimized)
   const setMinimized = useLayoutStore(state => state.setMinimized)
@@ -28,25 +29,45 @@ export function EventsTabs () {
     setMinimized(!minimized)
   }
 
+  const closeEvent = (event: PoliticalEvent) => {
+    toggleEvent(event)
+  }
+
   return (
     <Tabs.Root
       onValueChange={value => updateValue(value)}
       value={getTabsValue()}
       className='h-full transition-all'>
       <ScrollArea type='hover' scrollbars="horizontal" style={{ height: 41 }} >
-        <Tabs.List className={`${floatEvent && !minimized ? 'rounded-none' : 'rounded-t-xl'} pr-16 efcolor w-full overflow-x-scroll overflow-y-clip`}>
+        <Tabs.List className={`
+          ${floatEvent && !minimized ? 'rounded-none' : 'rounded-t-xl'} pr-16 efcolor w-full overflow-x-scroll overflow-y-clip`}>
           {/* TABS de todos los EVENTOS */}
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
-              ? <Tabs.Trigger value={event.id.toString()} key={event.id}>
-                <p style={{
-                  maxWidth: '150px',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis'
-                }}>
-                  {event.title}
-                </p>
-              </Tabs.Trigger>
+              ? <div key={`event-tab-${event.id}`} className='flex'>
+                <Tabs.Trigger value={event.id.toString()} key={event.id}>
+                  <p style={{
+                    maxWidth: '150px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis'
+                    // Tiene padding right para sustituir el espacio cuando no esta la X para cerrar la tab
+                    // paddingRight: `${event.id !== focusedEvent?.id && !floatEvent ? '33px' : ''}`
+                  }}>
+                    {event.title}
+                  </p>
+                </Tabs.Trigger>
+                {event.id === focusedEvent?.id &&
+                focusedEvent?.id !== -1 &&
+                !floatEvent &&
+                <IconButton variant='ghost' style={{ alignSelf: 'center', marginRight: '12px' }} onClick={() => closeEvent(event)}>
+                  <Cross1Icon />
+                </IconButton>}
+
+                {event.id !== focusedEvent?.id &&
+                focusedEvent?.id !== -1 &&
+                !floatEvent &&
+                <div className='mr-24' />}
+              </div>
               : null
           ))}
           {/* Tab de AGREGAR */}
@@ -97,7 +118,17 @@ export function EventsTabs () {
             <Heading className='text-pretty text-center'>
               Elige un evento y se mostrará aqui
             </Heading>
-            {!selectedEvents.find(event => event.id === -1) && <CreateEventButton />}
+            {!selectedEvents.find(event => event.id === -1) &&
+            <>
+              <Separator size='3' style={{ width: '50%' }}/>
+              <div className='flex flex-col items-center gap-3'>
+                <Text size='3' className='text-center'>
+                  o puedes crear un nuevo evento
+                </Text>
+                <CreateEventButton props={{ fullWidth: false, showIcon: true, showText: true }} />
+              </div>
+            </>
+            }
           </Flex>
         </Card>
       </Tabs.Content>
