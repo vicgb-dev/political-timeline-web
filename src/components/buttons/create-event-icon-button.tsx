@@ -4,10 +4,10 @@ import { Link } from '@tanstack/react-router'
 import { useEvents } from '../../stores/events-store'
 import { useLayoutStore } from '../../stores/layout-store'
 
+// TODO: combinar con CreateEventButton
 export function CreateEventIconButton () {
   const events = useEvents(state => state.selectedEvents)
-  const addEvent = useEvents(state => state.addEvent)
-  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+  const toggleEvent = useEvents(state => state.toggleEvent)
   const setMinimized = useLayoutStore(state => state.setMinimized)
   const addEventCreating = () => {
     const newEvent = {
@@ -23,8 +23,7 @@ export function CreateEventIconButton () {
       eventImg: ''
     }
 
-    addEvent(newEvent)
-    setFocusedEvent(newEvent)
+    toggleEvent(newEvent)
     setMinimized(false)
   }
 

@@ -7,7 +7,7 @@ export function SearchBar () {
       <TextField.Slot>
         <MagnifyingGlassIcon height="16" width="16" />
       </TextField.Slot>
-      <TextField.Input placeholder="@Figura pública, #tag, t[topic]..." size="3"/>
+      <TextField.Input placeholder="@Figura pública, #tag, t[tema]..." size="3"/>
       <TextField.Slot pr="3">
         <IconButton size="2" variant="ghost">
           <MixerHorizontalIcon height="16" width="16" />

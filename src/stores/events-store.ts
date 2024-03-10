@@ -4,9 +4,7 @@ import { PoliticalEvent } from '../models/political-event.interface'
 interface EventsState {
   selectedEvents: PoliticalEvent[]
   focusedEvent: PoliticalEvent | null
-  addEvent: (event: PoliticalEvent) => void
-  addEventAt: (ìndex: number, event: PoliticalEvent) => void
-  removeEvent: (event: PoliticalEvent) => void
+  toggleEvent: (event: PoliticalEvent) => void
   removeEventById: (id: number) => void
   setFocusedEvent: (event: PoliticalEvent | null) => void
   scrollTo: (eventId: number) => void
@@ -15,37 +13,47 @@ interface EventsState {
 export const useEvents = create<EventsState>((set) => ({
   selectedEvents: [],
   focusedEvent: null,
-  addEvent: (event: PoliticalEvent) => set((state) => ({ selectedEvents: [...state.selectedEvents, event] })),
-  addEventAt: (index: number, event: PoliticalEvent) => set((state) => ({ selectedEvents: addEventAt(state, index, event) })),
-  removeEvent: (event: PoliticalEvent) => set((state) => ({ selectedEvents: handleRemoveEvent(state, event, state.setFocusedEvent) })),
+  toggleEvent: (event: PoliticalEvent) => set((state) => ({ selectedEvents: toggleEvent(state, event, state.setFocusedEvent) })),
   removeEventById: (id: number) => set((state) => ({ selectedEvents: handleRemoveEventById(state, id, state.setFocusedEvent) })),
   setFocusedEvent: (event: PoliticalEvent | null) => set({ focusedEvent: event }),
-  scrollTo: (eventId: number) => {
-    const eventNode = document.getElementById(`event-${eventId}`)
-    if (eventNode) {
-      eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
-    }
-  }
+  scrollTo: (eventId: number) => scrollTo(eventId)
 }))
 
-function addEventAt (state: EventsState, index: number, event: PoliticalEvent): PoliticalEvent[] {
-  state.selectedEvents.splice(index, 0, event)
-  console.log(state.selectedEvents)
-  return state.selectedEvents
+function toggleEvent (state: EventsState, event: PoliticalEvent, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
+  // Si el evento ya está seleccionado, lo quito de la lista
+  if (state.selectedEvents.find((e) => e.id === event.id)) {
+    // Si estaba enfocado, le paso el foco a otro evento
+    if (state.focusedEvent?.id === event.id) {
+      // Quitamos este evento y el de crear
+      const tempEvents = state.selectedEvents.filter((e) => e.id !== -1)
+      const thisEventIndex = tempEvents.indexOf(event)
+
+      console.log('tempEvents', tempEvents)
+      console.log('thisEventIndex', thisEventIndex)
+
+      // Si habia mas eventos, vamos al anterior, si no, a la pantalla de añadir evento
+      setFocusedEvent(tempEvents.length > 0 ? tempEvents[thisEventIndex - 1] : null)
+      // setFocusedEvent(state.selectedEvents.indexOf(event) > 0 ? state.selectedEvents[state.selectedEvents.indexOf(event) - 1] : null)
+    }
+    return state.selectedEvents.filter((e) => e.id !== event.id)
+  }
+
+  // Si el evento no está seleccionado, lo añado a la lista y lo enfoco
+  setFocusedEvent(event)
+  return [...state.selectedEvents, event]
 }
 
-function handleRemoveEvent (state: EventsState, event: PoliticalEvent, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
-  const newSelectedEvents = state.selectedEvents.filter((e) => e.id !== event.id)
-  if (state.focusedEvent?.id === event.id) {
-    setFocusedEvent(null)
+function scrollTo (eventId: number): void {
+  const eventNode = document.getElementById(`event-${eventId}`)
+  if (eventNode) {
+    eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
-  return newSelectedEvents
 }
 
 function handleRemoveEventById (state: EventsState, eventId: number, setFocusedEvent: (event: PoliticalEvent | null) => void): PoliticalEvent[] {
-  const newSelectedEvents = state.selectedEvents.filter((e) => e.id !== eventId)
+  const tempEvents = state.selectedEvents.filter((e) => e.id !== eventId)
   if (state.focusedEvent?.id === eventId) {
     setFocusedEvent(null)
   }
-  return newSelectedEvents
+  return tempEvents
 }

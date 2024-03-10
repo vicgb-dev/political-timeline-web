@@ -21,11 +21,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const [topic, setTopic] = useState('')
   const selectedEvents = useEvents(state => state.selectedEvents)
-  const addEvent = useEvents(state => state.addEvent)
-  const addEventAt = useEvents(state => state.addEventAt)
-  const focusedEvent = useEvents(state => state.focusedEvent)
-  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
-  const removeEvent = useEvents(state => state.removeEvent)
+  const toggleEvent = useEvents(state => state.toggleEvent)
   const eventRef = useRef<HTMLDivElement>(null)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
@@ -51,41 +47,14 @@ export function EventS ({ props }: { props: EventSProps }) {
     // Obtener el nodo DOM de la event seleccionada
     const eventNode = eventRef.current
 
-    // Desplazar la event seleccionada al centro del viewport
+    // Desplazar el evento seleccionado al centro del viewport
     if (eventNode) {
       setTimeout(() => {
         eventNode.scrollIntoView({ behavior: 'smooth', block: 'center' })
       }, 10)
     }
 
-    // Si no hay ningun evento enfocado o estoy creando uno
-    if (focusedEvent === null || focusedEvent.id === -1) {
-      setFocusedEvent(props.event)
-      if (!selectedEvents.find((e) => e.id === props.event.id)) {
-        addEvent(props.event)
-        return
-      }
-      return
-    }
-
-    // Si ya estoy enfocado en este event, no hago nada
-    if (focusedEvent.id === props.event.id) return
-
-    // Si ya esta en eventos, lo enfoco
-    if (selectedEvents.find((e) => e.id === props.event.id)) {
-      setFocusedEvent(props.event)
-      return
-    }
-
-    // Si mi foco está en otro evento, quito ese evento, añado este y lo enfoco
-    if (focusedEvent.id !== props.event.id) {
-      const index = selectedEvents.findIndex(event => event.id === focusedEvent.id)
-      if (index !== -1) {
-        removeEvent(focusedEvent)
-        addEventAt(index, props.event)
-        setFocusedEvent(props.event)
-      }
-    }
+    toggleEvent(props.event)
   }
 
   return (

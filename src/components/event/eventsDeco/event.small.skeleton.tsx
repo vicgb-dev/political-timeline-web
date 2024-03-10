@@ -1,9 +1,7 @@
-import { Badge, Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
+import { Box, Button, Card, Flex, Heading, IconButton, Link, Text } from '@radix-ui/themes'
 import { ArchiveIcon, DotsVerticalIcon, DropdownMenuIcon, PersonIcon, Share1Icon } from '@radix-ui/react-icons'
 import { ALIGN } from '../../../constants/enums'
 import { CalendarLineEvent } from '../eventsDeco/calendar-line-event'
-import { shuffle } from '../../../tools/array-tools'
-import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 import '../event.css'
 
 interface EventSkeletonProps {

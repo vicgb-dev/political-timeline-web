@@ -24,11 +24,19 @@ function InnerApp () {
 function App () {
   const setIsFloatEvent = useLayoutStore(state => state.setIsFloatEvent)
   const setOneColumn = useLayoutStore(state => state.setOneColumn)
+  const openSidebar = useLayoutStore(state => state.openSidebar)
+  const closeSidebar = useLayoutStore(state => state.closeSidebar)
 
   const updateWindowSize = () => {
     const html: HTMLElement = document.getElementById('html')!
     const lessThanTablet = html.offsetWidth < Breakpoints.TABLET
     const lessThanMobile = html.offsetWidth < Breakpoints.MOBILE
+
+    if (lessThanTablet) {
+      closeSidebar()
+    } else {
+      openSidebar()
+    }
 
     setIsFloatEvent(lessThanTablet)
     setOneColumn(lessThanMobile)

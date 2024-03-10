@@ -5,7 +5,6 @@ import { ChevronDownIcon, ChevronUpIcon, PlusIcon } from '@radix-ui/react-icons'
 import { CreateEventButton } from '../../buttons/create-event-button'
 import { EventForm } from '../eventForm/event-form'
 import { useEvents } from '../../../stores/events-store'
-import { useContext } from 'react'
 import { useLayoutStore } from '../../../stores/layout-store'
 
 export function EventsTabs () {

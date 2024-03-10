@@ -1,5 +1,5 @@
 import { PersonIcon } from '@radix-ui/react-icons'
-import { Button, IconButton } from '@radix-ui/themes'
+import { IconButton } from '@radix-ui/themes'
 import { LoginDialog } from '../dialogs/login-dialog'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/auth-context'

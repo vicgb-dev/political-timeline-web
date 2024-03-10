@@ -14,6 +14,7 @@ export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
   const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
   const oneColumn = useLayoutStore(state => state.oneColumn)
+
   return (
     <div hidden={!isSidebarOpen} className='left-0 min-w-16 max-w-16 w-16'>
       <Flex
@@ -27,7 +28,7 @@ export function TimeLineMenu () {
         {isLogged && <CreateEventIconButton />}
         <MenuThemeButton />
         <Link to='/about' className='no-underline text-inherit'>
-          <IconButton variant='surface' style={{ cursor: 'pointer' }} onClick={() => console.log()}>
+          <IconButton variant='surface' style={{ cursor: 'pointer' }} tabIndex={-1}>
             <InfoCircledIcon />
           </IconButton>
         </Link>
@@ -38,12 +39,12 @@ export function TimeLineMenu () {
         <DialogAB props={{
           title: 'Cerrar sesión',
           description: '¿Estás seguro de que quieres cerrar sesión? Si estabas editando un evento los cambios no guardados se perderán.',
-          btnYesText: 'Cancelar',
-          btnYesAction: () => { },
-          btnNoText: 'Cerrar sesión',
-          btnNoAction: () => { logout() }
+          btnGrayText: 'Cancelar',
+          btnGrayAction: () => { },
+          btnColorText: 'Cerrar sesión',
+          btnColorAction: () => { logout() }
         }}>
-          <IconButton variant='surface' color='tomato' style={{ cursor: 'pointer' }}>
+          <IconButton variant='surface' color='tomato' style={{ cursor: 'pointer' }} tabIndex={-1}>
             <ExitIcon />
           </IconButton>
         </DialogAB>

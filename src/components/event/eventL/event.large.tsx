@@ -13,16 +13,14 @@ interface EventLProps {
 
 export function EventL ({ props }: { props: EventLProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
-  const removeSelectedEvent = useEvents(state => state.removeEvent)
-  const scrollTo = useEvents(state => state.scrollTo)
+  const toggleEvent = useEvents(state => state.toggleEvent)
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
   }
 
   const closeEvent = () => {
-    removeSelectedEvent(props.event)
-    scrollTo(props.event.id)
+    toggleEvent(props.event)
   }
 
   return (

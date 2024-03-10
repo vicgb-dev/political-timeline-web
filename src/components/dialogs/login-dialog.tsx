@@ -4,14 +4,15 @@ import { emailValid, passwordValid } from '../../tools/field-validations'
 import { AuthService } from '../../services/auth/auth-service'
 import { EyeNoneIcon, EyeOpenIcon, LockClosedIcon, PersonIcon } from '@radix-ui/react-icons'
 import * as Form from '@radix-ui/react-form'
-import './login-dialog.css'
 import { AuthContext } from '../../context/auth-context'
+import { ForgetPassDialog } from './forget-pass-dialog'
 
 export interface LoginFormData{
   email: string
   password: string
 }
 
+// TODO: usar hook useForm y zod
 export function LoginDialog ({ children }: {children: React.ReactNode}) {
   const { login } = useContext(AuthContext)
 
@@ -52,6 +53,8 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
     }
 
     setFormData(newFormData)
+
+    // TODO: llamar a la api
     if (emailValid(newFormData.email) === '' && passwordValid(newFormData.password) === '') {
       setLogingIn(true)
       try {
@@ -88,16 +91,16 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
         {children}
       </Dialog.Trigger>
 
-      <Dialog.Content className='login-dialog-content'>
+      <Dialog.Content className='flex flex-col items-center gap-3'>
         <Dialog.Title align='center' size='7'>Inicio de sesión</Dialog.Title>
         <Dialog.Description size="4" align='center'>
           ¿Ya tienes una cuenta?
         </Dialog.Description>
-        <Form.Root className='login-dialog-content' onSubmit={handleSubmit}>
+        <Form.Root className='flex flex-col items-center gap-3' onSubmit={handleSubmit}>
           <Flex direction='column' gap='4' align='center' pt='2' pb='2'>
             {/* Email */}
-            <label style={{ width: '100%', marginBottom: 15 }}>Email
-              <TextField.Root style={{ width: '100%' }} size='3'>
+            <label className='w-full mb-5'>Email
+              <TextField.Root className='w-full' size='3'>
                 <TextField.Slot>
                   <PersonIcon height="16" width="16" />
                 </TextField.Slot>
@@ -108,11 +111,11 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
                   onChange={(event) => handleChange(event, 'email')}/>
               </TextField.Root>
               {/* Email Error */}
-              <Text size='1' color='red' style={{ position: 'absolute', marginTop: 5 }}>{formErrors.email}</Text>
+              <Text size='1' color='red' className='absolute'>{formErrors.email}</Text>
             </label>
             {/* Password */}
-            <label style={{ width: '100%', marginBottom: 15, position: 'relative' }}>Constraseña
-              <TextField.Root style={{ width: '100%' }} size='3'>
+            <label className='w-full mb-5'>Constraseña
+              <TextField.Root className='w-full' size='3'>
                 <TextField.Slot>
                   <LockClosedIcon height="16" width="16" />
                 </TextField.Slot>
@@ -127,17 +130,17 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
                 <TextField.Slot>
                   <IconButton size="1" variant="ghost" onClick={(e) => togglePasswordView(e)}>
                     {passwordVisible
-                      ? <EyeOpenIcon height="14" width="14" />
-                      : <EyeNoneIcon height="14" width="14" />
+                      ? <EyeOpenIcon className='h-4 w-4'/>
+                      : <EyeNoneIcon className='h-4 w-4'/>
                     }
                   </IconButton>
                 </TextField.Slot>
               </TextField.Root>
               {/* Password Error */}
-              <Text size='1' color='red' style={{ position: 'absolute', marginTop: 5 }}>{formErrors.password}</Text>
+              <Text size='1' color='red' className='absolute'>{formErrors.password}</Text>
             </label>
             {/* Botones */}
-            <Flex gap="3" mb='3' mt='3' justify='center' width='100%'>
+            <div className='flex flex-row gap-3 mb-3 justify-center w-full'>
               <Dialog.Close>
                 <Button variant="soft" color="gray">
                   Cerrar
@@ -149,11 +152,12 @@ export function LoginDialog ({ children }: {children: React.ReactNode}) {
                   {logingIn ? 'Iniciando sesión' : 'Iniciar sesión'}
                 </Button>
               </Form.Submit>
-            </Flex>
+            </div>
           </Flex>
         </Form.Root>
-
-        <Link size='2' href='#'>¿Olvidaste tu contraseña?</Link>
+        <ForgetPassDialog>
+          <Link size='2' >¿Olvidaste tu contraseña?</Link>
+        </ForgetPassDialog>
         <Separator size='4'/>
         <Text size='3'>¿No tienes una cuenta? <Link href='#'>Regístrate</Link></Text>
 

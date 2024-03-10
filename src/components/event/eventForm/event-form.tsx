@@ -16,14 +16,13 @@ const schema = z.object({
 export type EventFormData = z.infer<typeof schema>
 
 export function EventForm () {
+  const removeEventById = useEvents(state => state.removeEventById)
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<EventFormData>({
     defaultValues: {
       date: new Date()
     },
     resolver: zodResolver(schema)
   })
-
-  const removeEventById = useEvents(state => state.removeEventById)
 
   const onSubmit: SubmitHandler<EventFormData> = async (data: EventFormData) => {
     try {
@@ -47,10 +46,10 @@ export function EventForm () {
           <DialogAB props={{
             title: 'Dejar de editar',
             description: '¿Estás seguro de que quieres dejar de editar? Los cambios no guardados se perderán.',
-            btnYesText: 'Seguir editando',
-            btnYesAction: () => { console.log('A') },
-            btnNoText: 'Dejar de editar',
-            btnNoAction: () => { removeEventById(-1) }
+            btnGrayText: 'Seguir editando',
+            btnGrayAction: () => { },
+            btnColorText: 'Dejar de editar',
+            btnColorAction: () => { removeEventById(-1) }
           }}>
             <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
           </DialogAB>

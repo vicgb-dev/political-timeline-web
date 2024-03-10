@@ -46,6 +46,6 @@
 }
 @media screen and (max-width: 1160px) {
 	.event-L-container-with-menu {
-		width: calc(100% - 470px);
+		width: calc((100% - 470px) -20px);
 	}
 }

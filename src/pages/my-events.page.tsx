@@ -3,13 +3,11 @@ import { PoliticalEvent } from '../models/political-event.interface'
 import { EventsService } from '../services/events-service'
 import { Header } from '../components/header/header'
 import { TimeLine } from '../components/timeline/timeline'
-import { Route } from '../routes/my-events'
 import './event-pages.css'
 import { TimeLineMenu } from '../components/timeline/timeline-menu'
 
 export function MyEventsPage () {
   const [events, setEvents] = useState<PoliticalEvent[] | null>(null)
-  const { creating } = Route.useSearch()
 
   // Obtener los eventos
   useEffect(() => {

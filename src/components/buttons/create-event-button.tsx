@@ -1,10 +1,12 @@
 import { Button } from '@radix-ui/themes'
 import { Link } from '@tanstack/react-router'
 import { useEvents } from '../../stores/events-store'
+import { useLayoutStore } from '../../stores/layout-store'
 
+// TODO: combinar con CreateEventIconButton
 export function CreateEventButton () {
-  const addEvent = useEvents(state => state.addEvent)
-  const setFocusedEvent = useEvents(state => state.setFocusedEvent)
+  const toggleEvent = useEvents(state => state.toggleEvent)
+  const setMinimized = useLayoutStore(state => state.setMinimized)
 
   const addEventCreating = () => {
     const newEvent = {
@@ -20,8 +22,8 @@ export function CreateEventButton () {
       eventImg: ''
     }
 
-    addEvent(newEvent)
-    setFocusedEvent(newEvent)
+    toggleEvent(newEvent)
+    setMinimized(false)
   }
 
   return (
@@ -30,8 +32,7 @@ export function CreateEventButton () {
         size='2'
         variant='soft'
         style={{ width: '100%', justifyContent: 'start', cursor: 'pointer' }} tabIndex={-1}
-        onClick={() => addEventCreating()
-        }>
+        onClick={() => addEventCreating()}>
         Crear evento
       </Button>
     </Link>

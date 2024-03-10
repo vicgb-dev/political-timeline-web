@@ -1,4 +1,4 @@
-import { BlendingModeIcon, CheckCircledIcon, InfoCircledIcon } from '@radix-ui/react-icons'
+import { BlendingModeIcon, CheckCircledIcon } from '@radix-ui/react-icons'
 import { Flex, Grid, Heading, IconButton, Popover, useThemeContext } from '@radix-ui/themes'
 import { useEffect } from 'react'
 

@@ -63,29 +63,14 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
     return showFloatEvent && !minimized ? 'fixed z-10 w-full top-0 mt-14 -translate-y-px -h-full-35' : ''
   }
 
-  function fullScreenStyles (): string {
-    return showFloatEvent && !minimized ? 'height: calc(100% - 35px)' : ''
-  }
-
   return (
     <>
+      {/* Mostrar evento grande como dialogo o minimizado */}
       {(selectedEvents.length > 0 && minimized) || (showFloatEvent && !minimized)
         ? <div className={`transition-all-custom ${minimizedClases()} ${fullScreenClases()}`}>
           <EventsTabs />
         </div>
         : null}
-
-      {/* Mostrar evento grande como dialogo */}
-      {/* {showFloatEvent && !minimized
-        ? <div
-          className='fixed z-10 w-full top-0 mt-14 -translate-y-px'
-          style={{
-            height: 'calc(100% - 35px)'
-          }}>
-          <EventsTabs />
-        </div>
-        : null
-      } */}
 
       {/* Mostrar evento grande dos tercios */}
       {showTwoThirdsEvent && !minimized
