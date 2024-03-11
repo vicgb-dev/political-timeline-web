@@ -30,7 +30,6 @@ export function SignUpDialog ({ children }: {children: React.ReactNode}) {
       await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
-      console.log(data)
       setOpen(false)
     } catch (error) {
       setError('root', { message: 'Error' })

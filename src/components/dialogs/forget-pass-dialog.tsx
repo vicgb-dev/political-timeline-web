@@ -24,7 +24,6 @@ export function ForgetPassDialog ({ children }: {children: React.ReactNode}) {
       await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
-      console.log(data)
     } catch (error) {
       setError('root', { message: 'Error' })
     }
@@ -37,7 +36,6 @@ export function ForgetPassDialog ({ children }: {children: React.ReactNode}) {
 
   useEffect(() => {
     return () => {
-      console.log('unmount')
       reset()
     }
   }, [])

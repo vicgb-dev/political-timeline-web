@@ -5,8 +5,10 @@
 @tailwind utilities;
 
 .radix-themes {
+	--default-font-family: "Bitter", serif;
+	/* --default-font-family: "Merriweather"; */
 	/* --default-font-family: "Titillium Web"; */
-	--default-font-family: "Sarabun";
+	/* --default-font-family: "Sarabun"; */
 	/* --default-font-family: "Source Code Pro"; */
 	/* --default-font-family: Arial, '-apple-system', 'BlinkMacSystemFont', 'Segoe UI (Custom)', 'Roboto', 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; */
 }

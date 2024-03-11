@@ -3,7 +3,6 @@ export class AuthRepo {
   static saveToken (token: string): void {
     // const cookies: Cookies = new Cookies()
     // cookies.set('token', token, { httpOnly: true, secure: true })
-    // console.log('TOKEN GUARDADO EN COOKIE')
     localStorage.setItem('token', token)
   }
 
@@ -15,6 +14,5 @@ export class AuthRepo {
 
   static logout (): void {
     localStorage.removeItem('token')
-    console.log('token borrado')
   }
 }

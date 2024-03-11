@@ -11,6 +11,7 @@ import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 import { useEvents } from '../../../stores/events-store'
 import '../event.css'
 import { Group } from '../../../models/group.interface'
+import { ToastProps, useToast } from '../../../stores/toast-store'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -25,6 +26,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   const selectedEvents = useEvents(state => state.selectedEvents)
   const toggleEvent = useEvents(state => state.toggleEvent)
   const eventRef = useRef<HTMLDivElement>(null)
+  const addToast = useToast(state => state.addToast)
 
   const isLeft = props.oneColumn ? props.oneColumn : props.column === ALIGN.LEFT
 
@@ -44,6 +46,7 @@ export function EventS ({ props }: { props: EventSProps }) {
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
+    showNotImplementedToast()
   }
 
   const focusOnThisEvent = () => {
@@ -58,6 +61,18 @@ export function EventS ({ props }: { props: EventSProps }) {
     }
 
     toggleEvent(props.event)
+  }
+
+  function showNotImplementedToast () {
+    const toast: ToastProps = {
+      title: 'Not implemented yet',
+      description: 'This feature is not implemented yet',
+      showButton: false,
+      buttonText: '',
+      buttonAction: () => { },
+      duration: 1000
+    }
+    addToast(toast, true)
   }
 
   return (

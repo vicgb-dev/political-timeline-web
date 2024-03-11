@@ -8,8 +8,8 @@ export interface DialogABProps{
     btnGrayAction: () => void,
     btnColorText: string
     btnColorAction: ()=>void,
-
 }
+
 // export function DialogAB ({ btnAText, btnAAction, btnBText, btnBAction, children }: React.PropsWithChildren<DialogABProps>) {
 export function DialogAB ({ children, props }: {children: React.ReactNode, props: DialogABProps}) {
   const [open, setOpen] = useState(false)

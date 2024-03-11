@@ -8,6 +8,7 @@ import { FakeGroups, getColor } from '../../../constants/mocks/mock-groups'
 import { useEvents } from '../../../stores/events-store'
 import { useLayoutStore } from '../../../stores/layout-store'
 import { PopoverEventLargeMenu } from '../../popover/event-large-menu'
+import { ToastProps, useToast } from '../../../stores/toast-store'
 
 interface EventLProps {
   event: PoliticalEvent
@@ -17,13 +18,27 @@ export function EventL ({ props }: { props: EventLProps }) {
   const [buttonsExpanded, setButtonsExpanded] = useState(false)
   const toggleEvent = useEvents(state => state.toggleEvent)
   const floatEvent = useLayoutStore(state => state.floatEvent)
+  const addToast = useToast(state => state.addToast)
 
   const toggleButtonsExpand = () => {
     setButtonsExpanded(!buttonsExpanded)
+    showNotImplementedToast()
   }
 
   const closeEvent = () => {
     toggleEvent(props.event)
+  }
+
+  function showNotImplementedToast () {
+    const toast: ToastProps = {
+      title: 'Not implemented yet',
+      description: 'This feature is not implemented yet',
+      showButton: false,
+      buttonText: '',
+      buttonAction: () => { },
+      duration: 1000
+    }
+    addToast(toast, true)
   }
 
   return (

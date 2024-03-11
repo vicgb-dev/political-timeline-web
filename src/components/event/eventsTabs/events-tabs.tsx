@@ -21,7 +21,6 @@ export function EventsTabs () {
   const { isLogged } = useContext(AuthContext)
 
   const updateValue = (value: string) => {
-    console.log('value', value)
     setFocusedEvent(selectedEvents.find((e) => e.id.toString() === value) ?? null)
   }
 
@@ -37,6 +36,12 @@ export function EventsTabs () {
     toggleEvent(event)
   }
 
+  function handleMouseDown (e: React.MouseEvent, event: PoliticalEvent) {
+    if (e.button === 1) {
+      toggleEvent(event)
+    }
+  }
+
   return (
     <Tabs.Root
       onValueChange={value => updateValue(value)}
@@ -49,7 +54,7 @@ export function EventsTabs () {
           {selectedEvents.map((event: PoliticalEvent) => (
             event.id > 0
               ? <div key={`event-tab-${event.id}`} className='flex'>
-                <Tabs.Trigger value={event.id.toString()} key={event.id}>
+                <Tabs.Trigger value={event.id.toString()} key={event.id} onMouseDown={(e) => handleMouseDown(e, event)}>
                   <p style={{
                     maxWidth: '150px',
                     overflow: 'hidden',

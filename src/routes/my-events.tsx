@@ -11,7 +11,6 @@ export const Route = createFileRoute('/my-events')({
   },
   beforeLoad: ({ context }) => {
     if (!context.auth.isLogged) {
-      console.log('Redirecting to /')
       throw redirect({ to: '/' })
     }
   },

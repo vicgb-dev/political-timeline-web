@@ -7,7 +7,6 @@ export interface ToastDemoProps {
 }
 
 const ToastDemo: React.FC<ToastDemoProps> = ({ showToast }: ToastDemoProps) => {
-  console.log(showToast)
   const [open, setOpen] = React.useState(showToast)
   const eventDateRef = React.useRef(new Date())
   const timerRef = React.useRef(0)

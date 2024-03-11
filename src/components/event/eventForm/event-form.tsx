@@ -29,7 +29,6 @@ export function EventForm () {
       await new Promise((resolve) => {
         setTimeout(resolve, 500)
       })
-      console.log(data)
     } catch (error) {
       setError('root', { message: 'Error' })
     }

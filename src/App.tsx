@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 import { useLayoutStore } from './stores/layout-store'
 import { Breakpoints } from './constants/breakpoints.ts'
 import './App.css'
+import { ToastService } from './shared/toast-service.tsx'
 
 const router = createRouter({
   routeTree,
@@ -62,6 +63,7 @@ function App () {
     <>
       <AuthProvider>
         <InnerApp />
+        <ToastService />
       </AuthProvider>
     </>
   )

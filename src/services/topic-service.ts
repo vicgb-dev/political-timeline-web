@@ -8,7 +8,7 @@ export class TopicService {
 
     return {
       id: 1,
-      title: 'Hola',
+      title: 'Tema del evento para agruparlos',
       article: 'article',
       startDate: new Date(),
       endDate: new Date()
@@ -45,7 +45,6 @@ export class TopicService {
         throw new Error('Error al obtener los datos de la API')
       }
       const data: Topic[] = await response.json()
-      console.log(data)
       return data
     } catch (error) {
       console.error('Error en la llamada a la API:', error)

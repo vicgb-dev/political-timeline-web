@@ -9,11 +9,26 @@ import { CreateEventIconButton } from '../buttons/create-event-icon-button'
 import { Link as RLink } from '@tanstack/react-router'
 import { DialogAB } from '../../shared/dialog/dialog-ab'
 import { SearchBarLogo } from '../search/search-bar-logo'
+import { useToast } from '../../stores/toast-store'
+import { ToastProps } from './../../stores/toast-store'
 
 export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
   const isSidebarOpen = useLayoutStore(state => state.isSidebarOpen)
   const oneColumn = useLayoutStore(state => state.oneColumn)
+  const addToast = useToast(state => state.addToast)
+
+  function handleOnGear () {
+    const toast: ToastProps = {
+      title: 'Not implemented yet',
+      description: 'This feature is not implemented yet',
+      showButton: false,
+      buttonText: '',
+      buttonAction: () => { },
+      duration: 1000
+    }
+    addToast(toast, true)
+  }
 
   return (
     <div hidden={!isSidebarOpen} className='left-0 min-w-20  w-16'>
@@ -32,7 +47,7 @@ export function TimeLineMenu () {
             <QuestionMarkIcon />
           </IconButton>
         </RLink>
-        <IconButton variant='surface'>
+        <IconButton variant='surface' onClick={handleOnGear}>
           <GearIcon />
         </IconButton>
         {isLogged &&
@@ -44,7 +59,7 @@ export function TimeLineMenu () {
           btnColorText: 'Cerrar sesión',
           btnColorAction: () => { logout() }
         }}>
-          <IconButton variant='surface' color='tomato' style={{ cursor: 'pointer' }} tabIndex={-1}>
+          <IconButton variant='surface' color='tomato' style={{ cursor: 'pointer' }}>
             <ExitIcon />
           </IconButton>
         </DialogAB>
