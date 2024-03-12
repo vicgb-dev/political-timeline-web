@@ -18,7 +18,7 @@ export function PopoverTabsMenu ({ children }: {children: React.ReactNode}) {
       showButton: false,
       buttonText: '',
       buttonAction: () => { },
-      duration: 1000
+      duration: 2000
     }
     addToast(toast, true)
   }

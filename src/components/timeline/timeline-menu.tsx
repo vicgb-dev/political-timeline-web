@@ -1,5 +1,5 @@
 import { ExitIcon, GearIcon, QuestionMarkIcon } from '@radix-ui/react-icons'
-import { Flex, IconButton, Link } from '@radix-ui/themes'
+import { Flex, IconButton } from '@radix-ui/themes'
 import { MenuThemeButton } from '../menu/menu-theme-button'
 import { useLayoutStore } from '../../stores/layout-store'
 import { MenuUserButton } from '../menu/menu-user-button'
@@ -25,7 +25,7 @@ export function TimeLineMenu () {
       showButton: false,
       buttonText: '',
       buttonAction: () => { },
-      duration: 1000
+      duration: 2000
     }
     addToast(toast, true)
   }

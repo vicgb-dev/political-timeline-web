@@ -15,7 +15,7 @@
 .in-top {
 	animation: rotate 5s linear infinite;
 	transform-origin: 13px 25px;
-    fill: var(--accent-3);
+    fill: var(--accent-6);
     /* filter: saturate(0); */
 }
 .out-bottom {
