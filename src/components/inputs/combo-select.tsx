@@ -6,6 +6,7 @@ import { Topic } from '../../models/topic.interface'
 import './combo-select.css'
 import { PoliticalEvent } from '../../models/political-event.interface'
 import { Group } from '../../models/group.interface'
+import { EventsService } from '../../services/events-service'
 
 // Cada tipo permitido debe tener un id
 type AllowedTypes = Topic | PoliticalEvent | Group
@@ -18,6 +19,7 @@ export interface ComboSelectProps<T extends AllowedTypes> {
 }
 
 export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSelectProps<T> }) {
+  const type: T = {} as T
   const [loadedData, setLoadedData] = useState<T[] | undefined>(undefined)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedData, setSelectedData] = useState<T[]>([])
@@ -30,9 +32,16 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
       console.log('Pedir temas que contengan esas letras')
 
       // TODO: Llamar al servicio de cada tipo
-
-      const foundTopics = await TopicService.getTopicsByTitle(event.target.value)
-      setLoadedData(foundTopics as T[])
+      if (type as Topic) {
+        const foundTopics = await TopicService.getTopicsByTitle(event.target.value)
+        setLoadedData(foundTopics as T[])
+      } else if (type as PoliticalEvent) {
+        const foundTopics = await EventsService.searchEventsWithQuery(event.target.value)
+        setLoadedData(foundTopics as T[])
+      } else if (type as Group) {
+        const foundTopics = await TopicService.getTopicsByTitle(event.target.value)
+        setLoadedData(foundTopics as T[])
+      }
     }
   }
 
@@ -64,7 +73,7 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
   }
 
   return (
-    <div className='flex flex-col relative'>
+    <div className='flex flex-col relative '>
       {(selectedData.length === 0 || true) &&
       <Popover.Root>
         <Popover.Trigger>
@@ -107,27 +116,29 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
         </Popover.Content>
       </Popover.Root>}
 
-      {selectedData.length > 0 && (
-        <ScrollArea className='max-h-28'>
-          <div className='flex flex-col max-h-48 py-3 px-5 gap-3'>
-            {selectedData.map(data => (
-              <div key={data.id} className='flex flex-row justify-between items-center'>
-                <div className='flex flex-col justify-between'>
-                  <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                    {props.getTitle(data)}
-                  </Text>
-                  <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                    {props.getSubtitle(data)}
-                  </Text>
+      <div className=' bg-red-400'>
+        {selectedData.length > 0 && (
+          <ScrollArea className=''>
+            <div className='flex flex-col py-3 px-5 gap-3'>
+              {selectedData.map(data => (
+                <div key={data.id} className='flex flex-row justify-between items-center'>
+                  <div className='flex flex-col justify-between'>
+                    <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
+                      {props.getTitle(data)}
+                    </Text>
+                    <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
+                      {props.getSubtitle(data)}
+                    </Text>
+                  </div>
+                  <IconButton variant='ghost' onClick={(e) => toggleData(e, data)}>
+                    <TrashIcon color='tomato' />
+                  </IconButton>
                 </div>
-                <IconButton variant='ghost' onClick={(e) => toggleData(e, data)}>
-                  <TrashIcon color='tomato' />
-                </IconButton>
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
-      )}
+              ))}
+            </div>
+          </ScrollArea>
+        )}
+      </div>
     </div>
   )
 }

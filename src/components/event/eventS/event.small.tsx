@@ -114,7 +114,7 @@ export function EventS ({ props }: { props: EventSProps }) {
           {
             parties.map((party, index) => (
               <Badge key={index} variant='outline' radius='large' color={getColor(party.color)} >
-                {party.name}
+                {party.acronym}
               </Badge>
             ))
           }

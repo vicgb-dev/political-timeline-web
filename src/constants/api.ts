@@ -16,3 +16,9 @@ export const ALL = '/all'
 
 // TOPICS
 export const TOPIC = '/topic'
+
+// GROUPS
+export const GROUP = '/group'
+
+// PUBLIC FIGURES
+export const PUBLIC_FIGURE = '/figure'

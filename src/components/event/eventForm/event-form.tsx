@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Heading, Text, TextFieldInput, Grid, ScrollArea, TextArea, Blockquote, Callout, Popover, HoverCard, Link, Avatar, Box } from '@radix-ui/themes'
+import { Button, Card, Flex, Heading, Text, TextFieldInput, Grid, ScrollArea, TextArea, Callout } from '@radix-ui/themes'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -124,8 +124,8 @@ export function EventForm () {
                 <label>Figuras publicas
                   <ComboSelect<Topic>
                     props={{
-                      multiSelect: false,
-                      buttonTitle: 'Elige tema',
+                      multiSelect: true,
+                      buttonTitle: 'Elige figura pública',
                       getTitle: (data: Topic) => data.title,
                       getSubtitle: (data: Topic) => data.article
                     }} />
@@ -136,8 +136,8 @@ export function EventForm () {
                 <label>Grupos políticos
                   <ComboSelect<Group>
                     props={{
-                      multiSelect: false,
-                      buttonTitle: 'Elige tema',
+                      multiSelect: true,
+                      buttonTitle: 'Elige grupo político',
                       getTitle: (data: Group) => data.name,
                       getSubtitle: (data: Group) => data.color
                     }} />
@@ -148,8 +148,8 @@ export function EventForm () {
                 <label>Eventos relacionados
                   <ComboSelect<Topic>
                     props={{
-                      multiSelect: false,
-                      buttonTitle: 'Elige tema',
+                      multiSelect: true,
+                      buttonTitle: 'Elige evento relacionado',
                       getTitle: (data: Topic) => data.title,
                       getSubtitle: (data: Topic) => data.article
                     }} />

@@ -63,4 +63,29 @@ export class EventsService {
       throw error
     }
   }
+
+  static async searchEventsWithQuery (query: string): Promise<PoliticalEvent[]> {
+    if (DEBUG) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fakeEvents.filter(e => e.title.toLowerCase().includes(query.toLowerCase()) || e.description.toLowerCase().includes(query.toLowerCase())))
+        }, 500)
+      })
+    }
+
+    try {
+      const response = await fetch(`${HOST}${EVENT}?title=${query}`)
+      if (!response.ok) {
+        throw new Error('Error al obtener los datos de la API')
+      }
+      let data: PoliticalEvent[] = await response.json()
+      data = data.sort((a, b) => {
+        return new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime()
+      })
+      return data
+    } catch (error) {
+      console.error('Error en la llamada a la API:', error)
+      throw error
+    }
+  }
 }
