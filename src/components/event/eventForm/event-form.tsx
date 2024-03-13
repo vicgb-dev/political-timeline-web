@@ -8,6 +8,8 @@ import { DialogAB } from '../../../shared/dialog/dialog-ab'
 import { useEvents } from '../../../stores/events-store'
 import { InfoCircledIcon } from '@radix-ui/react-icons'
 import { ComboSelect } from '../../inputs/combo-select'
+import { Topic } from '../../../models/topic.interface'
+import { Group } from '../../../models/group.interface'
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
@@ -81,7 +83,13 @@ export function EventForm () {
               </div>
               <div className="TOPIC flex flex-col">
                 <Text>Tema del evento</Text>
-                <ComboSelect props={{ multiSelect: false, buttonTitle: 'Elige tema' }} />
+                <ComboSelect<Topic>
+                  props={{
+                    multiSelect: false,
+                    buttonTitle: 'Elige tema',
+                    getTitle: (data: Topic) => data.title,
+                    getSubtitle: (data: Topic) => data.article
+                  }} />
                 {/* <TextFieldInput {...register('title')} placeholder="Titulo" />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                   <Text size='1' color='red'>asdasd</Text> */}
@@ -114,19 +122,37 @@ export function EventForm () {
               </div>
               <div className="FIGURES">
                 <label>Figuras publicas
-                  <ComboSelect props={{ multiSelect: true, buttonTitle: 'Elige figura pública' }} />
+                  <ComboSelect<Topic>
+                    props={{
+                      multiSelect: false,
+                      buttonTitle: 'Elige tema',
+                      getTitle: (data: Topic) => data.title,
+                      getSubtitle: (data: Topic) => data.article
+                    }} />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                 </label>
               </div>
               <div className="GROUPS">
                 <label>Grupos políticos
-                  <ComboSelect props={{ multiSelect: true, buttonTitle: 'Elige grupo político' }} />
+                  <ComboSelect<Group>
+                    props={{
+                      multiSelect: false,
+                      buttonTitle: 'Elige tema',
+                      getTitle: (data: Group) => data.name,
+                      getSubtitle: (data: Group) => data.color
+                    }} />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                 </label>
               </div>
               <div className="EVENTS">
                 <label>Eventos relacionados
-                  <ComboSelect props={{ multiSelect: true, buttonTitle: 'Elige evnto relacionado' }} />
+                  <ComboSelect<Topic>
+                    props={{
+                      multiSelect: false,
+                      buttonTitle: 'Elige tema',
+                      getTitle: (data: Topic) => data.title,
+                      getSubtitle: (data: Topic) => data.article
+                    }} />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                 </label>
               </div>

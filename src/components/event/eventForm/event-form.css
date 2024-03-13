@@ -1,13 +1,12 @@
-
 /* Create color var */
 :root {
-  --debug-bg-color: rgba(48, 48, 48, 0.418);
+  /* --debug-bg-color: rgba(48, 48, 48, 0.418); */
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: minmax(150px, 1fr) minmax(80px, 150px) 80px 240px 240px 80px;
+  grid-template-rows: minmax(150px, 1fr) minmax(80px, 1fr) 80px 240px 240px 80px;
   gap: 10px 10px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -23,73 +22,64 @@
   .container {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 
-    minmax(150px, 1fr) 
-    80px
-    80px 
-    80px 
-    240px 
-    240px 
-    240px 
-    240px 
-    240px 
-    80px;
+    grid-template-rows:
+      minmax(150px, 1fr) 80px 80px 80px 240px 240px 240px 240px 240px 80px;
     gap: 10px 10px;
     grid-auto-flow: row;
     grid-template-areas:
-    "INFO"
-    "TOPIC"
-    "DATE"
-    "TITLE"
-    "SUMMARY"
-    "SOURCES"
-    "FIGURES"
-    "GROUPS"
-    "EVENTS"
-    "TAGS";
+      "INFO"
+      "TOPIC"
+      "DATE"
+      "TITLE"
+      "SUMMARY"
+      "SOURCES"
+      "FIGURES"
+      "GROUPS"
+      "EVENTS"
+      "TAGS";
   }
 }
 
-.container > div{
-    background-color: var(--debug-bg-color);
+.container>div {
+  background-color: var(--debug-bg-color);
 }
 
-.INFO { 
-    grid-area: INFO;
+.INFO {
+  grid-area: INFO;
 }
 
-.TITLE { 
-    grid-area: TITLE;
+.TITLE {
+  grid-area: TITLE;
 }
 
-.DATE { 
-    grid-area: DATE;
+.DATE {
+  grid-area: DATE;
 }
 
-.TOPIC { 
-    grid-area: TOPIC;
+.TOPIC {
+  grid-area: TOPIC;
 }
 
-.SUMMARY { 
-    grid-area: SUMMARY;
+.SUMMARY {
+  grid-area: SUMMARY;
 }
 
-.SOURCES { 
-    grid-area: SOURCES;
+.SOURCES {
+  grid-area: SOURCES;
 }
 
-.FIGURES { 
-    grid-area: FIGURES;
+.FIGURES {
+  grid-area: FIGURES;
 }
 
-.GROUPS { 
-    grid-area: GROUPS;
+.GROUPS {
+  grid-area: GROUPS;
 }
 
-.EVENTS { 
-    grid-area: EVENTS;
+.EVENTS {
+  grid-area: EVENTS;
 }
 
-.TAGS { 
-    grid-area: TAGS;
+.TAGS {
+  grid-area: TAGS;
 }
