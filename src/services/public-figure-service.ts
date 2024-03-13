@@ -6,11 +6,14 @@ import { PublicFigure } from '../models/public-figure.interface'
 export class PublicFigureService {
   static async getPublicFiguresByName (name: string): Promise<PublicFigure[]> {
     if (DEBUG) {
-      const publicFigures = FakePublicFigures.filter(publicFigure => publicFigure.first_name.toLowerCase().includes(name))
+      const publicFigures = FakePublicFigures.filter(publicFigure =>
+        publicFigure.first_name.toLowerCase().includes(name.toLowerCase()) ||
+        publicFigure.last_name.toLowerCase().includes(name.toLowerCase())
+      )
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(publicFigures)
-        }, 500)
+        }, 5000)
       })
     }
 

@@ -7,41 +7,57 @@ import './combo-select.css'
 import { PoliticalEvent } from '../../models/political-event.interface'
 import { Group } from '../../models/group.interface'
 import { EventsService } from '../../services/events-service'
+import { GroupServices } from '../../services/group-services'
+import { PublicFigure } from '../../models/public-figure.interface'
+import { PublicFigureService } from '../../services/public-figure-service'
 
 // Cada tipo permitido debe tener un id
-type AllowedTypes = Topic | PoliticalEvent | Group
+type AllowedTypes = Topic | PoliticalEvent | Group | PublicFigure
 
-export interface ComboSelectProps<T extends AllowedTypes> {
-  multiSelect?: boolean
+export interface ComboSelectProps {
+  type: 'Topic' | 'PoliticalEvent' | 'Group' | 'PublicFigure'
+  multiSelect: boolean
   buttonTitle: string
-  getTitle: (data: T) => string
-  getSubtitle: (data: T) => string
 }
 
-export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSelectProps<T> }) {
-  const type: T = {} as T
+export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSelectProps }) {
   const [loadedData, setLoadedData] = useState<T[] | undefined>(undefined)
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedData, setSelectedData] = useState<T[]>([])
+  const [loading, setLoading] = useState(false)
 
   async function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(event.target.value)
 
-    if (event.target.value.length > 2) {
+    if (event.target.value.length > 1) {
       // Pedir temas que contengan esas letras
       console.log('Pedir temas que contengan esas letras')
 
-      // TODO: Llamar al servicio de cada tipo
-      if (type as Topic) {
-        const foundTopics = await TopicService.getTopicsByTitle(event.target.value)
-        setLoadedData(foundTopics as T[])
-      } else if (type as PoliticalEvent) {
-        const foundTopics = await EventsService.searchEventsWithQuery(event.target.value)
-        setLoadedData(foundTopics as T[])
-      } else if (type as Group) {
+      setLoading(true)
+
+      switch (props.type) {
+      case 'Topic':{
         const foundTopics = await TopicService.getTopicsByTitle(event.target.value)
         setLoadedData(foundTopics as T[])
       }
+        break
+      case 'PoliticalEvent': {
+        const foundPoliticalEvent = await EventsService.searchEventsWithQuery(event.target.value)
+        setLoadedData(foundPoliticalEvent as T[])
+      }
+        break
+      case 'Group':{
+        const foundGroup = await GroupServices.getGroupsByName(event.target.value)
+        setLoadedData(foundGroup as T[])
+      }
+        break
+      case 'PublicFigure':{
+        const foundGroup = await PublicFigureService.getPublicFiguresByName(event.target.value)
+        setLoadedData(foundGroup as T[])
+      }
+      }
+
+      setLoading(false)
     }
   }
 
@@ -63,32 +79,54 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
   }
 
   function getTitle (data: AllowedTypes) {
-    if (data as Topic) {
+    switch (props.type) {
+    case 'Topic':
       return (data as Topic).title
-    } else if (data as PoliticalEvent) {
+    case 'PoliticalEvent':
       return (data as PoliticalEvent).title
-    } else if (data as Group) {
+    case 'Group':
       return (data as Group).name
+    case 'PublicFigure':
+      return (data as PublicFigure).first_name
+    }
+  }
+
+  function getSubtitle (data: AllowedTypes) {
+    switch (props.type) {
+    case 'Topic':
+      return (data as Topic).article
+    case 'PoliticalEvent':
+      return (data as PoliticalEvent).summary
+    case 'Group':
+      return (data as Group).acronym
+    case 'PublicFigure':
+      return (data as PublicFigure).last_name
     }
   }
 
   return (
-    <div className='flex flex-col relative '>
+    <div className={` relative ${selectedData.length > 0 ? 'px-2 py-2' : ''}`}>
       {(selectedData.length === 0 || true) &&
       <Popover.Root>
         <Popover.Trigger>
-          <Button variant='outline'>
+          <Button
+            className='relative'
+            highContrast={selectedData.length > 0}
+            variant={`${selectedData.length > 0 ? 'ghost' : 'outline'}`}>
             <Text>{props.buttonTitle}</Text>
             <TriangleDownIcon />
           </Button>
         </Popover.Trigger>
 
-        <Popover.Content>
+        <Popover.Content className='w-full'>
           <TextField.Root >
             <TextField.Slot>
               <MagnifyingGlassIcon height="16" width="16" />
             </TextField.Slot>
             <TextField.Input onChange={handleChange} placeholder="Tema del evento..." />
+            {loading &&
+              <div className='loading-bar'/>
+            }
           </TextField.Root>
           <ScrollArea className='pt-1'>
             <div className='flex flex-col max-h-48 py-3 px-5 gap-3'>
@@ -96,11 +134,11 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
                 <Button key={data.id} variant='ghost' onClick={(e) => toggleData(e, data)}>
                   <div className='w-full flex flex-row justify-between items-center'>
                     <div className='flex flex-col flex-1'>
-                      <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
+                      <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
                         {getTitle(data)}
                       </Text>
-                      <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                        {props.getSubtitle(data)}
+                      <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
+                        {getSubtitle(data)}
                       </Text>
                     </div>
                     {props.multiSelect
@@ -116,7 +154,7 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
         </Popover.Content>
       </Popover.Root>}
 
-      <div className=' bg-red-400'>
+      <div className=''>
         {selectedData.length > 0 && (
           <ScrollArea className=''>
             <div className='flex flex-col py-3 px-5 gap-3'>
@@ -124,10 +162,10 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
                 <div key={data.id} className='flex flex-row justify-between items-center'>
                   <div className='flex flex-col justify-between'>
                     <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {props.getTitle(data)}
+                      {getTitle(data)}
                     </Text>
                     <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {props.getSubtitle(data)}
+                      {getSubtitle(data)}
                     </Text>
                   </div>
                   <IconButton variant='ghost' onClick={(e) => toggleData(e, data)}>

@@ -1,3 +1,27 @@
 .custom-border-color{
     border-color: var(--accent-10);
 }
+
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: -5px;
+  height: 2px;
+  border-radius: 12px;
+  z-index: 1000;
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-color: var(--accent-1);
+  }
+  50% {
+    background-color: var(--accent-10);
+  }
+  100% {
+    background-color: var(--accent-1);
+  }
+}

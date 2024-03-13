@@ -3,7 +3,7 @@ import { Group } from '../../models/group.interface'
 export const FakeGroups: Group[] = [
   {
     id: 1,
-    name: '',
+    name: 'Partido socialista obrero español',
     acronym: 'PSOE',
     current_boss: 1,
     creation_date: new Date(),
@@ -17,7 +17,7 @@ export const FakeGroups: Group[] = [
   },
   {
     id: 2,
-    name: '',
+    name: 'Partido popular',
     acronym: 'PP',
     current_boss: 1,
     creation_date: new Date(),
@@ -31,7 +31,7 @@ export const FakeGroups: Group[] = [
   },
   {
     id: 3,
-    name: '',
+    name: 'Vox',
     acronym: 'VOX',
     current_boss: 1,
     creation_date: new Date(),
@@ -45,7 +45,7 @@ export const FakeGroups: Group[] = [
   },
   {
     id: 4,
-    name: '',
+    name: 'Podemos',
     acronym: 'PODEMOS',
     current_boss: 1,
     creation_date: new Date(),
@@ -59,7 +59,7 @@ export const FakeGroups: Group[] = [
   },
   {
     id: 5,
-    name: '',
+    name: 'Sumar',
     acronym: 'SUMAR',
     current_boss: 1,
     creation_date: new Date(),
@@ -72,8 +72,8 @@ export const FakeGroups: Group[] = [
     article: ''
   },
   {
-    id: 5,
-    name: '',
+    id: 6,
+    name: 'Junts per Catalunya',
     acronym: 'JUNTS',
     current_boss: 1,
     creation_date: new Date(),
@@ -86,8 +86,8 @@ export const FakeGroups: Group[] = [
     article: ''
   },
   {
-    id: 5,
-    name: '',
+    id: 7,
+    name: 'Esquerra republicana de Cataluña',
     acronym: 'ERC',
     current_boss: 1,
     creation_date: new Date(),
@@ -100,8 +100,8 @@ export const FakeGroups: Group[] = [
     article: ''
   },
   {
-    id: 6,
-    name: '',
+    id: 8,
+    name: 'Partido animalista contra el maltrato animal',
     acronym: 'PACMA',
     current_boss: 1,
     creation_date: new Date(),
@@ -114,8 +114,8 @@ export const FakeGroups: Group[] = [
     article: ''
   },
   {
-    id: 7,
-    name: '',
+    id: 9,
+    name: 'Bloque nacionalista gallego',
     acronym: 'BNG',
     current_boss: 1,
     creation_date: new Date(),

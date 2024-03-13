@@ -4,9 +4,11 @@ import { FakeGroups } from '../constants/mocks/mock-groups'
 import { Group } from '../models/group.interface'
 
 export class GroupServices {
-  static async getGroupsByTitle (title: string): Promise<Group[]> {
+  static async getGroupsByName (name: string): Promise<Group[]> {
     if (DEBUG) {
-      const groups = FakeGroups.filter(group => group.name.toLowerCase().includes(title))
+      const groups = FakeGroups.filter(group =>
+        group.name.toLowerCase().includes(name.toLowerCase()) ||
+        group.acronym.toLowerCase().includes(name.toLowerCase()))
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(groups)
@@ -15,7 +17,7 @@ export class GroupServices {
     }
 
     try {
-      const response = await fetch(`${HOST}${GROUP}?title=${title}`)
+      const response = await fetch(`${HOST}${GROUP}?name=${name}`)
       if (!response.ok) {
         throw new Error('Error al obtener los datos de la API')
       }
