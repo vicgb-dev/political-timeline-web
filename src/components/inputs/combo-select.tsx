@@ -12,6 +12,7 @@ import { PublicFigure } from '../../models/public-figure.interface'
 import { PublicFigureService } from '../../services/public-figure-service'
 import { AllowedTypes, AllowedTypesEnum } from '../../types/allowed-types'
 import { SelectedResourceList } from './selected-resource-list'
+import { LoadedResourceList } from './loaded-resource-list'
 
 export interface ComboSelectProps {
   type: AllowedTypesEnum
@@ -127,28 +128,8 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
               <div className='loading-bar'/>
             }
           </TextField.Root>
-          <ScrollArea className='pt-1'>
-            <div className='flex flex-col max-h-48 py-3 px-5 gap-3'>
-              {loadedData?.map(data => (
-                <Button key={data.id} variant='ghost' onClick={(e) => toggleData(e, data)}>
-                  <div className='w-full flex flex-row justify-between items-center'>
-                    <div className='flex flex-col flex-1'>
-                      <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
-                        {getTitle(data)}
-                      </Text>
-                      <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
-                        {getSubtitle(data)}
-                      </Text>
-                    </div>
-                    {props.multiSelect
-                      ? <Checkbox checked={!!selectedData.find(t => t.id === data.id) } defaultChecked />
-                      : <RadioGroup.Root defaultValue="1">
-                        <RadioGroup.Item checked={!!selectedData.find(t => t.id === data.id) } value={`${data.id}`} />
-                      </RadioGroup.Root>}
-                  </div>
-                </Button>
-              ))}
-            </div>
+          <ScrollArea scrollbars='vertical'>
+            <LoadedResourceList props={{ loadedData, selectedData, multiSelect: props.multiSelect, getTitle, getSubtitle, toggleData }} />
           </ScrollArea>
         </Popover.Content>
       </Popover.Root>}

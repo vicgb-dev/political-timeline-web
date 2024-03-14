@@ -13,7 +13,7 @@ export class PublicFigureService {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(publicFigures)
-        }, 5000)
+        }, 500)
       })
     }
 
