@@ -17,10 +17,10 @@ export function LoadedResourceList ({ props }: { props: LoadedResourceListProps 
         <Button key={data.id} variant='ghost' onClick={(e) => props.toggleData(e, data)}>
           <div className='w-full flex flex-row justify-between items-center'>
             <div className='flex flex-col flex-1'>
-              <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
+              <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-72'>
                 {props.getTitle(data)}
               </Text>
-              <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-96'>
+              <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-72'>
                 {props.getSubtitle(data)}
               </Text>
             </div>

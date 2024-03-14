@@ -13,11 +13,13 @@ import { PublicFigure } from '../../../models/public-figure.interface'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import './event-form.css'
 import { AllowedTypesEnum } from '../../../types/allowed-types'
+import { SourceInputWithListen } from '../../inputs/source-input-with-list'
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
   summary: z.string().min(1, 'El resumen es requerido').max(100, 'El resumen no puede tener más de 100 caracteres'),
-  date: z.date()
+  date: z.string(),
+  time: z.string()
 })
 
 export type EventFormData = z.infer<typeof schema>
@@ -25,9 +27,9 @@ export type EventFormData = z.infer<typeof schema>
 export function EventForm () {
   const removeEventById = useEvents(state => state.removeEventById)
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<EventFormData>({
-    defaultValues: {
-      date: new Date()
-    },
+    // defaultValues: {
+    //   date: new Date()
+    // },
     resolver: zodResolver(schema)
   })
 
@@ -45,7 +47,7 @@ export function EventForm () {
     <Card size='3' className='h-full efcolor no-border no-top-radius event-card-L'>
       <Flex gap="3" align="start" justify="between" direction="row" pb='4' className='flex-wrap' >
         <Flex className='gap-5'>
-          <Heading size="7" style={{ textDecoration: 'underline' }}>
+          <Heading size="6" style={{ textDecoration: 'underline' }}>
           Crear nuevo evento
           </Heading>
           {/* {errors.root && <Text size='1' color='red'>{errors.root?.message}</Text>} */}
@@ -86,7 +88,8 @@ export function EventForm () {
             </Popover.Content>
           </Popover.Root>
         </Flex>
-        <Flex className='gap-3'>
+        <Flex className='gap-3 flex-1 justify-end items-end'>
+          <div className='flex-1'/>
           <DialogAB props={{
             title: 'Dejar de editar',
             description: '¿Estás seguro de que quieres dejar de editar? Los cambios no guardados se perderán.',
@@ -102,7 +105,7 @@ export function EventForm () {
       </Flex>
       <Flex direction='column' gap='2' className='h-full pb-10'>
         <Form.Root onSubmit={handleSubmit(onSubmit)} className='h-full pb-10'>
-          <ScrollArea type="hover" className='px-3'>
+          <ScrollArea type="hover">
             <div className="container">
               <div className="TOPIC">
                 <ComboSelect<Topic>
@@ -111,29 +114,24 @@ export function EventForm () {
                     multiSelect: false,
                     buttonTitle: 'Tema del evento'
                   }} />
-                {/* <TextFieldInput {...register('title')} placeholder="Titulo" />
-                  {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
-                  <Text size='1' color='red'>asdasd</Text> */}
-
+              </div>
+              <div className="DATE">
+                <label className='flex flex-col gap-2'>Fecha y hora
+                  <TextFieldInput {...register('date')} type="date" />
+                  <TextFieldInput {...register('time')} type="time" />
+                  {errors.date && <Text size='1' color='red'>{errors.date?.message}</Text>}
+                </label>
               </div>
               <div className="TITLE">
                 <label>Titulo
                   <TextFieldInput {...register('title')} placeholder="Titulo" />
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
-                  {/* <Text size='1' color='red'>asdasd</Text> */}
-                </label>
-              </div>
-              <div className="DATE">
-                <label className='flex flex-col gap-2'>Fecha y hora
-                  <TextFieldInput {...register('date')} type="date" />
-                  <TextFieldInput {...register('date')} type="time" />
-                  {/* <Text size='1' color='red'>asdasd</Text> */}
                 </label>
               </div>
               <div className="SUMMARY flex flex-col h-full">
                 <label htmlFor='event-create-form-summary'>Resumen del evento</label>
                 <TextArea id='event-create-form-summary' style={{ flex: 1 }} {...register('summary')} placeholder="Resumen" />
-                {/* <Text size='1' color='red'>asdasd</Text> */}
+                {errors.summary && <Text size='1' color='red'>{errors.summary?.message}</Text>}
               </div>
               <div className='RELATED flex flex-col gap-5'>
                 <Callout.Root variant='surface' className=''>
@@ -149,16 +147,7 @@ export function EventForm () {
                 </Callout.Root>
               </div>
               <div className="SOURCES">
-                <label >Fuentes
-                  <div className='flex gap-2'>
-                    <TextFieldInput {...register('title')} placeholder="Titulo"/>
-                    <IconButton variant='outline' size='2'>
-                      <PlusIcon />
-                    </IconButton>
-                  </div>
-                  {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
-                  {/* <Text size='1' color='red'>asdasd</Text> */}
-                </label>
+                <SourceInputWithListen />
               </div>
               <div className="FIGURES">
                 <ComboSelect<PublicFigure>
@@ -167,7 +156,6 @@ export function EventForm () {
                     multiSelect: true,
                     buttonTitle: 'Figura públicas'
                   }} />
-                {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
               </div>
               <div className="GROUPS">
                 <ComboSelect<Group>
@@ -176,7 +164,6 @@ export function EventForm () {
                     multiSelect: true,
                     buttonTitle: 'Grupos políticos'
                   }} />
-                {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
               </div>
               <div className="EVENTS">
                 <ComboSelect<PoliticalEvent>
@@ -185,13 +172,10 @@ export function EventForm () {
                     multiSelect: true,
                     buttonTitle: 'Eventos'
                   }} />
-                {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
               </div>
-              <div className="TAGS">
+              <div className="TAGS  pb-52">
                 <label>Etiquetas (separadas por espacios)
-                  <TextFieldInput {...register('title')} placeholder="Titulo"/>
-                  {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
-                  {/* <Text size='1' color='red'>asdasd</Text> */}
+                  <TextFieldInput placeholder="Etiquetas..."/>
                 </label>
               </div>
             </div>

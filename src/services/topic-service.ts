@@ -56,7 +56,7 @@ export class TopicService {
 
   static async getTopicsByTitle (title: string): Promise<Topic[]> {
     if (DEBUG) {
-      const topics = FakeTopics.filter(topic => topic.title.toLowerCase().includes(title))
+      const topics = FakeTopics.filter(topic => topic.title.toLowerCase().includes(title.toLowerCase()))
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(topics)

@@ -60,7 +60,7 @@ export function TimeLine ({ props }: { props: TimeLineProps }) {
   }
 
   function fullScreenClases (): string {
-    return showFloatEvent && !minimized ? 'fixed z-10 w-full top-0 mt-14 -translate-y-px -h-full-35' : ''
+    return showFloatEvent && !minimized ? 'fixed z-10 w-full top-0 -translate-y-px h-full23' : ''
   }
 
   return (

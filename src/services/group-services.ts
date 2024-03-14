@@ -12,7 +12,7 @@ export class GroupServices {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(groups)
-        }, 5000)
+        }, 500)
       })
     }
 

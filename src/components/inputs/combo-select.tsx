@@ -13,6 +13,7 @@ import { PublicFigureService } from '../../services/public-figure-service'
 import { AllowedTypes, AllowedTypesEnum } from '../../types/allowed-types'
 import { SelectedResourceList } from './selected-resource-list'
 import { LoadedResourceList } from './loaded-resource-list'
+import { Source } from '../../models/source.interface'
 
 export interface ComboSelectProps {
   type: AllowedTypesEnum
@@ -78,7 +79,7 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
     }
   }
 
-  function getTitle (data: AllowedTypes) {
+  function getTitle (data: AllowedTypes): string {
     switch (props.type) {
     case AllowedTypesEnum.Topic:
       return (data as Topic).title
@@ -88,10 +89,12 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
       return (data as Group).name
     case AllowedTypesEnum.PublicFigure:
       return (data as PublicFigure).first_name
+    case AllowedTypesEnum.Source:
+      return (data as Source).url
     }
   }
 
-  function getSubtitle (data: AllowedTypes) {
+  function getSubtitle (data: AllowedTypes): string {
     switch (props.type) {
     case AllowedTypesEnum.Topic:
       return (data as Topic).article
@@ -101,6 +104,8 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
       return (data as Group).acronym
     case AllowedTypesEnum.PublicFigure:
       return (data as PublicFigure).last_name
+    case AllowedTypesEnum.Source:
+      return ''
     }
   }
 
@@ -118,15 +123,13 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
           </Button>
         </Popover.Trigger>
 
-        <Popover.Content className='w-full'>
+        <Popover.Content className=''>
           <TextField.Root >
             <TextField.Slot>
               <MagnifyingGlassIcon height="16" width="16" />
             </TextField.Slot>
             <TextField.Input onChange={handleChange} placeholder="Tema del evento..." />
-            {loading &&
-              <div className='loading-bar'/>
-            }
+            {loading && <div className='loading-bar'/>}
           </TextField.Root>
           <ScrollArea scrollbars='vertical'>
             <LoadedResourceList props={{ loadedData, selectedData, multiSelect: props.multiSelect, getTitle, getSubtitle, toggleData }} />
@@ -134,9 +137,9 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
         </Popover.Content>
       </Popover.Root>}
 
-      {selectedData.length > 0 && (
+      {selectedData.length > 0 &&
         <SelectedResourceList props={{ selectedData, getTitle, getSubtitle, toggleData }} />
-      )}
+      }
     </div>
   )
 }

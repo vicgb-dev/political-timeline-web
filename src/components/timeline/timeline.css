@@ -6,8 +6,8 @@
 	max-width: 1500px;
 }
 
-.-h-full-35{
-	height: calc(100% - 35px);
+.h-full23{
+	height: calc(100% + 23px);
 }
 .transition-all-custom{
 	transition: all 0.3s ease-in-out;
