@@ -12,6 +12,7 @@ import { Group } from '../../../models/group.interface'
 import { PublicFigure } from '../../../models/public-figure.interface'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import './event-form.css'
+import { AllowedTypesEnum } from '../../../types/allowed-types'
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
@@ -106,7 +107,7 @@ export function EventForm () {
               <div className="TOPIC">
                 <ComboSelect<Topic>
                   props={{
-                    type: 'Topic',
+                    type: AllowedTypesEnum.Topic,
                     multiSelect: false,
                     buttonTitle: 'Tema del evento'
                   }} />
@@ -123,7 +124,7 @@ export function EventForm () {
                 </label>
               </div>
               <div className="DATE">
-                <label>Fecha y hora
+                <label className='flex flex-col gap-2'>Fecha y hora
                   <TextFieldInput {...register('date')} type="date" />
                   <TextFieldInput {...register('date')} type="time" />
                   {/* <Text size='1' color='red'>asdasd</Text> */}
@@ -140,18 +141,20 @@ export function EventForm () {
                     <InfoCircledIcon />
                   </Callout.Icon>
                   <Callout.Text>
-                  Elige otros recursos para relacionar el evento con ellos. Pueden ser figuras públicas, grupos políticos, eventos o etiquetas. No tienen por qué aparecer en el evento pero sí estar relacionados con él.
+                    <ul>
+                      <li>Los recursos relacionados con el evento no tienen por qué aparecer en él, pero sí estar relacionados con él.</li>
+                      <li>Pueden ser figuras públicas, otros grupos políticos, eventos o etiquetas.</li>
+                    </ul>
                   </Callout.Text>
                 </Callout.Root>
               </div>
               <div className="SOURCES">
-                <label className='w-full'>Fuentes
-                  <div className='flex flex-row w-full items-center'>
-                    <TextFieldInput {...register('title')} placeholder="Titulo" className='w-full' />
-                    <IconButton variant='outline' size='2' className='relative w-full'>
+                <label >Fuentes
+                  <div className='flex gap-2'>
+                    <TextFieldInput {...register('title')} placeholder="Titulo"/>
+                    <IconButton variant='outline' size='2'>
                       <PlusIcon />
                     </IconButton>
-
                   </div>
                   {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
                   {/* <Text size='1' color='red'>asdasd</Text> */}
@@ -160,7 +163,7 @@ export function EventForm () {
               <div className="FIGURES">
                 <ComboSelect<PublicFigure>
                   props={{
-                    type: 'PublicFigure',
+                    type: AllowedTypesEnum.PublicFigure,
                     multiSelect: true,
                     buttonTitle: 'Figura públicas'
                   }} />
@@ -169,7 +172,7 @@ export function EventForm () {
               <div className="GROUPS">
                 <ComboSelect<Group>
                   props={{
-                    type: 'Group',
+                    type: AllowedTypesEnum.Group,
                     multiSelect: true,
                     buttonTitle: 'Grupos políticos'
                   }} />
@@ -178,7 +181,7 @@ export function EventForm () {
               <div className="EVENTS">
                 <ComboSelect<PoliticalEvent>
                   props={{
-                    type: 'PoliticalEvent',
+                    type: AllowedTypesEnum.PoliticalEvent,
                     multiSelect: true,
                     buttonTitle: 'Eventos'
                   }} />
@@ -193,10 +196,6 @@ export function EventForm () {
               </div>
             </div>
           </ScrollArea>
-          <Grid gap='2'>
-            <Flex >
-            </Flex>
-          </Grid>
         </Form.Root>
       </Flex>
     </Card>

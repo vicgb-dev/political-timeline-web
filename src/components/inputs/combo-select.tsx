@@ -10,20 +10,19 @@ import { EventsService } from '../../services/events-service'
 import { GroupServices } from '../../services/group-services'
 import { PublicFigure } from '../../models/public-figure.interface'
 import { PublicFigureService } from '../../services/public-figure-service'
-
-// Cada tipo permitido debe tener un id
-type AllowedTypes = Topic | PoliticalEvent | Group | PublicFigure
+import { AllowedTypes, AllowedTypesEnum } from '../../types/allowed-types'
+import { SelectedResourceList } from './selected-resource-list'
 
 export interface ComboSelectProps {
-  type: 'Topic' | 'PoliticalEvent' | 'Group' | 'PublicFigure'
+  type: AllowedTypesEnum
   multiSelect: boolean
   buttonTitle: string
 }
 
 export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSelectProps }) {
-  const [loadedData, setLoadedData] = useState<T[] | undefined>(undefined)
+  const [loadedData, setLoadedData] = useState<AllowedTypes[] | undefined>(undefined)
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedData, setSelectedData] = useState<T[]>([])
+  const [selectedData, setSelectedData] = useState<AllowedTypes[]>([])
   const [loading, setLoading] = useState(false)
 
   async function handleChange (event: React.ChangeEvent<HTMLInputElement>) {
@@ -61,7 +60,7 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
     }
   }
 
-  function toggleData (e: any, data: T) {
+  function toggleData (e: any, data: AllowedTypes) {
     e.preventDefault()
     if (props.multiSelect) {
       if (selectedData.find(t => t.id === data.id)) {
@@ -80,32 +79,32 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
 
   function getTitle (data: AllowedTypes) {
     switch (props.type) {
-    case 'Topic':
+    case AllowedTypesEnum.Topic:
       return (data as Topic).title
-    case 'PoliticalEvent':
+    case AllowedTypesEnum.PoliticalEvent:
       return (data as PoliticalEvent).title
-    case 'Group':
+    case AllowedTypesEnum.Group:
       return (data as Group).name
-    case 'PublicFigure':
+    case AllowedTypesEnum.PublicFigure:
       return (data as PublicFigure).first_name
     }
   }
 
   function getSubtitle (data: AllowedTypes) {
     switch (props.type) {
-    case 'Topic':
+    case AllowedTypesEnum.Topic:
       return (data as Topic).article
-    case 'PoliticalEvent':
+    case AllowedTypesEnum.PoliticalEvent:
       return (data as PoliticalEvent).summary
-    case 'Group':
+    case AllowedTypesEnum.Group:
       return (data as Group).acronym
-    case 'PublicFigure':
+    case AllowedTypesEnum.PublicFigure:
       return (data as PublicFigure).last_name
     }
   }
 
   return (
-    <div className={` relative ${selectedData.length > 0 ? 'px-2 py-2' : ''}`}>
+    <div className={`${selectedData.length > 0 ? 'px-2 py-2' : ''}`}>
       {(selectedData.length === 0 || true) &&
       <Popover.Root>
         <Popover.Trigger>
@@ -154,101 +153,9 @@ export function ComboSelect<T extends AllowedTypes> ({ props }: { props: ComboSe
         </Popover.Content>
       </Popover.Root>}
 
-      <div className=''>
-        {selectedData.length > 0 && (
-          <ScrollArea className=''>
-            <div className='flex flex-col py-3 px-5 gap-3'>
-              {selectedData.map(data => (
-                <div key={data.id} className='flex flex-row justify-between items-center'>
-                  <div className='flex flex-col justify-between'>
-                    <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {getTitle(data)}
-                    </Text>
-                    <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {getSubtitle(data)}
-                    </Text>
-                  </div>
-                  <IconButton variant='ghost' onClick={(e) => toggleData(e, data)}>
-                    <TrashIcon color='tomato' />
-                  </IconButton>
-                </div>
-              ))}
-            </div>
-          </ScrollArea>
-        )}
-      </div>
-    </div>
-  )
-}
-/*
-  return (
-    <div tabIndex={0} onFocus={handleOnFocus} onBlur={(e) => handleOnBlur(e)} className='relative'>
-      <TextField.Root >
-        <TextField.Slot>
-          <MagnifyingGlassIcon height="16" width="16" />
-        </TextField.Slot>
-        <TextField.Input onChange={handleChange} placeholder="Tema del evento..." />
-      </TextField.Root>
-
-      {searchBoxOpen &&
-      <div className='absolute w-full z-10 bg-zinc-800 rounded-b-lg border custom-border-color'>
-        <ScrollArea className=''>
-          <div className='flex flex-col max-h-48 py-3 px-5 gap-3'>
-            {topics?.map(topic => (
-              <Button key={topic.id} variant='ghost' onClick={(e) => toggleTopic(e, topic)}>
-                <div className='w-full flex flex-row justify-between items-center'>
-                  <div className='flex flex-col flex-1'>
-                    <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {topic.title}
-                    </Text>
-                    <Text size="2" color="gray" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                      {topic.article}
-                    </Text>
-                  </div>
-                  {selectedTopics.find(t => t.id === topic.id)
-                    ? <PlusCircledIcon />
-                    : <MinusCircledIcon />}
-                </div>
-              </Button>
-            ))}
-          </div>
-        </ScrollArea>
-      </div>}
-
-      {selectedTopics.length > 0 && (
-        <div className='flex flex-col gap-3'>
-          {selectedTopics.map(topic => (
-            <Button key={topic.id} variant='ghost' className='flex flex-row justify-between items-center' onClick={(e) => toggleTopic(e, topic)}>
-              <Text size="2" weight="bold" className='whitespace-nowrap overflow-hidden text-ellipsis max-w-56'>
-                {topic.title}
-              </Text>
-              <MinusCircledIcon />
-            </Button>
-          ))}
-        </div>
+      {selectedData.length > 0 && (
+        <SelectedResourceList props={{ selectedData, getTitle, getSubtitle, toggleData }} />
       )}
     </div>
   )
-} */
-
-/*
-
-  function handleOnFocus (e: React.FocusEvent<HTMLDivElement, Element>) {
-    console.log('e', e)
-    const targetTagName = (e.target as HTMLElement).tagName.toLowerCase()
-    if (searchQuery.length > 2) {
-      setSearchBoxOpen(true)
-    }
-  }
-
-  function handleOnBlur (e: React.FocusEvent<HTMLDivElement, Element>) {
-    console.log('e', e)
-    const targetTagName = (e.target as HTMLElement).tagName.toLowerCase()
-    if (targetTagName === 'input') {
-      setSearchBoxOpen(false)
-    }
-  }
-
-  return (
-    <div tabIndex={0} onFocus={(e) => handleOnFocus(e)} onBlur={(e) => handleOnBlur(e)} className='relative'>
-*/
+}

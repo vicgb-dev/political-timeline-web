@@ -6,7 +6,7 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 100px 80px 200px 80px 140px 80px;
+  grid-template-rows: 110px 80px 200px 80px minmax(120px, min-content) 80px;
   gap: 20px 20px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -22,6 +22,7 @@
   /* border: 1px solid var(--accent-7); */
   /* border-radius: 10px; */
   /* padding: 6px; */
+  /* background-color: var(--debug-bg-color); */
 }
 
 @media (max-width: 768px) {
@@ -45,12 +46,9 @@
   }
 }
 
-.container>div {
-  background-color: var(--debug-bg-color);
-}
-
 .TITLE {
   grid-area: TITLE;
+  padding-top: 7px;
 }
 
 .DATE {
@@ -73,6 +71,9 @@
   border: 1px solid var(--accent-7);
   border-radius: 10px;
   padding: 6px;
+  .rt-TextFieldRoot{
+	flex: 1;
+  }
 }
 
 .RELATED {
