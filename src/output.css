@@ -27157,21 +27157,16 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.px-3 {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-}
-
 .pb-10 {
   padding-bottom: 2.5rem;
 }
 
-.pb-52 {
-  padding-bottom: 13rem;
-}
-
 .pb-56 {
   padding-bottom: 14rem;
+}
+
+.pb-9 {
+  padding-bottom: 2.25rem;
 }
 
 .pr-1 {
@@ -27241,25 +27236,4 @@ video {
   /* --default-font-family: "Sarabun"; */
   /* --default-font-family: "Source Code Pro"; */
   /* --default-font-family: Arial, '-apple-system', 'BlinkMacSystemFont', 'Segoe UI (Custom)', 'Roboto', 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; */
-}
-
-@media (max-width: 768px) {
-  .mobile\:px-3 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-}
-
-@media (max-width: 1024px) {
-  .tablet\:px-3 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-}
-
-@media (max-width: 1500px) {
-  .desktop\:px-3 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
 }

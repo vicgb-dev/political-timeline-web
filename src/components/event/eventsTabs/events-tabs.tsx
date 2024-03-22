@@ -9,6 +9,7 @@ import { useLayoutStore } from '../../../stores/layout-store'
 import { useContext } from 'react'
 import { AuthContext } from '../../../context/auth-context'
 import { PopoverTabsMenu } from '../../popover/tabs-menu'
+import { EventFormArticle } from '../eventForm/event-form-article'
 
 export function EventsTabs () {
   const selectedEvents = useEvents(state => state.selectedEvents)
