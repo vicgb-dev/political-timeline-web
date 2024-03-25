@@ -6,23 +6,9 @@ import { PublicFigure } from '../../../models/public-figure.interface'
 import { Group } from '../../../models/group.interface'
 import { PoliticalEvent } from '../../../models/political-event.interface'
 import { AllowedTypesEnum } from '../../../types/allowed-types'
-import { eventInitialContent } from '../../../helpers/blocknote/initial-content'
-import { eventBlockEditorPlaceholders } from '../../../helpers/blocknote/placeholders'
-import { getCustomSlashMenuItems } from '../../../helpers/blocknote/suggestion-items'
-import '@blocknote/core/fonts/inter.css'
-import '@blocknote/react/style.css'
-import { filterSuggestionItems } from '@blocknote/core'
-import { BlockNoteView, FormattingToolbarController, SuggestionMenuController, useCreateBlockNote } from '@blocknote/react'
-import { getCustomFormattingToolbarItems } from '../../../helpers/blocknote/formatting-toolbar'
+import { CustomBlockNote } from '../../custom-blocknote/custom-blocknote'
 
 export function EventFormArticle () {
-  const editor = useCreateBlockNote(
-    {
-      initialContent: eventInitialContent,
-      placeholders: eventBlockEditorPlaceholders
-    }
-  )
-
   return (
     <Flex direction='column' gap='2' className='h-full pb-10'>
       <Form.Root className='h-full pb-10'>
@@ -31,19 +17,7 @@ export function EventFormArticle () {
             <div className="ARTICLE flex flex-col h-full">
               {/* <label htmlFor='event-create-form-article'>Artículo</label> */}
               {/* <TextArea id='event-create-form-article' style={{ flex: 1 }} placeholder="Artículo..." /> */}
-              <BlockNoteView
-                data-theming-css-variables-demo
-                editor={editor}
-                slashMenu={false}
-                formattingToolbar={false}>
-                <FormattingToolbarController formattingToolbar={getCustomFormattingToolbarItems}/>
-                <SuggestionMenuController
-                  triggerCharacter={'/'}
-                  getItems={async (query) =>
-                    filterSuggestionItems(getCustomSlashMenuItems(editor), query)
-                  }/>
-
-              </BlockNoteView>
+              <CustomBlockNote />
             </div>
             <div className='RELATED flex flex-col gap-5'>
               <Callout.Root variant='surface' className=''>

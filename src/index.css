@@ -15,4 +15,8 @@
 
 .bn-container[data-theming-css-variables-demo][data-color-scheme] {
 	--bn-font-family: "Bitter", serif;
+	a {
+		text-decoration: underline;
+		color: var(--accent-12)
+	}
 }

@@ -1,12 +1,13 @@
 import { BlockTypeSelect, CreateLinkButton, FormattingToolbar, FormattingToolbarProps } from '@blocknote/react'
 import { ReactElement } from 'react'
-import { h1Icon, h2Icon, h3Icon, pIcon } from '../../constants/icons/blocknote-toolbar-icons'
-import { BoldTextStyleButton } from './toolbar-buttons/bold-button'
-import { ItalicTextStyleButton } from './toolbar-buttons/italic-button'
-import { UnderlineTextStyleButton } from './toolbar-buttons/underline-button'
-import { StrikelineTextStyleButton } from './toolbar-buttons/strikeline-button'
-import { CustomNestBlockButton, CustomUnnestBlockButton } from './toolbar-buttons/nest-buttons'
+import { h1Icon, h2Icon, h3Icon, pIcon } from '../../../constants/icons/blocknote-toolbar-icons'
+import { BoldTextStyleButton } from '../toolbar-buttons/bold-button'
+import { ItalicTextStyleButton } from '../toolbar-buttons/italic-button'
+import { UnderlineTextStyleButton } from '../toolbar-buttons/underline-button'
+import { StrikelineTextStyleButton } from '../toolbar-buttons/strikeline-button'
+import { CustomNestBlockButton, CustomUnnestBlockButton } from '../toolbar-buttons/nest-buttons'
 import { RiListOrdered, RiListUnordered } from 'react-icons/ri'
+import { CustomCreateLinkButton } from '../toolbar-buttons/link-button'
 export function getCustomFormattingToolbarItems (): ReactElement<FormattingToolbarProps> {
   return (
 
@@ -67,7 +68,7 @@ export function getCustomFormattingToolbarItems (): ReactElement<FormattingToolb
       <CustomNestBlockButton key={'nestBlockButton'} />
       <CustomUnnestBlockButton key={'nestBlockButton'} />
 
-      {/* <CreateLinkButton key={'createLinkButton'} /> */}
+      <CustomCreateLinkButton key={'createLinkButton'} />
     </FormattingToolbar>
   )
 }
