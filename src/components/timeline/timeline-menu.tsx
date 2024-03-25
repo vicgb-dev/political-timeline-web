@@ -11,6 +11,7 @@ import { DialogAB } from '../../shared/dialog/dialog-ab'
 import { SearchBarLogo } from '../search/search-bar-logo'
 import { useToast } from '../../stores/toast-store'
 import { ToastProps } from './../../stores/toast-store'
+import { notImplementedToastProps } from '../../constants/mocks/not-implemented-toast'
 
 export function TimeLineMenu () {
   const { isLogged, logout } = useContext(AuthContext)
@@ -19,14 +20,7 @@ export function TimeLineMenu () {
   const addToast = useToast(state => state.addToast)
 
   function handleOnGear () {
-    const toast: ToastProps = {
-      title: 'Not implemented yet',
-      description: 'This feature is not implemented yet',
-      showButton: false,
-      buttonText: '',
-      buttonAction: () => { },
-      duration: 2000
-    }
+    const toast: ToastProps = notImplementedToastProps
     addToast(toast, true)
   }
 

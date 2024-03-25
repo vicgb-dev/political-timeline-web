@@ -1,6 +1,10 @@
 import { DefaultReactSuggestionItem, createReactInlineContentSpec } from '@blocknote/react'
 import { schema } from '../custom-blocknote'
 import { PublicFigureService } from '../../../services/public-figure-service'
+import { Button, Popover } from '@radix-ui/themes'
+import { PersonIcon } from '@radix-ui/react-icons'
+import { ToastProps, useToast } from '../../../stores/toast-store'
+import { notImplementedToastProps } from '../../../constants/mocks/not-implemented-toast'
 
 export const PublicFigure = createReactInlineContentSpec(
   {
@@ -13,11 +17,27 @@ export const PublicFigure = createReactInlineContentSpec(
     content: 'none'
   },
   {
-    render: (props) => (
-      <span className='bg-[color:var(--accent-5)]'>
-        @{props.inlineContent.props.publicFigure}
-      </span>
-    )
+    render: (props) => {
+      const addToast = useToast(state => state.addToast)
+
+      function showNotImplementedToast () {
+        const toast: ToastProps = notImplementedToastProps
+        addToast(toast, true)
+      }
+      return (
+        <Popover.Root>
+          <Popover.Trigger>
+            <span className='bg-[color:var(--accent-5)]'>
+        @{props.inlineContent.props.publicFigure}</span>
+          </Popover.Trigger>
+          <Popover.Content >
+            <Button variant='soft' size='2' className='relative' onClick={showNotImplementedToast}>
+              <PersonIcon />
+        Ir al artículo de {props.inlineContent.props.publicFigure}
+            </Button>
+          </Popover.Content>
+        </Popover.Root>)
+    }
   }
 )
 

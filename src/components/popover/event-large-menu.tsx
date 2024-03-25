@@ -2,6 +2,7 @@ import { SewingPinFilledIcon, Share1Icon } from '@radix-ui/react-icons'
 import { Button, Flex, Popover, Text } from '@radix-ui/themes'
 import { useState } from 'react'
 import { ToastProps, useToast } from '../../stores/toast-store'
+import { notImplementedToastProps } from '../../constants/mocks/not-implemented-toast'
 
 export function PopoverEventLargeMenu ({ children }: {children: React.ReactNode}) {
   const [open, setOpen] = useState(false)
@@ -16,14 +17,7 @@ export function PopoverEventLargeMenu ({ children }: {children: React.ReactNode}
   }
 
   function showNotImplementedToast () {
-    const toast: ToastProps = {
-      title: 'Not implemented yet',
-      description: 'This feature is not implemented yet',
-      showButton: false,
-      buttonText: '',
-      buttonAction: () => { },
-      duration: 2000
-    }
+    const toast: ToastProps = notImplementedToastProps
     addToast(toast, true)
   }
 

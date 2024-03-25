@@ -12,6 +12,7 @@ import { useEvents } from '../../../stores/events-store'
 import '../event.css'
 import { Group } from '../../../models/group.interface'
 import { ToastProps, useToast } from '../../../stores/toast-store'
+import { notImplementedToastProps } from '../../../constants/mocks/not-implemented-toast'
 
 interface EventSProps {
   event: PoliticalEvent
@@ -64,14 +65,7 @@ export function EventS ({ props }: { props: EventSProps }) {
   }
 
   function showNotImplementedToast () {
-    const toast: ToastProps = {
-      title: 'Not implemented yet',
-      description: 'This feature is not implemented yet',
-      showButton: false,
-      buttonText: '',
-      buttonAction: () => { },
-      duration: 2000
-    }
+    const toast: ToastProps = notImplementedToastProps
     addToast(toast, true)
   }
 
