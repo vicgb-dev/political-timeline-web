@@ -2,6 +2,7 @@ import { BlockNoteEditor, PartialBlock, insertOrUpdateBlock } from '@blocknote/c
 import { DefaultReactSuggestionItem } from '@blocknote/react'
 import { PilcrowIcon, TextIcon } from '@radix-ui/react-icons'
 import { RiListOrdered, RiListUnordered } from 'react-icons/ri'
+import { schema } from '../custom-blocknote'
 
 const paragraphItem = (editor: BlockNoteEditor) => ({
   title: 'Párrafo',
@@ -96,12 +97,12 @@ const numListItem = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta una lista enumerada'
 })
 
-export const getCustomSlashMenuItems = (editor: BlockNoteEditor): DefaultReactSuggestionItem[] => [
+export const getCustomSlashMenuItems = (editor: BlockNoteEditor | typeof schema.BlockNoteEditor): DefaultReactSuggestionItem[] => [
   // ...getDefaultReactSlashMenuItems(editor),
-  paragraphItem(editor),
-  h1Item(editor),
-  h2Item(editor),
-  h3Item(editor),
-  listItem(editor),
-  numListItem(editor)
+  paragraphItem(editor as BlockNoteEditor),
+  h1Item(editor as BlockNoteEditor),
+  h2Item(editor as BlockNoteEditor),
+  h3Item(editor as BlockNoteEditor),
+  listItem(editor as BlockNoteEditor),
+  numListItem(editor as BlockNoteEditor)
 ]
