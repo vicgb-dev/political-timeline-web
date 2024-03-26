@@ -9,7 +9,6 @@ import { useLayoutStore } from '../../../stores/layout-store'
 import { useContext } from 'react'
 import { AuthContext } from '../../../context/auth-context'
 import { PopoverTabsMenu } from '../../popover/tabs-menu'
-import { EventFormArticle } from '../eventForm/event-form-article'
 
 export function EventsTabs () {
   const selectedEvents = useEvents(state => state.selectedEvents)
@@ -48,6 +47,7 @@ export function EventsTabs () {
       onValueChange={value => updateValue(value)}
       value={getTabsValue()}
       className='h-full transition-all'>
+      {/* TABS */}
       <ScrollArea type='hover' scrollbars="horizontal" style={{ height: 41 }} >
         <Tabs.List className={`
           ${floatEvent && !minimized ? 'rounded-none' : 'rounded-t-xl'} pr-20 efcolor w-full overflow-x-scroll overflow-y-clip`}>
@@ -149,6 +149,8 @@ export function EventsTabs () {
       {
         selectedEvents.find(event => event.id === -1) && (<Tabs.Content
           value={'-1'}
+          hidden={focusedEvent?.id !== -1}
+          forceMount={true}
           key={'creatingEventkey'}
           style={{
             height: 'calc(100% - 60px)'

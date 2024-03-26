@@ -15,16 +15,16 @@ const schema = z.object({
   path: ['confirmPassword']
 })
 
-type signUpData = z.infer<typeof schema>
+type SignUpData = z.infer<typeof schema>
 
 export function SignUpDialog ({ children }: {children: React.ReactNode}) {
   const [passwordVisible, setPasswordVisible] = useState(false)
   const [open, setOpen] = useState(false)
-  const { register, handleSubmit, setError, formState: { errors, isSubmitting }, reset } = useForm<signUpData>({
+  const { register, handleSubmit, setError, formState: { errors, isSubmitting }, reset } = useForm<SignUpData>({
     resolver: zodResolver(schema)
   })
 
-  const onSubmit: SubmitHandler<signUpData> = async (data: signUpData) => {
+  const onSubmit: SubmitHandler<SignUpData> = async (data: SignUpData) => {
     try {
       // TODO: SignUp logic
       await new Promise((resolve) => {

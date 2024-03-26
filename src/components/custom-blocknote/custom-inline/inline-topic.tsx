@@ -28,7 +28,7 @@ export const Topic = createReactInlineContentSpec(
         <Popover.Root>
           <Popover.Trigger>
             <span className='bg-[color:var(--accent-5)]'>
-        t[{props.inlineContent.props.topic}]</span>
+        t:{props.inlineContent.props.topic}</span>
           </Popover.Trigger>
           <Popover.Content >
             <Button variant='soft' size='2' className='relative' onClick={showNotImplementedToast}>
@@ -51,6 +51,8 @@ export async function getTopictMenuItems (
   return new Promise((resolve) => {
     resolve(events.map((topic) => ({
       title: topic.title,
+      icon: <DashboardIcon />,
+      subtext: topic.article.substring(0, 50),
       onItemClick: () => {
         editor.insertInlineContent([
           {

@@ -50,6 +50,8 @@ export async function getPublicFigureMenuItems (
   return new Promise((resolve) => {
     resolve(publicFigures.map((publicFigure) => ({
       title: publicFigure.first_name + ' ' + publicFigure.last_name,
+      icon: <PersonIcon />,
+      subtext: publicFigure.article.substring(0, 50),
       onItemClick: () => {
         editor.insertInlineContent([
           {

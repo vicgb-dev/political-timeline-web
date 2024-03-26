@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Heading, Text, TextFieldInput, Grid, ScrollArea, TextArea, Callout, Popover, IconButton } from '@radix-ui/themes'
+import { Button, Card, Flex, Heading, Callout, Popover, IconButton } from '@radix-ui/themes'
 import { DialogAB } from '../../../shared/dialog/dialog-ab'
 import { useEvents } from '../../../stores/events-store'
 import { InfoCircledIcon, TriangleDownIcon } from '@radix-ui/react-icons'
@@ -6,10 +6,18 @@ import './event-form.css'
 import { useState } from 'react'
 import { EventFormDetails } from './event-form-details'
 import { EventFormArticle } from './event-form-article'
+import { useEventForm } from './event-form-hook'
 
 export function EventForm () {
   const removeEventById = useEvents(state => state.removeEventById)
   const [inDetails, setInDetails] = useState(true)
+  const {
+    onSubmit,
+    article,
+    setArticle,
+    title,
+    setTitle
+  } = useEventForm()
 
   return (
     <Card size='3' className='h-full efcolor no-border no-top-radius event-card-L'>
@@ -68,13 +76,13 @@ export function EventForm () {
           }}>
             <Button variant='soft' color='tomato' size='2'>Cancelar</Button>
           </DialogAB>
-          <Button variant='soft' type="submit">Crear</Button>
+          <Button variant='soft' type="submit" onClick={ onSubmit }>Crear</Button>
           <Button variant='soft' onClick={() => setInDetails(!inDetails)}>{inDetails ? 'Editar artículo' : 'Editar detalles'}</Button>
         </Flex>
       </Flex>
       {inDetails
-        ? <EventFormDetails />
-        : <EventFormArticle />}
+        ? <EventFormDetails props={{ title: title || '', setTitle }} />
+        : <EventFormArticle props={{ article: article || [], setArticle }} />}
     </Card>
   )
 }

@@ -2,15 +2,16 @@ import { Flex, ScrollArea, TextFieldInput, Text, Callout, TextArea } from '@radi
 import { ComboSelect } from '../../inputs/combo-select'
 import { Topic } from '../../../models/topic.interface'
 import { AllowedTypesEnum } from '../../../types/allowed-types'
-import { Group } from '../../../models/group.interface'
-import { PoliticalEvent } from '../../../models/political-event.interface'
-import { PublicFigure } from '../../../models/public-figure.interface'
 import { SourceInputWithListen } from '../../inputs/source-input-with-list'
-import { InfoCircledIcon } from '@radix-ui/react-icons'
 import * as Form from '@radix-ui/react-form'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+interface DetailsProps {
+  title: string
+  setTitle: (title: string) => void
+}
 
 const schema = z.object({
   title: z.string().min(1, 'El título es requerido').max(100, 'El título no puede tener más de 100 caracteres'),
@@ -21,7 +22,7 @@ const schema = z.object({
 
 export type EventFormData = z.infer<typeof schema>
 
-export function EventFormDetails () {
+export function EventFormDetails ({ props }: { props: DetailsProps }) {
   const { register, handleSubmit, setError, formState: { errors, isSubmitting } } = useForm<EventFormData>({
     // defaultValues: {
     //   date: new Date()
@@ -61,7 +62,7 @@ export function EventFormDetails () {
             </div>
             <div className="TITLE">
               <label>Titulo
-                <TextFieldInput {...register('title')} placeholder="Titulo" />
+                <TextFieldInput value={props.title} onChange={(e) => props.setTitle(e.target.value)} placeholder="Titulo" />
                 {errors.title && <Text size='1' color='red'>{errors.title?.message}</Text>}
               </label>
             </div>

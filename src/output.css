@@ -26936,6 +26936,10 @@ video {
   display: block;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: flex;
 }
@@ -27161,6 +27165,10 @@ video {
   padding-bottom: 2.5rem;
 }
 
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+
 .pb-56 {
   padding-bottom: 14rem;
 }
@@ -27187,6 +27195,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .text-black {
@@ -27236,4 +27248,12 @@ video {
   /* --default-font-family: "Sarabun"; */
   /* --default-font-family: "Source Code Pro"; */
   /* --default-font-family: Arial, '-apple-system', 'BlinkMacSystemFont', 'Segoe UI (Custom)', 'Roboto', 'Helvetica Neue', 'Open Sans (Custom)', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; */
+}
+
+.bn-container[data-theming-css-variables-demo][data-color-scheme] {
+  --bn-font-family: "Bitter", serif;
+  a {
+    text-decoration: underline;
+    color: var(--accent-12)
+  }
 }

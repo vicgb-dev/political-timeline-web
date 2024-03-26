@@ -8,7 +8,12 @@ import { PoliticalEvent } from '../../../models/political-event.interface'
 import { AllowedTypesEnum } from '../../../types/allowed-types'
 import { CustomBlockNote } from '../../custom-blocknote/custom-blocknote'
 
-export function EventFormArticle () {
+interface ArticleProps {
+  article: any[]
+  setArticle: (blocks: any[]) => void
+}
+
+export function EventFormArticle ({ props }: { props: ArticleProps }) {
   return (
     <Flex direction='column' gap='2' className='h-full pb-10'>
       <Form.Root className='h-full pb-10'>
@@ -17,7 +22,15 @@ export function EventFormArticle () {
             <div className="ARTICLE flex flex-col h-full">
               {/* <label htmlFor='event-create-form-article'>Artículo</label> */}
               {/* <TextArea id='event-create-form-article' style={{ flex: 1 }} placeholder="Artículo..." /> */}
-              <CustomBlockNote />
+              <Callout.Root variant='surface' className='mb-5'>
+                <Callout.Icon>
+                  <InfoCircledIcon />
+                </Callout.Icon>
+                <Callout.Text>
+                  <p>{`"@" para figuras públicas, "{" para eventos, "[" para temas, "|" para grupos`}</p>
+                </Callout.Text>
+              </Callout.Root>
+              <CustomBlockNote props={{ initialValue: props.article || [], returnBlocks: props.setArticle }} />
             </div>
             <div className='RELATED flex flex-col gap-5'>
               <Callout.Root variant='surface' className=''>
