@@ -1,11 +1,8 @@
-import { DefaultReactSuggestionItem, createReactInlineContentSpec } from '@blocknote/react'
-import { schema } from '../custom-blocknote'
-import { EventsService } from '../../../services/events-service'
+import { createReactInlineContentSpec } from '@blocknote/react'
 import { Button, Popover } from '@radix-ui/themes'
 import { CalendarIcon } from '@radix-ui/react-icons'
 import { ToastProps, useToast } from '../../../stores/toast-store'
 import { notImplementedToastProps } from '../../../constants/mocks/not-implemented-toast'
-import { getDate } from '../../../tools/date-tools'
 
 export const PoliticalEvent = createReactInlineContentSpec(
   {
@@ -43,29 +40,3 @@ export const PoliticalEvent = createReactInlineContentSpec(
     }
   }
 )
-
-export async function getEventMenuItems (
-  editor: typeof schema.BlockNoteEditor,
-  query: string
-): Promise<DefaultReactSuggestionItem[]> {
-  const events = await EventsService.searchEventsWithQuery(query)
-
-  return new Promise((resolve) => {
-    resolve(events.map((politicalEvent) => ({
-      title: politicalEvent.title,
-      icon: <CalendarIcon />,
-      subtext: getDate(politicalEvent.eventDate),
-      onItemClick: () => {
-        editor.insertInlineContent([
-          {
-            type: 'politicalEvent',
-            props: {
-              politicalEvent: politicalEvent.title
-            }
-          },
-          ' ' // add a space after
-        ])
-      }
-    })))
-  })
-}

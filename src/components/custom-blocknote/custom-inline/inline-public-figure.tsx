@@ -1,6 +1,4 @@
-import { DefaultReactSuggestionItem, createReactInlineContentSpec } from '@blocknote/react'
-import { schema } from '../custom-blocknote'
-import { PublicFigureService } from '../../../services/public-figure-service'
+import { createReactInlineContentSpec } from '@blocknote/react'
 import { Button, Popover } from '@radix-ui/themes'
 import { PersonIcon } from '@radix-ui/react-icons'
 import { ToastProps, useToast } from '../../../stores/toast-store'
@@ -12,6 +10,12 @@ export const PublicFigure = createReactInlineContentSpec(
     propSchema: {
       publicFigure: {
         default: 'Unknown'
+      },
+      id: {
+        default: 0
+      },
+      description: {
+        default: 'Unknown'
       }
     },
     content: 'none'
@@ -21,6 +25,10 @@ export const PublicFigure = createReactInlineContentSpec(
       const addToast = useToast(state => state.addToast)
 
       function showNotImplementedToast () {
+        console.log('PublicFigure',
+          props.inlineContent.props.publicFigure,
+          props.inlineContent.props.id,
+          props.inlineContent.props.description)
         const toast: ToastProps = notImplementedToastProps
         addToast(toast, true)
       }
@@ -40,29 +48,3 @@ export const PublicFigure = createReactInlineContentSpec(
     }
   }
 )
-
-export async function getPublicFigureMenuItems (
-  editor: typeof schema.BlockNoteEditor,
-  query: string
-): Promise<DefaultReactSuggestionItem[]> {
-  const publicFigures = await PublicFigureService.getPublicFiguresByName(query)
-
-  return new Promise((resolve) => {
-    resolve(publicFigures.map((publicFigure) => ({
-      title: publicFigure.first_name + ' ' + publicFigure.last_name,
-      icon: <PersonIcon />,
-      subtext: publicFigure.article.substring(0, 50),
-      onItemClick: () => {
-        editor.insertInlineContent([
-          {
-            type: 'publicFigure',
-            props: {
-              publicFigure: publicFigure.first_name + ' ' + publicFigure.last_name
-            }
-          },
-          ' ' // add a space after
-        ])
-      }
-    })))
-  })
-}

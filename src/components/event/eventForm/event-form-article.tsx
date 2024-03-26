@@ -11,6 +11,7 @@ import { CustomBlockNote } from '../../custom-blocknote/custom-blocknote'
 interface ArticleProps {
   article: any[]
   setArticle: (blocks: any[]) => void
+  addPublicFigure: (publicFigure: PublicFigure) => void
 }
 
 export function EventFormArticle ({ props }: { props: ArticleProps }) {
@@ -27,47 +28,13 @@ export function EventFormArticle ({ props }: { props: ArticleProps }) {
                   <InfoCircledIcon />
                 </Callout.Icon>
                 <Callout.Text>
-                  <p>{`"@" para figuras públicas, "{" para eventos, "[" para temas, "|" para grupos`}</p>
+                  {`"@" para figuras públicas, "{" para eventos, "[" para temas, "|" para grupos`}
                 </Callout.Text>
               </Callout.Root>
-              <CustomBlockNote props={{ initialValue: props.article || [], returnBlocks: props.setArticle }} />
-            </div>
-            <div className='RELATED flex flex-col gap-5'>
-              <Callout.Root variant='surface' className=''>
-                <Callout.Icon>
-                  <InfoCircledIcon />
-                </Callout.Icon>
-                <Callout.Text>
-                  <ul>
-                    <li>Los recursos relacionados con el evento no tienen por qué aparecer en él, pero sí estar relacionados con él.</li>
-                    <li>Pueden ser figuras públicas, otros grupos políticos, eventos o etiquetas.</li>
-                  </ul>
-                </Callout.Text>
-              </Callout.Root>
-            </div>
-            <div className="FIGURES">
-              <ComboSelect<PublicFigure>
-                props={{
-                  type: AllowedTypesEnum.PublicFigure,
-                  multiSelect: true,
-                  buttonTitle: 'Figura públicas'
-                }} />
-            </div>
-            <div className="GROUPS">
-              <ComboSelect<Group>
-                props={{
-                  type: AllowedTypesEnum.Group,
-                  multiSelect: true,
-                  buttonTitle: 'Grupos políticos'
-                }} />
-            </div>
-            <div className="EVENTS">
-              <ComboSelect<PoliticalEvent>
-                props={{
-                  type: AllowedTypesEnum.PoliticalEvent,
-                  multiSelect: true,
-                  buttonTitle: 'Eventos'
-                }} />
+              <CustomBlockNote props={{
+                initialValue: props.article || [],
+                returnBlocks: props.setArticle,
+                addPublicFigure: props.addPublicFigure }} />
             </div>
           </div>
         </ScrollArea>

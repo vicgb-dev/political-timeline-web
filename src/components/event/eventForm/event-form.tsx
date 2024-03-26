@@ -16,7 +16,8 @@ export function EventForm () {
     article,
     setArticle,
     title,
-    setTitle
+    setTitle,
+    addPublicFigure
   } = useEventForm()
 
   return (
@@ -82,7 +83,11 @@ export function EventForm () {
       </Flex>
       {inDetails
         ? <EventFormDetails props={{ title: title || '', setTitle }} />
-        : <EventFormArticle props={{ article: article || [], setArticle }} />}
+        : <EventFormArticle props={{
+          article: article || [],
+          setArticle,
+          addPublicFigure
+        }} /> }
     </Card>
   )
 }

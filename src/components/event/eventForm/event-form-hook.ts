@@ -1,6 +1,7 @@
 import { Topic } from '../../../models/topic.interface'
 import { Source } from '../../../models/source.interface'
 import { useEffect, useState } from 'react'
+import { PublicFigure } from '../../../models/public-figure.interface'
 
 export function useEventForm () {
   const [topic, setTopic] = useState<Topic>()
@@ -8,6 +9,12 @@ export function useEventForm () {
   const [summary, setSummary] = useState<string>()
   const [sources, setSources] = useState<Source[]>()
   const [article, setArticle] = useState<any[]>()
+
+  const [publicFigures, setPublicFigures] = useState<PublicFigure[]>([])
+
+  function addPublicFigure (publicFigure: PublicFigure) {
+    setPublicFigures([...publicFigures, publicFigure])
+  }
 
   function onSubmit () {
     console.log('SUBMITTING')
@@ -19,8 +26,8 @@ export function useEventForm () {
   }
 
   useEffect(() => {
-    console.log('article', article)
-  }, [article])
+    console.log('publicFigures', publicFigures)
+  }, [publicFigures])
 
   return {
     topic,
@@ -33,6 +40,7 @@ export function useEventForm () {
     setSources,
     article,
     setArticle,
+    addPublicFigure,
     onSubmit
   }
 }

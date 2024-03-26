@@ -4,7 +4,7 @@ import { PilcrowIcon, TextIcon } from '@radix-ui/react-icons'
 import { RiListOrdered, RiListUnordered } from 'react-icons/ri'
 import { schema } from '../custom-blocknote'
 
-const paragraphItem = (editor: BlockNoteEditor) => ({
+const paragraphItem = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Párrafo',
   onItemClick: () => {
     const pBlock: PartialBlock = {
@@ -19,7 +19,7 @@ const paragraphItem = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta un título grande'
 })
 
-const h1Item = (editor: BlockNoteEditor) => ({
+const h1Item = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Título H1',
   onItemClick: () => {
     const h1Block: PartialBlock = {
@@ -35,7 +35,7 @@ const h1Item = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta un título grande'
 })
 
-const h2Item = (editor: BlockNoteEditor) => ({
+const h2Item = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Título H2',
   onItemClick: () => {
     const h2Block: PartialBlock = {
@@ -51,7 +51,7 @@ const h2Item = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta un título mediano'
 })
 
-const h3Item = (editor: BlockNoteEditor) => ({
+const h3Item = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Título H3',
   onItemClick: () => {
     const h3Block: PartialBlock = {
@@ -67,7 +67,7 @@ const h3Item = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta un título pequeño'
 })
 
-const listItem = (editor: BlockNoteEditor) => ({
+const listItem = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Lista',
   onItemClick: () => {
     const numListBlock: PartialBlock = {
@@ -82,7 +82,7 @@ const listItem = (editor: BlockNoteEditor) => ({
   subtext: 'Inserta una lista'
 })
 
-const numListItem = (editor: BlockNoteEditor) => ({
+const numListItem = (editor: BlockNoteEditor): DefaultReactSuggestionItem => ({
   title: 'Lista enumerada',
   onItemClick: () => {
     const numListBlock: PartialBlock = {

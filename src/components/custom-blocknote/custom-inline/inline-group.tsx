@@ -1,10 +1,8 @@
-import { DefaultReactSuggestionItem, createReactInlineContentSpec } from '@blocknote/react'
-import { schema } from '../custom-blocknote'
+import { createReactInlineContentSpec } from '@blocknote/react'
 import { Button, Popover } from '@radix-ui/themes'
-import { DashboardIcon, IdCardIcon } from '@radix-ui/react-icons'
+import { IdCardIcon } from '@radix-ui/react-icons'
 import { ToastProps, useToast } from '../../../stores/toast-store'
 import { notImplementedToastProps } from '../../../constants/mocks/not-implemented-toast'
-import { GroupServices } from '../../../services/group-services'
 
 export const Group = createReactInlineContentSpec(
   {
@@ -41,29 +39,3 @@ export const Group = createReactInlineContentSpec(
     }
   }
 )
-
-export async function getGrouptMenuItems (
-  editor: typeof schema.BlockNoteEditor,
-  query: string
-): Promise<DefaultReactSuggestionItem[]> {
-  const events = await GroupServices.getGroupsByName(query)
-
-  return new Promise((resolve) => {
-    resolve(events.map((group) => ({
-      title: group.acronym,
-      icon: <DashboardIcon />,
-      subtext: group.name,
-      onItemClick: () => {
-        editor.insertInlineContent([
-          {
-            type: 'group',
-            props: {
-              group: group.acronym
-            }
-          },
-          ' ' // add a space after
-        ])
-      }
-    })))
-  })
-}
