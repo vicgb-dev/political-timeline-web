@@ -63,11 +63,11 @@ export function CustomBlockNote ({ props }: { props: BlockNoteProps }) {
       linkToolbar={false}
       onChange={() => props.returnBlocks(editor.document)}
     >
-      <div>
+      {/* <div>
         <pre>
           {JSON.stringify(editor.document, null, 2)}
         </pre>
-      </div>
+      </div> */}
       <LinkToolbarController linkToolbar={CustomLinkToolbar} />
       <FormattingToolbarController formattingToolbar={getCustomFormattingToolbarItems}/>
       <SuggestionMenuController
